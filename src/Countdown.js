@@ -28,7 +28,9 @@ const CountdownComponent = ({everyTimeStamp}) => {
       isPlaying
       strokeWidth={30}
       size={300}
-      duration={durationInSeconds}
+      
+      duration={2700}
+      initialRemainingTime={durationInSeconds}
       colors={["#A30000", "#ff2626", "#F7B801", "#00d619", "#00d619"]}
       colorsTime={[durationInSeconds*0.87, durationInSeconds*0.75, durationInSeconds*0.5, durationInSeconds*0.25, 0]}
       onComplete={() => setTimerFinished(true)}
