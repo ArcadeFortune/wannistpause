@@ -58,8 +58,8 @@ const CountdownComponent = ({everyTimeStamp}) => {
     setTotalDuration((maxDuration) => maxDuration + 1)
   };
   
-  const currentTime = moment('08:29', 'HH:mm')
-  // const currentTime = moment()  
+  // const currentTime = moment('08:29', 'HH:mm')
+  const currentTime = moment()  
   
   var activeInterval = getActiveInterval(currentTime, everyTimeStamp);
 
