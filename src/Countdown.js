@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import moment from 'moment';
 import './Countdown.css';
+import Confetti from 'react-confetti'
 
 function getActiveInterval(currentTime, everyTimeStamp) {
   for (const interval of everyTimeStamp) {
@@ -14,13 +15,15 @@ function getActiveInterval(currentTime, everyTimeStamp) {
 }
 
 const CountdownComponent = ({everyTimeStamp}) => {
-  const currentTime = moment()
-  // const currentTime = moment('08:29', 'HH:mm')
+  const [timerFinished, setTimerFinished] = useState(false);
+  // const currentTime = moment()
+  const currentTime = moment('08:29', 'HH:mm')
   const activeInterval = getActiveInterval(currentTime, everyTimeStamp);
   if (!activeInterval) return (<div>Kein Unterricht</div>);
 
   const durationInSeconds = activeInterval.end.diff(currentTime, 'seconds');
   return (
+    <>
     <CountdownCircleTimer
       isPlaying
       strokeWidth={30}
@@ -28,10 +31,12 @@ const CountdownComponent = ({everyTimeStamp}) => {
       duration={durationInSeconds}
       colors={["#A30000", "#ff2626", "#F7B801", "#00d619", "#00d619"]}
       colorsTime={[durationInSeconds*0.87, durationInSeconds*0.75, durationInSeconds*0.5, durationInSeconds*0.25, 0]}
-      onComplete={() => [true, 1000]}
+      onComplete={() => setTimerFinished(true)}
     >
       {renderTime}
     </CountdownCircleTimer>
+    {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
+    </>
   );
 }
 
