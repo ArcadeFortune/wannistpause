@@ -79,20 +79,22 @@ const CountdownComponent = ({everyTimeStamp}) => {
   const [activeInterval, setActiveInterval] = useState(null); // get the two timestamps of the current interval
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
   const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
-
+  const [a, setA] = useState(0); // to refresh the useState
+  
   useEffect(() => {
     if (everyTimeStamp.length === 0) return; // needs to load data
-    // const currentTime = moment('17:55', 'HH:mm') // for testing
-    const currentTime = moment(); // sets current time
+    const currentTime = moment('08:31', 'HH:mm') // for testing
+    // const currentTime = moment(); // sets current time
     setActiveInterval(getActiveInterval(currentTime, everyTimeStamp)); // finds current interval
-    if (!activeInterval) return; // needs to refresh setState
+
+    if (!activeInterval)  { setA((prevA) => prevA + 1); return; }; // needs to refresh setState
     setTotalDuration(activeInterval.current.end.diff(activeInterval.current.start, 'seconds')) // sets the duration of the current interval either 45 minutes or 10 minutes
     setRemainingTime(activeInterval.current.end.diff(currentTime, 'seconds')) // sets the remaining time of the current interval
-  }, [everyTimeStamp, timerFinished]);
-
+  }, [everyTimeStamp, timerFinished, a]);
 
   if (everyTimeStamp.length === 0) return <div>Intranet laden...</div>;
   if (activeInterval === 0) return <div>Kein Unterricht!</div>; // badly solved
+  console.log('totalDuration:', totalDuration/60, 'minutes') 
   if (!totalDuration) return <div>Zeit rechnen...</div>;
   if (!activeInterval) return <div>Kein Unterricht!</div>;
 
