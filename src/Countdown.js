@@ -83,11 +83,15 @@ const CountdownComponent = ({everyTimeStamp}) => {
 
   useEffect(() => {
     if (everyTimeStamp.length === 0) return; // needs to load data
-    // const currentTime = moment('08:31', 'HH:mm') // for testing
-    const currentTime = moment(); // sets current time
+    const currentTime = moment('08:39:55', 'HH:mm:ss') // for testing
+    // const currentTime = moment(); // sets current time
     setActiveInterval(getActiveInterval(currentTime, everyTimeStamp)); // finds current interval
 
-    if (!activeInterval)  { setA((prevA) => prevA + 1); return; }; // needs to refresh setState
+    if (!activeInterval)  { 
+      if (a > 5) setA((prevA) => prevA + 1);
+      return;
+    } // needs to refresh setState
+
     setTotalDuration(activeInterval.current.end.diff(activeInterval.current.start, 'seconds')) // sets the duration of the current interval either 45 minutes or 10 minutes
     setRemainingTime(activeInterval.current.end.diff(currentTime, 'seconds')) // sets the remaining time of the current interval
   }, [everyTimeStamp, timerFinished, a]);
@@ -100,12 +104,13 @@ const CountdownComponent = ({everyTimeStamp}) => {
 
   const handleComplete = () => {
     console.log('finished!')
-    // setTotalDuration((maxDuration) => maxDuration + 1)
 
     setTimerFinished(true)    
     setTimeout(() => {
       setTimerFinished(false);
-    }, 4000);
+    }, 4000); // confetti refresh
+
+    return { shouldRepeat: true }
   };
 
   return (
