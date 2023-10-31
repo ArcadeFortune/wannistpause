@@ -83,8 +83,8 @@ const CountdownComponent = ({everyTimeStamp}) => {
 
   useEffect(() => {
     if (everyTimeStamp.length === 0) return; // needs to load data
-    const currentTime = moment('08:39:55', 'HH:mm:ss') // for testing
-    // const currentTime = moment(); // sets current time
+    // const currentTime = moment('08:39:55', 'HH:mm:ss') // for testing
+    const currentTime = moment(); // sets current time
     setActiveInterval(getActiveInterval(currentTime, everyTimeStamp)); // finds current interval
 
     if (!activeInterval)  { 
@@ -97,10 +97,9 @@ const CountdownComponent = ({everyTimeStamp}) => {
   }, [everyTimeStamp, timerFinished, a]);
 
   if (everyTimeStamp.length === 0) return <div>Intranet laden...</div>;
-  if (activeInterval === 0) return <div>Kein Unterricht!</div>; // badly solved
-  console.log('totalDuration:', totalDuration/60, 'minutes') 
+  if (activeInterval === 0) return <div className='countdown'>Kein Unterricht!</div>; // badly solved
   if (!totalDuration) return <div>Zeit rechnen...</div>;
-  if (!activeInterval) return <div>Kein Unterricht!</div>;
+  if (!activeInterval) return <div className='countdown'>Kein Unterricht!</div>;
 
   const handleComplete = () => {
     console.log('finished!')
@@ -126,7 +125,6 @@ const CountdownComponent = ({everyTimeStamp}) => {
                   
           duration={totalDuration}
           initialRemainingTime={remainingTime}
-          // initialRemainingTime={5} // for testing
           onComplete={handleComplete}
         >
           {renderTime}
