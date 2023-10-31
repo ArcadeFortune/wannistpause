@@ -6,3 +6,20 @@
 .text {
   color: #aaa;
 }
+
+.countdown {
+  opacity: 0;
+  animation: spawn 0.4s forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes spawn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -115,22 +115,23 @@ const CountdownComponent = ({everyTimeStamp}) => {
 
   return (
     <>
-    <CountdownCircleTimer
-      isPlaying
-      strokeWidth={30}
-      size={300}
-      colors={["#A30000", "#ff2626", "#F7B801", "#00d619", "#00d619"]}
-      colorsTime={[2700*0.87, 2700*0.75, 2700*0.5, 2700*0.25, 0]}
-      
-      duration={totalDuration}
-      initialRemainingTime={remainingTime}
-      // initialRemainingTime={5} // for testing
-      onComplete={handleComplete}
-    >
-      {renderTime}
-    </CountdownCircleTimer>
-
-    {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
+      {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
+      <div className='countdown'>
+        <CountdownCircleTimer
+          isPlaying
+          strokeWidth={30}
+          size={300}
+          colors={["#A30000", "#ff2626", "#F7B801", "#00d619", "#00d619"]}
+          colorsTime={[2700*0.87, 2700*0.75, 2700*0.5, 2700*0.25, 0]}
+                  
+          duration={totalDuration}
+          initialRemainingTime={remainingTime}
+          // initialRemainingTime={5} // for testing
+          onComplete={handleComplete}
+        >
+          {renderTime}
+        </CountdownCircleTimer>
+      </div>
     </>
   );
 }
