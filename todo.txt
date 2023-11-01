@@ -1,0 +1,1 @@
+hardcode times, add button to fetch times from intranet and parse the string into json
