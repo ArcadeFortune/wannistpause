@@ -76,7 +76,7 @@ const CountdownComponent = ({ksh}) => {
         >
           {renderTime}
         </CountdownCircleTimer>
-        <div className='nextSubject'>S'nöchste Fach: <br></br><span className='subject'>{nextSubject.subject}, {nextSubject.room}</span></div>
+        <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject'>{nextSubject.subject}, {nextSubject.room}</span></div>
       </div>
         }        
     </>
