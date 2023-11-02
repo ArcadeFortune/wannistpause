@@ -1,5 +1,5 @@
-import moment from "moment";
 import React from "react";
+import moment from "moment";
 
 
 export function renderTime({ remainingTime }) {
@@ -7,9 +7,9 @@ export function renderTime({ remainingTime }) {
 
   return (
     <div className="timer">
-      <div className="text">Remaining</div>
+      <div className="text">Nur no</div>
       <div className="value">{moment.utc(remainingTime * 1000).format('mm:ss')}</div>
-      <div className="text">minutes</div>
+      <div className="text">Minute</div>
     </div>
   );
 }
@@ -64,4 +64,18 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 
   // If no conditions met, currentTime is not within any intervals or gaps.
   return 0;
+}
+
+export function getNextSubject(currentTime, timestamps, everyClass, currentClass) {
+  console.log(getCurrentClass(everyClass, currentClass))
+  // console.log(everyClass)
+  // console.log(currentClass)
+  return {subject: "dummy subject1", room: '101'};
+}
+
+function getCurrentClass(everyClass, currentClass) {
+  for (let oneClass of everyClass) {
+    console.log(oneClass)
+  }
+  return 'test'
 }
