@@ -9,8 +9,13 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://intranet.tam.ch/ksh/public/timetable/daily-class-schedule"          
-        );
+          "https://intranet.tam.ch/ksh/public/timetable/daily-class-schedule", {
+            method: 'GET',
+            headers: {
+                'Accept-Language': 'de-DE,de;q=0.9' // This sets German as the preferred language
+            }
+        });
+        
         const data = await response.text();
         const parser = new DOMParser();
         const kshdocument = parser.parseFromString(data, "text/html");
