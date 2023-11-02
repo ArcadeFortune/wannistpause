@@ -7,7 +7,6 @@ import { getActiveInterval, getNextSubject, renderTime } from './importantFuncti
 
 
 const CountdownComponent = ({ksh}) => {
-  let a
   const [activeInterval, setActiveInterval] = useState(0); // get the two timestamps of the current interval (in moment object)
   const [totalDuration, setTotalDuration] = useState(null); // either 45 minutes or 10 minutes
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
@@ -22,8 +21,8 @@ const CountdownComponent = ({ksh}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    // const currentTime = moment('08:35:55', 'HH:mm:ss') // for testing
-    const currentTime = moment(); // sets current time
+    const currentTime = moment('08:35:55', 'HH:mm:ss') // for testing
+    // const currentTime = moment(); // sets current time
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval
@@ -41,7 +40,6 @@ const CountdownComponent = ({ksh}) => {
     console.log('Die nächste Lektion ist in:', getNextSubject(currentTime, ksh.everyClass).subject, 'im Raum', getNextSubject(currentTime, ksh.everyClass).room)
 
   }, [ksh]);
-  // }, [ksh, timerFinished, a]);
 
   const handleComplete = () => {
     console.log('finished!')
@@ -76,9 +74,8 @@ const CountdownComponent = ({ksh}) => {
         >
           {renderTime}
         </CountdownCircleTimer>
-        <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject'>{nextSubject.subject}, {nextSubject.room}</span></div>
-      </div>
-        }        
+        {/* <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject'>{nextSubject.subject}, {nextSubject.room}</span></div> */}
+      </div>}        
     </>
   );
 }

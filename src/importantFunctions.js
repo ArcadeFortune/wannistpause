@@ -67,15 +67,15 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 }
 
 export function getNextSubject(currentTime, timestamps, everyClass, currentClass) {
-  console.log(getCurrentClass(everyClass, currentClass))
+  // console.log(getCurrentClass(everyClass, currentClass))
   // console.log(everyClass)
   // console.log(currentClass)
   return {subject: "dummy subject1", room: '101'};
 }
 
 function getCurrentClass(everyClass, currentClass) {
-  for (let oneClass of everyClass) {
-    console.log(oneClass)
-  }
-  return 'test'
+  // for (let oneClass of everyClass) {
+  //   console.log(oneClass)
+  // }
+  // return 'test'
 }
