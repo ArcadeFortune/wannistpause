@@ -21,8 +21,7 @@ const CountdownComponent = ({ksh}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = moment('08:35:55', 'HH:mm:ss') // for testing
-    // const currentTime = moment(); // sets current time
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('08:35:55', 'HH:mm:ss') : moment();// for testing
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval
