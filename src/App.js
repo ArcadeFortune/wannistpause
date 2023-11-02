@@ -15,7 +15,7 @@ function App() {
                 'Accept-Language': 'de-DE,de;q=0.9' // This sets German as the preferred language
             }
         });
-        
+         
         const data = await response.text();
         const parser = new DOMParser();
         const kshdocument = parser.parseFromString(data, "text/html");
