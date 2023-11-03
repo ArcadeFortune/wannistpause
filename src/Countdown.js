@@ -41,7 +41,7 @@ const CountdownComponent = ({ksh}) => {
 
   const handleComplete = () => {
     console.log('finished!')
-    console.log('Die Jetztige Zeit ist:', moment().format('HH:mm:ss'))
+    console.log('Die Jetztige Zeit ist nun:', moment().format('HH:mm:ss'))
 
     setTimerFinished(true)    
     setTimeout(() => {
