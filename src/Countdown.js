@@ -37,7 +37,6 @@ const CountdownComponent = ({ksh}) => {
 
     setNextSubject(getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a')) // sets the next subject
     console.log('Die nächste Lektion ist:', getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').subject, getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').room ? ', im Raum: ' + getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').room : '')
-
   }, [ksh]);
 
   const handleComplete = () => {
