@@ -46,9 +46,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {ksh ? (
-          <div>
-            <CountdownComponent ksh={ksh}></CountdownComponent>
-          </div>
+          <CountdownComponent ksh={ksh}></CountdownComponent>
         ) : null}
       </header>
     </div>

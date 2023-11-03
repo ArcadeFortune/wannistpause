@@ -21,7 +21,7 @@ const CountdownComponent = ({ksh}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('11:15:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('07:45:55', 'HH:mm:ss') : moment();// for testing
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval
@@ -59,6 +59,7 @@ const CountdownComponent = ({ksh}) => {
       {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
 
       {<div className='countdown'>
+        <div className='full-title'><span className='url'>https://</span><span className='title'>WannIstPause</span><span className='url'>.vercel.app</span></div>
         <CountdownCircleTimer
           isPlaying
           strokeWidth={30}

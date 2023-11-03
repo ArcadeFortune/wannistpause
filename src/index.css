@@ -8,6 +8,13 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Kawi', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'Kawi';
+  src: url("/public/NotoSansKawi-Regular.ttf") format("truetype");
+  /* font-weight: 300;
+  font-style: normal; */
 }

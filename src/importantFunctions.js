@@ -7,9 +7,9 @@ export function renderTime({ remainingTime }) {
 
   return (
     <div className="timer">
-      <div className="text">Nur noch</div>
+      {/* <div className="text">Nur noch</div> */}
       <div className="value">{moment.utc(remainingTime * 1000).format('mm:ss')}</div>
-      <div className="text">Minuten</div>
+      {/* <div className="text">Minuten</div> */}
     </div>
   );
 }

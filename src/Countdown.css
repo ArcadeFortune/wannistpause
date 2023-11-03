@@ -28,9 +28,20 @@
 }
 
 .nextSubject {
-  margin: 10px;
+  margin: 0.5em;
+  margin-bottom: 3em;
 }
 
 .subject {
   font-weight: 600;
+}
+
+.full-title {
+  margin-bottom: 1.6em;
+  font-family: 'Kawi';
+}
+
+.url {
+  font-size: 0.8em;
+  color: #aaa;
 }
