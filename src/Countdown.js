@@ -21,7 +21,7 @@ const CountdownComponent = ({ksh}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('08:35:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('11:15:55', 'HH:mm:ss') : moment();// for testing
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval
@@ -35,8 +35,8 @@ const CountdownComponent = ({ksh}) => {
     setRemainingTime(actvIntvl.current.end.diff(currentTime, 'seconds')) // sets the remaining time of the current interval
     console.log('Es bleiben noch:', actvIntvl.current.end.diff(currentTime, 'seconds'), 'Sekunden')
 
-    setNextSubject(getNextSubject(currentTime, ksh.everyClass)) // sets the next subject
-    console.log('Die nächste Lektion ist in:', getNextSubject(currentTime, ksh.everyClass).subject, 'im Raum', getNextSubject(currentTime, ksh.everyClass).room)
+    setNextSubject(getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a')) // sets the next subject
+    console.log('Die nächste Lektion ist:', getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').subject, getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').room ? 'im Raum: ' + getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').room : '')
 
   }, [ksh]);
 
@@ -73,7 +73,7 @@ const CountdownComponent = ({ksh}) => {
         >
           {renderTime}
         </CountdownCircleTimer>
-        {/* <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject'>{nextSubject.subject}, {nextSubject.room}</span></div> */}
+        <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject'>{nextSubject.subject}{nextSubject.room && <span>, {nextSubject.room}</span>} </span></div>
       </div>}        
     </>
   );

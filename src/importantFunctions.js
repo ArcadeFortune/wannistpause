@@ -19,14 +19,15 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   let nextStart = null;
   let prevInterval = null;
   let found = false;
+  let i = 0
 
-  for (let i = 0; i < everyTimeStamp.length; i++) {
+  for (i; i < everyTimeStamp.length; i++) {
     const interval = everyTimeStamp[i];
     const [start, end] = interval.trim().split(' - ').map(t => moment(t, 'HH:mm'));
 
     if (found) {
       // console.log({ current: prevInterval, next: { start, end } })
-      return { current: prevInterval };
+      return { current: prevInterval, timeIndex: i };
     }
 
     // Check if currentTime is between the end of the previous interval and the start of the current.
@@ -47,7 +48,7 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 
   // check if the current time is after the last interval
   if (found && !nextStart) {
-    return { current: prevInterval, next: null };
+    return { current: prevInterval, next: null, timeIndex: i };
   }
 
   // does not work
@@ -59,23 +60,28 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   // If currentTime falls within a gap, return the gap information.
   if (nextStart) {
     // console.log({ current: { start: prevEnd, end: nextStart }, next: { start: nextStart }, gap: { before: prevEnd, after: nextStart } })
-    return { current: { start: prevEnd, end: nextStart } };
+    return { current: { start: prevEnd, end: nextStart }, timeIndex: i };
   }
 
   // If no conditions met, currentTime is not within any intervals or gaps.
   return 0;
 }
 
-export function getNextSubject(currentTime, timestamps, everyClass, currentClass) {
-  // console.log(getCurrentClass(everyClass, currentClass))
-  // console.log(everyClass)
-  // console.log(currentClass)
-  return {subject: "dummy subject1", room: '101'};
+export function getNextSubject(timeIndex, timestamps, everyClass, currentClass) {
+  const currentClassList = (getCurrentClass(everyClass, currentClass))
+  const nextLessonArray = currentClassList[timeIndex].innerText.trim().split('\n\n') //example: ['E', 'sor', '203']
+  if (nextLessonArray.length === 1) {
+    return {subject: "Frei Stunde!"};
+  } else {
+    return {subject: nextLessonArray[0], teacher: nextLessonArray[1], room: nextLessonArray[2]};
+  }
 }
 
 function getCurrentClass(everyClass, currentClass) {
-  // for (let oneClass of everyClass) {
-  //   console.log(oneClass)
-  // }
-  // return 'test'
+  for (let oneClass of everyClass) {
+    if (oneClass.querySelector('th').innerText.trim() === currentClass) {
+      return [...oneClass.children].filter(child => child.tagName !== 'TH'); // return all elements of the correct row without the TH element
+    }
+  }
+  return 'test'
 }
