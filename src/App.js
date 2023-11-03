@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
   const [ksh, setKsh] = useState({});
+  const [breakTime, setBreakTime] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,9 +46,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {ksh ? (
-          <CountdownComponent ksh={ksh}></CountdownComponent>
-        ) : null}
+        <div className='full-title' onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{breakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
+        <CountdownComponent ksh={ksh} setBreakTime={setBreakTime}></CountdownComponent>
       </header>
     </div>
   );

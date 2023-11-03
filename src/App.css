@@ -24,15 +24,21 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.full-title {
+  /* margin-bottom: 1.6em; */
+  font-family: 'Kawi';
+  position: absolute;
+  top: 3em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.full-title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #aaaaaa75;
+  text-decoration-thickness: 1px;
+}
+
+.url {
+  font-size: 0.8em;
+  color: #aaa;
 }

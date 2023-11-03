@@ -2,19 +2,19 @@ import React from "react";
 import moment from "moment";
 
 
-export function renderTime({ remainingTime }) {
+export const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) return <div className="timer">Pause!</div>;
 
   return (
     <div className="timer">
-      {/* <div className="text">Nur noch</div> */}
+      <div className="text">Nur noch</div>
       <div className="value">{moment.utc(remainingTime * 1000).format('mm:ss')}</div>
-      {/* <div className="text">Minuten</div> */}
+      <div className="text">Minuten</div>
     </div>
   );
-}
+};
 
-export function getActiveInterval(currentTime, everyTimeStamp) {
+export const getActiveInterval = (currentTime, everyTimeStamp) => {
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
@@ -27,7 +27,7 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 
     if (found) {
       // console.log({ current: prevInterval, next: { start, end } })
-      return { current: prevInterval, timeIndex: i };
+      return { current: prevInterval, timeIndex: i, breakTime: false };
     }
 
     // Check if currentTime is between the end of the previous interval and the start of the current.
@@ -60,12 +60,12 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   // If currentTime falls within a gap, return the gap information.
   if (nextStart) {
     // console.log({ current: { start: prevEnd, end: nextStart }, next: { start: nextStart }, gap: { before: prevEnd, after: nextStart } })
-    return { current: { start: prevEnd, end: nextStart }, timeIndex: i };
+    return { current: { start: prevEnd, end: nextStart }, timeIndex: i, breakTime: true };
   }
 
   // If no conditions met, currentTime is not within any intervals or gaps.
   return 0;
-}
+};
 
 export function getNextSubject(timeIndex, timestamps, everyClass, currentClass) {
   const currentClassList = (getCurrentClass(everyClass, currentClass))

@@ -6,7 +6,7 @@ import Confetti from 'react-confetti'
 import { getActiveInterval, getNextSubject, renderTime } from './importantFunctions';
 
 
-const CountdownComponent = ({ksh}) => {
+const CountdownComponent = ({ksh, setBreakTime}) => {
   const [activeInterval, setActiveInterval] = useState(0); // get the two timestamps of the current interval (in moment object)
   const [totalDuration, setTotalDuration] = useState(null); // either 45 minutes or 10 minutes
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
@@ -21,12 +21,13 @@ const CountdownComponent = ({ksh}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('07:45:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('08:39:55', 'HH:mm:ss') : moment();// for testing
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval
     const actvIntvl = getActiveInterval(currentTime, ksh.timestamps); // useEffect() does not save variables changed with setState().
     if (actvIntvl === 0) {console.log('kei Schuel!'); return}; // 0 means it is outside of the timetable
+    setBreakTime(actvIntvl.breakTime); // is it breaktime?
     console.log('Dies ist zwischen:', actvIntvl.current.start.format('HH:mm:ss'), '-', actvIntvl.current.end.format('HH:mm:ss'))
 
     setTotalDuration(actvIntvl.current.end.diff(actvIntvl.current.start, 'seconds')) // sets the duration of the current interval either 45 minutes or 10 minutes
@@ -56,10 +57,11 @@ const CountdownComponent = ({ksh}) => {
 
   return (
     <>
+      
+
       {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
 
       {<div className='countdown'>
-        <div className='full-title'><span className='url'>https://</span><span className='title'>WannIstPause</span><span className='url'>.vercel.app</span></div>
         <CountdownCircleTimer
           isPlaying
           strokeWidth={30}
