@@ -12,8 +12,8 @@ const CountdownComponent = ({ksh, setBreakTime}) => {
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
   const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
   const [nextSubject, setNextSubject] = useState({subject: "dummy subject", room: '100'}); // to display the next subject
-  useEffect(() => {
 
+  useEffect(() => {
     console.log('Intranet laden...')
     if (Object.keys(ksh).length === 0) {
       console.log('Noch keine Daten.')
@@ -21,12 +21,12 @@ const CountdownComponent = ({ksh, setBreakTime}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('08:39:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('15:45:55', 'HH:mm:ss') : moment();// for testing
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval
     const actvIntvl = getActiveInterval(currentTime, ksh.timestamps); // useEffect() does not save variables changed with setState().
-    if (actvIntvl === 0) {console.log('kei Schuel!'); return}; // 0 means it is outside of the timetable
+    if (actvIntvl === 0) {console.log('keine Schule!'); return}; // 0 means it is outside of the timetable
     setBreakTime(actvIntvl.breakTime); // is it breaktime?
     console.log('Dies ist zwischen:', actvIntvl.current.start.format('HH:mm:ss'), '-', actvIntvl.current.end.format('HH:mm:ss'))
 
@@ -37,7 +37,6 @@ const CountdownComponent = ({ksh, setBreakTime}) => {
     console.log('Es bleiben noch:', actvIntvl.current.end.diff(currentTime, 'seconds'), 'Sekunden')
 
     setNextSubject(getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a')) // sets the next subject
-    console.log('Die nächste Lektion ist:', getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').subject, getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').room ? ', im Raum: ' + getNextSubject(actvIntvl.timeIndex, ksh.timestamps, ksh.everyClass, 'I3a').room : '')
   }, [ksh]);
 
   const handleComplete = () => {
@@ -57,8 +56,6 @@ const CountdownComponent = ({ksh, setBreakTime}) => {
 
   return (
     <>
-      
-
       {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
 
       {<div className='countdown'>

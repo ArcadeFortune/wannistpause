@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 
-export const renderTime = ({ remainingTime }) => {
+export function renderTime({ remainingTime }) {
   if (remainingTime === 0) return <div className="timer">Pause!</div>;
 
   return (
@@ -12,9 +12,9 @@ export const renderTime = ({ remainingTime }) => {
       <div className="text">Minuten</div>
     </div>
   );
-};
+}
 
-export const getActiveInterval = (currentTime, everyTimeStamp) => {
+export function getActiveInterval(currentTime, everyTimeStamp) {
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
@@ -65,12 +65,19 @@ export const getActiveInterval = (currentTime, everyTimeStamp) => {
 
   // If no conditions met, currentTime is not within any intervals or gaps.
   return 0;
-};
+}
 
 export function getNextSubject(timeIndex, timestamps, everyClass, currentClass) {
   const currentClassList = (getCurrentClass(everyClass, currentClass))
+
+  // remove any deleted lessons from the returned object
+  let deletedLessons = currentClassList[timeIndex].querySelectorAll('.ttp-mod-deleted')
+  if (deletedLessons) deletedLessons.forEach(lesson => lesson.remove())
+
   const nextLessonArray = currentClassList[timeIndex].innerText.trim().split('\n\n') //example: ['E', 'sor', '203']
-  if (nextLessonArray.length === 1) {
+
+  console.log('Die nächste Lektion ist:', nextLessonArray)
+  if (JSON.stringify(nextLessonArray) === '[""]') { // '[""]' this needs to be perfectly like this lol
     return {subject: "Frei Stunde!"};
   } else {
     return {subject: nextLessonArray[0], teacher: nextLessonArray[1], room: nextLessonArray[2]};
