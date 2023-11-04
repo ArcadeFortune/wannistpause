@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CountdownComponent from "./Countdown";
 import "./App.css";
+import { BurgerMenu } from "./BurgerMenu";
 
 function App() {
   const [ksh, setKsh] = useState({});
@@ -46,6 +47,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        
+        <BurgerMenu></BurgerMenu>
         <div className='full-title' onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{breakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         <CountdownComponent ksh={ksh} setBreakTime={setBreakTime}></CountdownComponent>
       </header>

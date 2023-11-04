@@ -38,6 +38,11 @@
   text-decoration-thickness: 1px;
 }
 
+.full-title.burger-menu {
+  right: 2.7em;
+  top: calc(3em + 5px);
+}
+
 .url {
   font-size: 0.8em;
   color: #aaa;

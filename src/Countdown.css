@@ -7,6 +7,12 @@
   color: #aaa;
 }
 
+svg rect {
+  fill: #aaa;  /* Change 'blue' to your desired color */
+  stroke: #aaaaaa8a;  /* The color of the border/stroke */
+  stroke-width: 1;  /* The width of the border/stroke */
+}
+
 .countdown {
   opacity: 0;
   animation: spawn 0.4s forwards;
