@@ -1,0 +1,64 @@
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 9em; 
+  height: 100vh;  /* Full height */
+  background-color: rgb(0, 0, 0);
+  overflow-x: hidden;
+  transition: 0.5s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )  ;  /* Adjust the sliding speed */
+  transform: translateX(100%);  /* Initially hidden */
+  
+  background-image: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%); /* Adjust gradient as needed */
+  background-size: 1px 100%;
+  background-repeat: no-repeat; /* To make sure the gradient doesn't repeat */
+  background-position: left center; /* Aligns the gradient to the left */
+  padding-left: 1px;
+}
+
+.menu.open {
+  transform: translateX(0);  /* Slide in when open */
+}
+
+.menu-content > div {
+  padding-top: 0.5em;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
+  background-size: 80% 1px; 
+  background-repeat: no-repeat; /* To make sure the gradient doesn't repeat */
+  background-position: bottom center; 
+  transition: 0.5s;  /* Adjust the sliding speed */
+}
+
+/* all divs in the menu */
+.menu-content > div:hover {
+  cursor: pointer;
+  background-size: 100% 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
+  font-size: 1.02em; /* 1em is default font size */
+  /* letter-spacing: 2px; looks ugly af */
+}
+
+/* burger menu */
+svg rect {
+  fill: #aaa;
+  stroke: #aaaaaa8a;  /* The color of the border/stroke */
+  stroke-width: 1;  /* The width of the border/stroke */
+  transition: fill 0.5s, stroke 0.5s;
+}
+
+.burger-menu { 
+  margin-top: 1em;
+}
+
+.burger-menu:hover {
+  cursor: pointer;  
+}
+
+.burger-menu:hover rect {
+  fill: #ffffff; 
+  stroke: #ffffff8a;  /* The color of the border/stroke */
+}
+
+.menu-burger-menu:hover {
+  cursor: pointer;
+}

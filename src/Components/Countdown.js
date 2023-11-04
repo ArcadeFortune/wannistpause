@@ -3,7 +3,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import moment from 'moment';
 import './Countdown.css';
 import Confetti from 'react-confetti'
-import { getActiveInterval, getNextSubject, renderTime } from './importantFunctions';
+import { getActiveInterval, getNextSubject, renderTime } from '../importantFunctions';
 
 
 const CountdownComponent = ({ksh, setBreakTime}) => {
@@ -21,7 +21,7 @@ const CountdownComponent = ({ksh, setBreakTime}) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('15:45:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('11:45:55', 'HH:mm:ss') : moment();// for testing
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     setActiveInterval(getActiveInterval(currentTime, ksh.timestamps)); // finds current interval

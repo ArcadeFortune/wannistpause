@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -25,10 +14,11 @@
 }
 
 .full-title {
-  /* margin-bottom: 1.6em; */
   font-family: 'Kawi';
   position: absolute;
   top: 3em;
+  text-decoration-color: #aaaaaa00;
+  transition: text-decoration 0.5s;
 }
 
 .full-title:hover {
@@ -39,6 +29,7 @@
 }
 
 .full-title.burger-menu {
+  margin: 0;
   right: 2.7em;
   top: calc(3em + 5px);
 }

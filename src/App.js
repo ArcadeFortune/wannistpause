@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import CountdownComponent from "./Countdown";
+import CountdownComponent from "./Components/Countdown";
 import "./App.css";
-import { BurgerMenu } from "./BurgerMenu";
+import './Components/Menu.css';
+
+import { BurgerMenu } from "./Components/BurgerMenu";
+import { Menu } from "./Components/Menu";
 
 function App() {
   const [ksh, setKsh] = useState({});
   const [breakTime, setBreakTime] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleClick() {
+    setIsOpen(!isOpen)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,7 +56,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         
-        <BurgerMenu></BurgerMenu>
+        <BurgerMenu handleClick={handleClick} className="full-title burger-menu"></BurgerMenu>
+
+        <div className={`menu ${isOpen ? 'open' : ''}`}>
+          <div className="menu-content">
+            <BurgerMenu handleClick={handleClick} className="burger-menu"></BurgerMenu>
+            <Menu/>
+          </div>
+        </div>
         <div className='full-title' onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{breakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         <CountdownComponent ksh={ksh} setBreakTime={setBreakTime}></CountdownComponent>
       </header>

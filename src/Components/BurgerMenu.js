@@ -1,10 +1,7 @@
-export function BurgerMenu() {
-  function handleClick() {
-    alert('clicked');
-  }
+export function BurgerMenu({ handleClick, className }) {
 
   return (
-    <svg width="1em" height="1em" className="full-title burger-menu" onClick={handleClick}>
+    <svg width="1em" height="1em" onClick={handleClick} className={className}>
       <style>@import url('./Countdown.css');</style>
       <rect
         x="1"
@@ -17,7 +14,7 @@ export function BurgerMenu() {
       />
       <rect
         x="1"
-        y="calc(1em - 1em / 2 - 2px)"
+        y="calc(1em - 1em / 2 - 2px)" //this is inconsistent with the other rects
         width="calc(1em - 2px)"
         height="calc(1em / 6)"
         fill="black"
