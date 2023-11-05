@@ -31,7 +31,7 @@ const CountdownComponent = ({ className }) => {
 
   return (
     <>
-      {ksh.timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
+      {ksh.timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={500} />}
       {<div className={`${className} countdown`}>
         <CountdownCircleTimer
           key={ksh.timerKey}
