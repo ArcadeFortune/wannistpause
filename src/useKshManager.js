@@ -3,19 +3,22 @@ import { getActiveInterval, getNextSubject } from "./importantFunctions";
 import { useState } from "react";
 
 export default function useKSHManager() {
-  const [timeStamps, setTimeStamps] = useState(null); // general timestamps //import these
+  // data relevant variables
+  const [timeStamps, setTimeStamps] = useState(null); // general timestamps
   const [everyClass, setEveryClass] = useState(null); // all the subjects
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentClass, setCurrentClass] = useState(null); // school class selected by the user
 
-  const [activeInterval, setActiveInterval] = useState(0); // get the two timestamps of the current interval (in moment object)
+  // website relevant variables
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
+
+  // timer relevant variables
+  const [activeInterval, setActiveInterval] = useState(0); // get the two timestamps of the current interval (in moment object)
   const [totalDuration, setTotalDuration] = useState(null); // either 45 minutes or 10 minutes
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
   const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
-  const [nextSubject, setNextSubject] = useState({
-    subject: "dummy subject",
-    room: "100",
-  }); // to display the next subject
+  const [nextSubject, setNextSubject] = useState({}); // to display the next subject
 
   function isKSHLoaded() {
     return timeStamps != undefined && everyClass != undefined;
@@ -28,6 +31,10 @@ export default function useKSHManager() {
 
   function handleBurgerClick() {
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  function handleChangeClassClick() {
+    setIsChangeClassOpen(!isChangeClassOpen);
   }
 
   function configureTimer(currentTime) {
@@ -81,7 +88,9 @@ export default function useKSHManager() {
   return {
     timeStamps, setTimeStamps,
     everyClass, setEveryClass,
+    currentClass, setCurrentClass,
     isMenuOpen, setIsMenuOpen,
+    isChangeClassOpen, setIsChangeClassOpen,
     activeInterval, setActiveInterval,
     isBreakTime, setIsBreakTime,
     totalDuration, setTotalDuration,
@@ -91,6 +100,7 @@ export default function useKSHManager() {
     isKSHLoaded,
     isActiveInterval,
     handleBurgerClick,
+    handleChangeClassClick,
     configureTimer,
     handleTimerComplete,
   };

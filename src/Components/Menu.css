@@ -20,22 +20,25 @@
   transform: translateX(0);  /* Slide in when open */
 }
 
-.menu-content > div {
+.menu-content > div, .select {
   padding-top: 0.5em;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
   background-size: 80% 1px; 
   background-repeat: no-repeat; /* To make sure the gradient doesn't repeat */
   background-position: bottom center; 
   transition: 0.5s;  /* Adjust the sliding speed */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.42);
+
 }
 
 /* all divs in the menu */
-.menu-content > div:hover {
+.menu-content > div:hover, .select:hover {
   cursor: pointer;
   background-size: 100% 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
   font-size: 1.02em; /* 1em is default font size */
   /* letter-spacing: 2px; looks ugly af */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.877);
 }
 
 /* burger menu */

@@ -18,3 +18,8 @@ code {
   /* font-weight: 300;
   font-style: normal; */
 }
+
+.blur {  
+  -webkit-filter: blur(8px); 
+  filter: blur(8px);
+}

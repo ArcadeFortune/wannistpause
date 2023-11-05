@@ -7,7 +7,7 @@ import { getActiveInterval, getNextSubject, renderTime } from '../importantFunct
 import { KshManagerContext } from '../KshManager';
 
 
-const CountdownComponent = () => {
+const CountdownComponent = ({ className }) => {
   const ksh = useContext(KshManagerContext);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const CountdownComponent = () => {
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     ksh.configureTimer(currentTime);
-  }, [ksh.timeStamps]);
+  }, [ksh.timeStamps, ksh.currentClass]);
 
 
   if (!ksh.isKSHLoaded()) return <div>Intranet laden...</div>;
@@ -31,7 +31,7 @@ const CountdownComponent = () => {
   return (
     <>
       {ksh.timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
-      {<div className='countdown'>
+      {<div className={`${className} countdown`}>
         <CountdownCircleTimer
           isPlaying
           strokeWidth={30}

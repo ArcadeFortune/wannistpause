@@ -2,7 +2,7 @@ export function BurgerMenu({ handleClick, className }) {
 
   return (
     <svg width="1em" height="1em" onClick={handleClick} className={className}>
-      <style>@import url('./Countdown.css');</style>
+      {/* <style>@import url('./Countdown.css');</style> */}
       <rect
         x="1"
         y="1"
