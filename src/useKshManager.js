@@ -15,6 +15,8 @@ export default function useKSHManager() {
   const [isBreakTime, setIsBreakTime] = useState(false);
 
   // timer relevant variables
+  const [timerKey, setTimerKey] = useState(0); // to restart the timer
+  const [refreshTimer, setRefreshTimer] = useState(0); // to restart the timer. also useEffect is kinda annoying
   const [activeInterval, setActiveInterval] = useState(0); // get the two timestamps of the current interval (in moment object)
   const [totalDuration, setTotalDuration] = useState(null); // either 45 minutes or 10 minutes
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
@@ -37,10 +39,28 @@ export default function useKSHManager() {
   function handleChangeClassClick() {
     setIsChangeClassOpen(!isChangeClassOpen);
   }
+  
+  function handleTimerComplete() {
+    console.log("fertig!");
+    console.log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
+    setRefreshTimer(refreshTimer + 1);
+
+
+    setTimerFinished(true);
+    setTimeout(() => {
+      setTimerFinished(false);
+    }, 4000); // confetti refresh
+
+  }
 
   function saveCurrentClass(currentClass) {
     localStorage.setItem('currentClass', currentClass);
     setCurrentClass(currentClass);
+  }
+
+  function restartTimer() {
+    setTimerKey(timerKey + 1);
+    // setTimerFinished(false);
   }
 
   function configureTimer(currentTime) {
@@ -73,21 +93,11 @@ export default function useKSHManager() {
       "Es bleiben noch:",
       i.current.end.diff(currentTime, "seconds"),
       "Sekunden"
-    );
-
+      );
+      
     setNextSubject(getNextSubject(i.timeIndex, timeStamps, todaysSubjects, currentClass)); // sets the next subject
-  }
-
-  function handleTimerComplete() {
-    console.log("finished!");
-    console.log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
-
-    setTimerFinished(true);
-    setTimeout(() => {
-      setTimerFinished(false);
-    }, 4000); // confetti refresh
-
-    return { shouldRepeat: true };
+    
+    restartTimer();
   }
 
   // return every variable
@@ -98,12 +108,15 @@ export default function useKSHManager() {
     currentClass, saveCurrentClass,
     isMenuOpen, setIsMenuOpen,
     isChangeClassOpen, setIsChangeClassOpen,
+    timerKey, setTimerKey,
+    refreshTimer, setRefreshTimer,
     activeInterval, setActiveInterval,
     isBreakTime, setIsBreakTime,
     totalDuration, setTotalDuration,
     remainingTime, setRemainingTime,
     timerFinished, setTimerFinished,
     nextSubject, setNextSubject,
+    restartTimer,
     isKSHLoaded,
     isActiveInterval,
     handleBurgerClick,

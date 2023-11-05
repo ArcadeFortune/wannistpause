@@ -68,6 +68,7 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 
 export function getNextSubject(timeIndex, timestamps, todaysSubjects, currentClass) {
   const currentClassList = (getCurrentClass(todaysSubjects, currentClass))
+  if (timeIndex > currentClassList.length - 1) return {subject: "Frei Stunde!"}; // if the current time is after the last lesson, return a free lesson
 
   // remove any deleted lessons from the returned object
   let deletedLessons = currentClassList[timeIndex].querySelectorAll('.ttp-mod-deleted')

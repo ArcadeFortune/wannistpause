@@ -18,11 +18,12 @@ const CountdownComponent = ({ className }) => {
     } // needs to load data
     console.log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('08:39:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment() : moment();// for testing
+    currentTime.add(1, 'seconds'); // perhaps this will fix everything
     console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     ksh.configureTimer(currentTime);
-  }, [ksh.timeStamps, ksh.currentClass]);
+  }, [ksh.timeStamps, ksh.currentClass, ksh.refreshTimer]);
 
 
   if (!ksh.isKSHLoaded()) return <div>Intranet laden...</div>;
@@ -33,6 +34,7 @@ const CountdownComponent = ({ className }) => {
       {ksh.timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
       {<div className={`${className} countdown`}>
         <CountdownCircleTimer
+          key={ksh.timerKey}
           isPlaying
           strokeWidth={30}
           size={300}
