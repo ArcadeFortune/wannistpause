@@ -8,6 +8,7 @@
 }
 
 .countdown {
+  margin-top: 5em;
   opacity: 0;
   animation: spawn 0.4s forwards;
   animation-delay: 0.1s;
@@ -28,12 +29,14 @@
 }
 
 .nextSubject {
-  margin: 0.5em;
   margin-bottom: 3em;
-  font-size: 1.2em;
 }
 
-.subject {
+.currentClass {
+  margin-top: 0.5em;
+}
+
+.subject, .currentSelectedClass {
   
   font-family: 'Kawi';
   font-weight: 600;

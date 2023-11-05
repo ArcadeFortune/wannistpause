@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import moment from 'moment';
 import './Countdown.css';
 import Confetti from 'react-confetti'
-import { getActiveInterval, getNextSubject, renderTime } from '../importantFunctions';
+import { renderTime } from '../importantFunctions';
 import { KshManagerContext } from '../KshManager';
 
 
@@ -45,6 +45,7 @@ const CountdownComponent = ({ className }) => {
         >
           {renderTime}
         </CountdownCircleTimer>
+        <div className='currentClass'>Klasse: <br></br><span className='currentSelectedClass'>{ksh.currentClass}</span></div>
         <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject'>{ksh.nextSubject.subject}{ksh.nextSubject.room && <span>, {ksh.nextSubject.room}</span>} </span></div>
       </div>}        
     </>

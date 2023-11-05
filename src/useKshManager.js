@@ -22,7 +22,7 @@ export default function useKSHManager() {
   const [nextSubject, setNextSubject] = useState({}); // to display the next subject
 
   function isKSHLoaded() {
-    return timeStamps != undefined && todaysSubjects != undefined;
+    return timeStamps != null && todaysSubjects != null;
     // return timeStamps && everyClass; // if / else
   }
 
