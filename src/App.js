@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CountdownComponent from "./Components/Countdown";
 import "./App.css";
 import './Components/Menu.css';
 
 import { BurgerMenu } from "./Components/BurgerMenu";
 import { Menu } from "./Components/Menu";
+import { KshManagerContext } from "./KshManager";
 
 function App() {
+  const test = useContext(KshManagerContext);
   const [ksh, setKsh] = useState({});
   const [breakTime, setBreakTime] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +55,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App"> 
       <header className="App-header">
         
         <BurgerMenu handleClick={handleClick} className="full-title burger-menu"></BurgerMenu>

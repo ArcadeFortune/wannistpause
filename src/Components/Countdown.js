@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import moment from 'moment';
 import './Countdown.css';
 import Confetti from 'react-confetti'
 import { getActiveInterval, getNextSubject, renderTime } from '../importantFunctions';
+import { KshManagerContext } from '../KshManager';
 
 
 const CountdownComponent = ({ksh, setBreakTime}) => {
+  const test = useContext(KshManagerContext)
   const [activeInterval, setActiveInterval] = useState(0); // get the two timestamps of the current interval (in moment object)
   const [totalDuration, setTotalDuration] = useState(null); // either 45 minutes or 10 minutes
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
@@ -57,7 +59,6 @@ const CountdownComponent = ({ksh, setBreakTime}) => {
   return (
     <>
       {timerFinished && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} />}
-
       {<div className='countdown'>
         <CountdownCircleTimer
           isPlaying
