@@ -3,7 +3,7 @@
   text-shadow: 0 0 8px hsla(0,0%,100%,.8);
 }
 
-.text {
+.timer-text {
   color: #aaa;
 }
 
@@ -34,5 +34,7 @@
 }
 
 .subject {
+  
+  font-family: 'Kawi';
   font-weight: 600;
 }

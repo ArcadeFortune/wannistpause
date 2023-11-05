@@ -5,8 +5,9 @@ import { useState } from "react";
 export default function useKSHManager() {
   // data relevant variables
   const [timeStamps, setTimeStamps] = useState(null); // general timestamps
-  const [everyClass, setEveryClass] = useState(null); // all the subjects
-  const [currentClass, setCurrentClass] = useState(null); // school class selected by the user
+  const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
+  const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
+  const [currentClass, setCurrentClass] = useState('I3a'); // school class selected by the user
 
   // website relevant variables
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function useKSHManager() {
   const [nextSubject, setNextSubject] = useState({}); // to display the next subject
 
   function isKSHLoaded() {
-    return timeStamps != undefined && everyClass != undefined;
+    return timeStamps != undefined && todaysSubjects != undefined;
     // return timeStamps && everyClass; // if / else
   }
 
@@ -69,7 +70,7 @@ export default function useKSHManager() {
       "Sekunden"
     );
 
-    setNextSubject(getNextSubject(i.timeIndex, timeStamps, everyClass, "I3a")); // sets the next subject
+    setNextSubject(getNextSubject(i.timeIndex, timeStamps, todaysSubjects, currentClass)); // sets the next subject
   }
 
   function handleTimerComplete() {
@@ -87,6 +88,7 @@ export default function useKSHManager() {
   // return every variable
   return {
     timeStamps, setTimeStamps,
+    todaysSubjects, setTodaysSubjects,
     everyClass, setEveryClass,
     currentClass, setCurrentClass,
     isMenuOpen, setIsMenuOpen,

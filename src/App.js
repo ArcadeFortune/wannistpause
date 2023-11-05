@@ -26,16 +26,23 @@ function App() {
         const parser = new DOMParser();
         const kshdocument = parser.parseFromString(data, "text/html");
 
-        // grab all the subjects
-        const everyClass = Array.from(
-          kshdocument.querySelectorAll(".ttp-line")
-        ).map((line) => line);
-        
         // grab the general timestamps
         const timeStamps = Array.from(
           kshdocument.querySelectorAll(".ttp-timespan")
         ).map((timeStamp) => timeStamp.innerHTML);
+
+        // grab all the subjects
+        const todaysSubjects = Array.from(
+          kshdocument.querySelectorAll(".ttp-line")
+        ).map((line) => line);
+        
+        // grab every class as a string list
+        const everyClass = Array.from(
+          todaysSubjects.map((line) => line.querySelector('th').innerHTML)
+        );
+          
         ksh.setTimeStamps(timeStamps);
+        ksh.setTodaysSubjects(todaysSubjects);
         ksh.setEveryClass(everyClass);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -56,7 +63,7 @@ function App() {
     <div className="App"> 
       <header className="App-header">
         <ChangeClass
-          options={['Option 1', 'Option 2', 'Option 3']} 
+          options={ksh.everyClass} 
           onSave={handleSave} 
           onClose={() => setIsModalOpen(false)}
         />

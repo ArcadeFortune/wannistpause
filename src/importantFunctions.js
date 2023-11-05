@@ -6,9 +6,9 @@ export function renderTime({ remainingTime }) {
 
   return (
     <div className="timer">
-      <div className="text">Nur noch</div>
+      <div className="timer-text">Nur noch</div>
       <div className="value">{moment.utc(remainingTime * 1000).format('mm:ss')}</div>
-      <div className="text">Minuten</div>
+      <div className="timer-text">Minuten</div>
     </div>
   );
 }
@@ -66,8 +66,8 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   return 0;
 }
 
-export function getNextSubject(timeIndex, timestamps, everyClass, currentClass) {
-  const currentClassList = (getCurrentClass(everyClass, currentClass))
+export function getNextSubject(timeIndex, timestamps, todaysSubjects, currentClass) {
+  const currentClassList = (getCurrentClass(todaysSubjects, currentClass))
 
   // remove any deleted lessons from the returned object
   let deletedLessons = currentClassList[timeIndex].querySelectorAll('.ttp-mod-deleted')
@@ -83,8 +83,8 @@ export function getNextSubject(timeIndex, timestamps, everyClass, currentClass) 
   }
 }
 
-function getCurrentClass(everyClass, currentClass) {
-  for (let oneClass of everyClass) {
+function getCurrentClass(todaysSubjects, currentClass) {
+  for (let oneClass of todaysSubjects) {
     if (oneClass.querySelector('th').innerText.trim() === currentClass) {
       return [...oneClass.children].filter(child => child.tagName !== 'TH'); // return all elements of the correct row without the TH element
     }
