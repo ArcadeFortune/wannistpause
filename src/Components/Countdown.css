@@ -36,8 +36,7 @@
   margin-top: 0.5em;
 }
 
-.subject, .currentSelectedClass {
-  
+.subject, .currentSelectedClass {  
   font-family: 'Kawi';
   font-weight: 600;
 }

@@ -11,7 +11,7 @@ export default function ChangeClass({ options, onSave, onClose }) {
   return (
     <div className={`${ksh.isChangeClassOpen ? '' : 'close'} change-class overlay`}>
       <div className="change-class modal">
-        <div className='change-class close-button' onClick={() => {console.log('closing with', originalOption); ksh.setCurrentClass(originalOption); ksh.handleChangeClassClick()}}><CrossMark/></div>
+        <div className='change-class close-button' onClick={() => {console.log('closing with', originalOption); ksh.saveCurrentClass(originalOption); ksh.handleChangeClassClick()}}><CrossMark/></div>
         <div className="change-class title">Klasse wechseln</div>
         <select value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
           {options.map(option => (
@@ -20,7 +20,7 @@ export default function ChangeClass({ options, onSave, onClose }) {
             </option>
           ))}
         </select>
-        <div className="change-class save-button select" onClick={() => { console.log('saving', selectedOption); ksh.setCurrentClass(selectedOption); ksh.handleChangeClassClick()}}><span className='select-text'>Save</span></div>
+        <div className="change-class save-button select" onClick={() => { console.log('saving', selectedOption); ksh.saveCurrentClass(selectedOption); ksh.handleChangeClassClick()}}><span className='select-text'>Save</span></div>
       </div>
     </div>
   );
