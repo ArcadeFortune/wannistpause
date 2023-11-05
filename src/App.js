@@ -8,14 +8,7 @@ import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 
 function App() {
-  const test = useContext(KshManagerContext);
-  const [ksh, setKsh] = useState({});
-  const [breakTime, setBreakTime] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleClick() {
-    setIsOpen(!isOpen)
-  }
+  const ksh = useContext(KshManagerContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,11 +34,8 @@ function App() {
         const timeStamps = Array.from(
           kshdocument.querySelectorAll(".ttp-timespan")
         ).map((timeStamp) => timeStamp.innerHTML);
-        setKsh({
-          ...ksh,
-          timestamps: timeStamps,
-          everyClass: everyClass,
-        });
+        ksh.setTimeStamps(timeStamps);
+        ksh.setEveryClass(everyClass);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -58,16 +48,16 @@ function App() {
     <div className="App"> 
       <header className="App-header">
         
-        <BurgerMenu handleClick={handleClick} className="full-title burger-menu"></BurgerMenu>
+        <BurgerMenu handleClick={ksh.handleBurgerClick} className="full-title burger-menu"></BurgerMenu>
 
-        <div className={`menu ${isOpen ? 'open' : ''}`}>
+        <div className={`menu ${ksh.isMenuOpen ? 'open' : ''}`}>
           <div className="menu-content">
-            <BurgerMenu handleClick={handleClick} className="burger-menu"></BurgerMenu>
+            <BurgerMenu handleClick={ksh.handleBurgerClick} className="burger-menu"></BurgerMenu>
             <Menu/>
           </div>
         </div>
-        <div className='full-title' onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{breakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
-        <CountdownComponent ksh={ksh} setBreakTime={setBreakTime}></CountdownComponent>
+        <div className='full-title' onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
+        <CountdownComponent></CountdownComponent>
       </header>
     </div>
   );

@@ -77,8 +77,21 @@ export default function useKSHManager() {
     return { shouldRepeat: true };
   }
 
+  // return every variable
   return {
-    isMenuOpen,
-    handleBurgerClick
-  }
+    timeStamps, setTimeStamps,
+    everyClass, setEveryClass,
+    isMenuOpen, setIsMenuOpen,
+    activeInterval, setActiveInterval,
+    isBreakTime, setIsBreakTime,
+    totalDuration, setTotalDuration,
+    remainingTime, setRemainingTime,
+    timerFinished, setTimerFinished,
+    nextSubject, setNextSubject,
+    isKSHLoaded,
+    isActiveInterval,
+    handleBurgerClick,
+    configureTimer,
+    handleTimerComplete,
+  };
 }
