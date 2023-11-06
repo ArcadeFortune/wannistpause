@@ -1,6 +1,6 @@
 .change-class {
   z-index: 69;
-  transition: 0.5s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )
+  transition: 0.1s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )
 }
 
 .change-class.overlay {
@@ -22,7 +22,6 @@
   border-radius: 1em;
   width: 17em;
   height: 10em;
-  margin-bottom: 7.5em;
   transition: 0.5s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
 
   display: flex;

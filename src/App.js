@@ -72,7 +72,7 @@ function App() {
         <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur' : ''} full-title burger-menu`}></BurgerMenu>
 
         <div className={`menu ${ksh.isMenuOpen ? 'open' : ''}`}>
-          <div className="menu-content">
+          <div className={`${ksh.isChangeClassOpen ? 'blur' : ''} menu-content`}>
             <span className="title">Menü</span>
             <BurgerMenu handleClick={ksh.handleBurgerClick} className="burger-menu"></BurgerMenu>
             <Menu/>
