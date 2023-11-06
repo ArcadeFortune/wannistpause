@@ -20,7 +20,7 @@ export default function ChangeClass({ options, onSave, onClose }) {
             </option>
           ))}
         </select>
-        <div className="change-class save-button select" onClick={() => { console.log('saving', selectedOption); ksh.saveCurrentClass(selectedOption); ksh.handleChangeClassClick()}}><span className='select-text'>Save</span></div>
+        <div className="change-class save-button select" onClick={() => { console.log('saving', selectedOption); ksh.saveCurrentClass(selectedOption); ksh.handleChangeClassClick()}}><span className='select-text'>Speichern</span></div>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 .menu {
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   top: 0;
   right: 0;
   width: 9em; 
   height: 100vh;  /* Full height */
-  background-color: rgb(0, 0, 0);
+  background-color: #282c34;  
   overflow-x: hidden;
   transition: 0.5s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )  ;  /* Adjust the sliding speed */
   transform: translateX(100%);  /* Initially hidden */
