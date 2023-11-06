@@ -14,11 +14,17 @@
 }
 
 .full-title {
-  font-family: 'Kawi';
   position: absolute;
-  top: 3em;
+  top: 2.3em;
   text-decoration-color: #aaaaaa00;
   transition: text-decoration 0.5s;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(52, 13, 13, 0.991);
+  color: white;
 }
 
 .full-title:hover {
@@ -30,8 +36,16 @@
 
 .full-title.burger-menu {
   margin: 0;
-  right: 2.7em;
-  top: calc(3em + 5px);
+  right: 4em;
+  top: 3em;
+}
+
+@media (max-width: 550px) {
+  .full-title.burger-menu {
+    margin: 0;
+    right:1em;
+    top: 3em;
+  }
 }
 
 .url {

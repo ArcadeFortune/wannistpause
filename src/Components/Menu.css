@@ -21,6 +21,11 @@
   transform: translateX(0);  /* Slide in when open */
 }
 
+.menu-content > .title {
+  display: block;
+  margin: 0.3em;
+}
+
 .menu-content > div, .select {
   padding-top: 0.5em;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
@@ -51,7 +56,7 @@ svg rect {
 }
 
 .burger-menu { 
-  margin-top: 1em;
+  z-index: 1;
 }
 
 .burger-menu:hover {

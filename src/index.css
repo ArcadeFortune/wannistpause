@@ -23,3 +23,15 @@ code {
   -webkit-filter: blur(8px); 
   filter: blur(8px);
 }
+
+::-moz-selection {
+  --tw-text-opacity: 1;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 8px #ffffff
+}
+
+::selection {
+  --tw-text-opacity: 1;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 8px #ffffff
+}
