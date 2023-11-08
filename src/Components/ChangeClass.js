@@ -9,10 +9,11 @@ export default function ChangeClass({ options, onSave, onClose }) {
   const [selectedOption, setSelectedOption] = useState(ksh.currentClass);
 
   return (
-    <div className={`${ksh.isChangeClassOpen ? '' : 'close'} change-class overlay`}>
-      <div className="change-class modal">
-        <div className='change-class close-button' onClick={() => {console.log('closing with', originalOption); ksh.saveCurrentClass(originalOption); ksh.handleChangeClassClick()}}><CrossMark/></div>
-        <div className="change-class title">Klasse wechseln</div>
+    <div className={`change-class ${ksh.isChangeClassOpen ? 'open' : 'close'}`}>
+      <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class overlay`} onClick={() => {ksh.isChangeClassOpen ? ksh.handleChangeClassClick() : console.log('why u spamclicking like that')}}></div>
+      <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class modal`}>
+      <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class close-button`} onClick={() => {console.log('closing with', originalOption); ksh.saveCurrentClass(originalOption); ksh.handleChangeClassClick()}}><CrossMark/></div>
+        <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class title`}>Klasse wechseln</div>
         <select value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
           {options.map(option => (
             <option key={option} value={option}>
@@ -20,7 +21,7 @@ export default function ChangeClass({ options, onSave, onClose }) {
             </option>
           ))}
         </select>
-        <div className="change-class save-button select" onClick={() => { console.log('saving', selectedOption); ksh.saveCurrentClass(selectedOption); ksh.handleChangeClassClick()}}><span className='select-text'>Speichern</span></div>
+        <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class save-button select`} onClick={() => { console.log('saving', selectedOption); ksh.saveCurrentClass(selectedOption); ksh.handleChangeClassClick()}}><span className='select-text'>Speichern</span></div>
       </div>
     </div>
   );

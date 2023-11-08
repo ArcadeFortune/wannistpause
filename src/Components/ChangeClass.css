@@ -1,28 +1,39 @@
 .change-class {
   z-index: 69;
-  transition: 0.1s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: 0.2s cubic-bezier(0.21, 0.82, 0.69, 0.97);
+}
+
+.change-class.open {
+  visibility: visible;
 }
 
 .change-class.overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.137);
+}
+
+.change-class.overlay.open {
+  opacity: 1;
 }
 
 .change-class.modal {
-  z-index: 420;
   position: absolute;
-  background-color: #00000065;
-  border: 0.1em solid black;
-  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.42);;
-  border-radius: 1em;
+  background-color: #282c34;
+  box-shadow: 0px 18px 19px rgb(0 0 0 / 62%);
+  border-radius: 0.3em;
   width: 17em;
   height: 10em;
-  transition: 0.5s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
 
   display: flex;
   flex-direction: column;
@@ -30,11 +41,22 @@
   justify-content: space-around;
 }
 
-.change-class.close {
-  transform: scale(0);
-
+.change-class.modal.close {
+  transform: scale(0.8);
+  opacity: 0;
 }
 
+.change-class.title {
+  position: relative;
+  height: initial;
+  width: initial;
+}
+
+.change-class.select {
+  position: relative;
+  height: initial;
+  width: initial;
+}
 
 .change-class.close-button {
   position: absolute;
@@ -68,15 +90,4 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-}
-
-@keyframes spawn {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }

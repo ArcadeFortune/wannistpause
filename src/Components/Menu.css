@@ -7,7 +7,7 @@
   height: 100vh;  /* Full height */
   background-color: #282c34;  
   overflow-x: hidden;
-  transition: 0.5s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )  ;  /* Adjust the sliding speed */
+  transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 )  ;  /* Adjust the sliding speed */
   transform: translateX(100%);  /* Initially hidden */
   
   background-image: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%); /* Adjust gradient as needed */
@@ -32,7 +32,7 @@
   background-size: 80% 1px; 
   background-repeat: no-repeat; /* To make sure the gradient doesn't repeat */
   background-position: bottom center; 
-  transition: 0.5s;  /* Adjust the sliding speed */
+  transition: 0.2s;  /* Adjust the sliding speed */
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.42);
 
 }
@@ -52,7 +52,7 @@ svg rect {
   fill: #aaa;
   stroke: #aaaaaa8a;  /* The color of the border/stroke */
   stroke-width: 1;  /* The width of the border/stroke */
-  transition: fill 0.5s, stroke 0.5s;
+  transition: fill 0.2s, stroke 0.5s;
 }
 
 .burger-menu { 

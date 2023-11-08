@@ -17,7 +17,7 @@
   position: absolute;
   top: 2.3em;
   text-decoration-color: #aaaaaa00;
-  transition: text-decoration 0.5s;
+  transition: text-decoration 0.2s;
 }
 
 .title {
