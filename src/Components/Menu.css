@@ -24,6 +24,7 @@
 .menu-content > .title {
   display: block;
   margin: 0.3em;
+  margin-bottom: -0.35em; /* make up for the font difference */
 }
 
 .menu-content > div, .select {
