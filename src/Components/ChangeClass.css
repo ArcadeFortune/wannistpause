@@ -39,6 +39,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+
+  background-image: 
+    radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%), /* Left gradient */
+    radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%); /* Right gradient */
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  background-position: left center, right center; /* Aligns the gradient to the left and right */
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 .change-class.modal.close {
@@ -59,18 +68,18 @@
 }
 
 .change-class.close-button {
+  font-family: 'ArcadeFortune';
+  user-select: none;
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 2em;
-  height: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0em;
+  right: 0em;
+  width: 1em;
+  height: 1em;
   margin: 0.5em;
 }
 
 .change-class.close-button:hover {
+  text-shadow: 0 0 8px #ffffff;
   cursor: pointer;
 }
 

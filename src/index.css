@@ -1,4 +1,5 @@
 body {
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.591);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -19,6 +20,15 @@ code {
   font-style: normal; */
 }
 
+@font-face {
+  font-family: 'ArcadeFortune';
+  src:  url('/public/ArcadeFortune-Regular.woff2') format('woff2'),
+        url('/public/ArcadeFortune-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .blur2 {  
   -webkit-filter: blur(2px); 
   filter: blur(2px);
@@ -27,11 +37,11 @@ code {
 ::-moz-selection {
   --tw-text-opacity: 1;
   color: rgb(255, 255, 255);
-  text-shadow: 0 0 8px #ffffff
+  text-shadow: 0 0 8px #ffffff;
 }
 
 ::selection {
   --tw-text-opacity: 1;
   color: rgb(255, 255, 255);
-  text-shadow: 0 0 8px #ffffff
+  text-shadow: 0 0 8px #ffffff;
 }
