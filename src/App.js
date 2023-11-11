@@ -80,6 +80,11 @@ function App() {
           </div>
         </div>
         
+        {/* Stundenplan */}
+        <div className={`menu-timetable ${ksh.isTimeTableOpen ? 'move' : ''}`}>
+          
+        </div>
+
         <div className={`${ksh.isChangeClassOpen ? 'blur' : ''} full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         <CountdownComponent className={`${ksh.isChangeClassOpen ? 'blur' : ''}`}></CountdownComponent>
       </header>
