@@ -71,6 +71,7 @@ function App() {
         {savedOption && <p>Saved Option: {savedOption}</p>}
         <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur' : ''} full-title burger-menu`}></BurgerMenu>
 
+        <div className={`menu-main ${ksh.isMenuOpen ? 'open' : ''}`} onClick={ksh.handleBurgerClick}> </div>
         <div className={`menu ${ksh.isMenuOpen ? 'open' : ''}`}>
           <div className={`${ksh.isChangeClassOpen ? 'blur' : ''} menu-content`}>
             <span className="title">Menü</span>
@@ -78,6 +79,7 @@ function App() {
             <Menu/>
           </div>
         </div>
+        
         <div className={`${ksh.isChangeClassOpen ? 'blur' : ''} full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         <CountdownComponent className={`${ksh.isChangeClassOpen ? 'blur' : ''}`}></CountdownComponent>
       </header>

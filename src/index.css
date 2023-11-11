@@ -29,9 +29,9 @@ code {
 }
 
 
-.blur2 {  
-  -webkit-filter: blur(2px); 
-  filter: blur(2px);
+.blur {  
+  -webkit-filter: blur(1px); 
+  filter: blur(1px);
 }
 
 ::-moz-selection {
