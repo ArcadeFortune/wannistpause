@@ -35,8 +35,8 @@ export default function useKSHManager() {
   }
 
   function handleBurgerClick() {
+    console.log('clicking')
     // if the time table and the menu are open,
-
     if (isMenuOpen && isTimeTableOpen) {
       console.log('isMenuOpen: ', isMenuOpen);
       console.log('isTimeTableOpen: ', isTimeTableOpen);

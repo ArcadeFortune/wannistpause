@@ -1,5 +1,5 @@
 .menu-main {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -10,12 +10,8 @@
   visibility: visible;
 }
 
-.menu-main.move {
-  visibility: hidden;
-}
-
 .menu {
-  z-index: 3;
+  z-index: 4;
   position: fixed;
   top: 0;
   right: 0;
@@ -100,7 +96,7 @@ svg rect {
 }
 
 .burger-menu { 
-  z-index: 2;
+  z-index: 3;
 }
 
 .burger-menu:hover {

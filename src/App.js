@@ -71,7 +71,7 @@ function App() {
         {savedOption && <p>Saved Option: {savedOption}</p>}
         <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}${ksh.isTimeTableOpen ? 'move ' : ''}full-title burger-menu`}></BurgerMenu>
 
-        <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}`} onClick={ksh.handleBurgerClick} > </div>
+        <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}`} onClick={ksh.handleBurgerClick}></div>
         <div className={`menu${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}${ksh.isMenuAndTimeTableOpen ? ' close-right' : ''}`}>
           <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}menu-content`}>
             <span className="title">Menü</span>
