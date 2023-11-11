@@ -12,6 +12,7 @@ export default function useKSHManager() {
   // website relevant variables
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
+  const [isTimeTableOpen, setIsTimeTableOpen] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
 
   // timer relevant variables
@@ -38,6 +39,10 @@ export default function useKSHManager() {
 
   function handleChangeClassClick() {
     setIsChangeClassOpen(!isChangeClassOpen);
+  }
+
+  function handleTimeTableClick() {
+    setIsTimeTableOpen(!isTimeTableOpen);
   }
   
   function handleTimerComplete() {
@@ -108,6 +113,7 @@ export default function useKSHManager() {
     currentClass, saveCurrentClass,
     isMenuOpen, setIsMenuOpen,
     isChangeClassOpen, setIsChangeClassOpen,
+    isTimeTableOpen, setIsTimeTableOpen,
     timerKey, setTimerKey,
     refreshTimer, setRefreshTimer,
     activeInterval, setActiveInterval,
@@ -121,6 +127,7 @@ export default function useKSHManager() {
     isActiveInterval,
     handleBurgerClick,
     handleChangeClassClick,
+    handleTimeTableClick,
     configureTimer,
     handleTimerComplete,
   };
