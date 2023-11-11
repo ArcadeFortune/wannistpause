@@ -64,7 +64,7 @@ export default function useKSHManager() {
   }
 
   function configureTimer(currentTime) {
-    console.log("timeStamps: ", timeStamps);
+    console.log("Schulzeiten: ", timeStamps);
     const i = getActiveInterval(currentTime, timeStamps);
     setActiveInterval(i); // finds current interval
 
