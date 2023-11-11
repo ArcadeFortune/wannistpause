@@ -15,7 +15,7 @@
 }
 
 .menu {
-  z-index: 2;
+  z-index: 3;
   position: fixed;
   top: 0;
   right: 0;
@@ -35,7 +35,7 @@
 }
 
 .menu-timetable {
-  /* background-color: red; */
+  background-color: rgba(121, 0, 0, 0.518);
   z-index: 1;
   position: fixed;
   top: 0;
@@ -54,6 +54,10 @@
 .menu.open {
   transform: translateX(calc(0% + 2px));
   box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 62%);
+}
+
+.menu.move.close-right {
+  transform: translateX(calc(-100vw));
 }
 
 .menu.move {
@@ -96,7 +100,7 @@ svg rect {
 }
 
 .burger-menu { 
-  z-index: 1;
+  z-index: 2;
 }
 
 .burger-menu:hover {

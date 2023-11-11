@@ -13,6 +13,7 @@ export default function useKSHManager() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
   const [isTimeTableOpen, setIsTimeTableOpen] = useState(false);
+  const [isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen] = useState(false);
   const [isBreakTime, setIsBreakTime] = useState(false);
 
   // timer relevant variables
@@ -34,6 +35,15 @@ export default function useKSHManager() {
   }
 
   function handleBurgerClick() {
+    // if the time table and the menu are open,
+
+    if (isMenuOpen && isTimeTableOpen) {
+      console.log('isMenuOpen: ', isMenuOpen);
+      console.log('isTimeTableOpen: ', isTimeTableOpen);
+      setIsMenuAndTimeTableOpen(!isMenuAndTimeTableOpen);
+    } else {
+      setIsMenuAndTimeTableOpen(false);
+    }
     setIsMenuOpen(!isMenuOpen);
   }
 
@@ -114,6 +124,7 @@ export default function useKSHManager() {
     isMenuOpen, setIsMenuOpen,
     isChangeClassOpen, setIsChangeClassOpen,
     isTimeTableOpen, setIsTimeTableOpen,
+    isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen,
     timerKey, setTimerKey,
     refreshTimer, setRefreshTimer,
     activeInterval, setActiveInterval,

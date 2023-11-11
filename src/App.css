@@ -38,7 +38,12 @@
   margin: 0;
   right: 4em;
   top: 3em;
+  transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
 }
+
+.full-title.burger-menu.move {
+  left: 4em;
+} 
 
 @media (max-width: 550px) {
   .full-title.burger-menu {

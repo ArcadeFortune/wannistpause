@@ -14,7 +14,7 @@ export default function ChangeClass({ options, onSave, onClose }) {
       <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class modal`}>
       <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class close-button`} onClick={() => {console.log('Schliesse mit Klasse:', originalOption); ksh.saveCurrentClass(originalOption); setSelectedOption(originalOption); ksh.handleChangeClassClick()}}>x</div>
         <div className={`${ksh.isChangeClassOpen ? 'open' : 'close'} change-class title`}>Klasse wechseln</div>
-        <select value={selectedOption} onChange={e => setSelectedOption(e.target.value)}>
+        <select value={selectedOption} onChange={e => setSelectedOption(e.target.value)} className='change-class-select'>
           {options.map(option => (
             <option key={option} value={option}>
               {option}
