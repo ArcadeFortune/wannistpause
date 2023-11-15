@@ -1,11 +1,13 @@
 import moment from "moment";
-import { getActiveInterval, getNextSubject } from "./importantFunctions";
-import { useState } from "react";
+import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
+import { useEffect, useState } from "react";
 
 export default function useKSHManager() {
   // data relevant variables
   const [timeStamps, setTimeStamps] = useState(null); // general timestamps
+  const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
   const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
+  const [todaysSubjectsClass, setTodaysSubjectsClass] = useState(null); // all the subjects of the current class
   const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
   const [currentClass, setCurrentClass] = useState(localStorage.getItem('currentClass') || 'I3a'); // school class selected by the user
 
@@ -25,6 +27,12 @@ export default function useKSHManager() {
   const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
   const [nextSubject, setNextSubject] = useState({}); // to display the next subject
 
+  useEffect(() => {
+    if (!isKSHLoaded()) return;
+    console.log('updating class')
+    setTodaysSubjectsClass(getCurrentClass(todaysSubjects, currentClass));
+  }, [todaysSubjects, currentClass]);
+
   function isKSHLoaded() {
     return timeStamps != null && todaysSubjects != null;
     // return timeStamps && everyClass; // if / else
@@ -35,11 +43,8 @@ export default function useKSHManager() {
   }
 
   function handleBurgerClick() {
-    console.log('clicking')
     // if the time table and the menu are open,
     if (isMenuOpen && isTimeTableOpen) {
-      console.log('isMenuOpen: ', isMenuOpen);
-      console.log('isTimeTableOpen: ', isTimeTableOpen);
       setIsMenuAndTimeTableOpen(!isMenuAndTimeTableOpen);
     } else {
       setIsMenuAndTimeTableOpen(false);
@@ -79,7 +84,7 @@ export default function useKSHManager() {
   }
 
   function configureTimer(currentTime) {
-    console.log("Schulzeiten: ", timeStamps);
+    console.log("Schulzeiten: ", JSON.stringify(timeStamps));
     const i = getActiveInterval(currentTime, timeStamps);
     setActiveInterval(i); // finds current interval
 
@@ -109,16 +114,24 @@ export default function useKSHManager() {
       i.current.end.diff(currentTime, "seconds"),
       "Sekunden"
       );
-      
-    setNextSubject(getNextSubject(i.timeIndex, timeStamps, todaysSubjects, currentClass)); // sets the next subject
+    
+    
+    // setTodaysSubjectsClass(getCurrentClass(todaysSubjects, currentClass)); // sets the subjects of the current class
+    setNextSubject(getNextSubject(i.timeIndex, timeStamps, getCurrentClass(todaysSubjects, currentClass))); // sets the next subject
     
     restartTimer();
+  } 
+
+  function cleanUpTimeStamps(timeStamps) {
+    setTimeStampsClean(cleanTimeStamps(timeStamps));
   }
 
   // return every variable
   return {
     timeStamps, setTimeStamps,
+    timeStampsClean, setTimeStampsClean: cleanUpTimeStamps,
     todaysSubjects, setTodaysSubjects,
+    todaysSubjectsClass, setTodaysSubjectsClass,
     everyClass, setEveryClass,
     currentClass, saveCurrentClass,
     isMenuOpen, setIsMenuOpen,

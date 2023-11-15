@@ -7,6 +7,7 @@ import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
+import TimeTable from "./Components/TimeTable";
 
 function App() {
   const ksh = useContext(KshManagerContext);
@@ -42,6 +43,7 @@ function App() {
         );
           
         ksh.setTimeStamps(timeStamps);
+        ksh.setTimeStampsClean(timeStamps);
         ksh.setTodaysSubjects(todaysSubjects);
         ksh.setEveryClass(everyClass);
       } catch (error) {
@@ -82,7 +84,8 @@ function App() {
         
         {/* Stundenplan */}
         <div className={`menu-timetable ${ksh.isTimeTableOpen ? 'move' : ''}`}>
-          
+          <button onClick={() => console.log(ksh.todaysSubjectsClass[0].innerHTML)}>lfog</button>
+          <TimeTable/>
         </div>
 
         <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>

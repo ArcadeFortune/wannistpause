@@ -13,6 +13,16 @@ export function renderTime({ remainingTime }) {
   );
 }
 
+export function cleanTimeStamps(timeStamps) {
+  let timestamps = [];
+  for (let range of timeStamps) {
+      let times = range.trim().split(' - ');
+      timestamps.push(times[0], times[1]);
+  }
+  return timestamps;
+}
+
+
 export function getActiveInterval(currentTime, everyTimeStamp) {
   let prevEnd = null;
   let nextStart = null;
@@ -66,8 +76,10 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   return 0;
 }
 
-export function getNextSubject(timeIndex, timestamps, todaysSubjects, currentClass) {
-  const currentClassList = (getCurrentClass(todaysSubjects, currentClass))
+export function getNextSubject(timeIndex, timestamps, todaysSubjectsClass) {
+  const currentClassList = todaysSubjectsClass
+
+  // currentClassList.map(lesson => console.log(lesson.innerText.trim().split('\n\n')))
   if (timeIndex > currentClassList.length - 1) return {subject: "FREI!!!"}; // if the current time is after the last lesson, return a free lesson
 
   // remove any deleted lessons from the returned object
@@ -84,7 +96,8 @@ export function getNextSubject(timeIndex, timestamps, todaysSubjects, currentCla
   }
 }
 
-function getCurrentClass(todaysSubjects, currentClass) {
+export function getCurrentClass(todaysSubjects, currentClass) {
+  
   for (let oneClass of todaysSubjects) {
     if (oneClass.querySelector('th').innerText.trim() === currentClass) {
       return [...oneClass.children].filter(child => child.tagName !== 'TH'); // return all elements of the correct row without the TH element
