@@ -76,8 +76,8 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   return 0;
 }
 
-export function getNextSubject(timeIndex, timestamps, todaysSubjectsClass) {
-  const currentClassList = todaysSubjectsClass
+export function getNextSubject(timeIndex, timestamps, todaysSubjectsClassHTML) {
+  const currentClassList = todaysSubjectsClassHTML
 
   // currentClassList.map(lesson => console.log(lesson.innerText.trim().split('\n\n')))
   if (timeIndex > currentClassList.length - 1) return {subject: "FREI!!!"}; // if the current time is after the last lesson, return a free lesson

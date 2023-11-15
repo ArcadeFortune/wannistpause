@@ -31,7 +31,7 @@
 }
 
 .menu-timetable {
-  background-color: rgba(121, 0, 0, 0.518);
+  background-color: #282c34;
   z-index: 1;
   position: fixed;
   top: calc(2.3em + 2em);
@@ -41,6 +41,10 @@
   transform: translateX(100%);
   overflow-x: hidden;
   transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .menu-timetable.move {

@@ -84,7 +84,6 @@ function App() {
         
         {/* Stundenplan */}
         <div className={`menu-timetable ${ksh.isTimeTableOpen ? 'move' : ''}`}>
-          <button onClick={() => console.log(ksh.todaysSubjectsClass[0].innerHTML)}>lfog</button>
           <TimeTable/>
         </div>
 
