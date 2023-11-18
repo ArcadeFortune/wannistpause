@@ -45,3 +45,16 @@ code {
   color: rgb(255, 255, 255);
   text-shadow: 0 0 8px #ffffff;
 }
+
+::-webkit-scrollbar {
+  border: 1px solid #ffffff1e;
+  width: 13px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+
+::-webkit-scrollbar-thumb {
+  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+}
