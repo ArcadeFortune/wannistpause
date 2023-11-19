@@ -5,22 +5,23 @@ import './Countdown.css';
 import Confetti from 'react-confetti'
 import { renderTime } from '../importantFunctions';
 import { KshManagerContext } from '../KshManager';
+import log from '../log';
 
 
 const CountdownComponent = ({ className }) => {
   const ksh = useContext(KshManagerContext);
 
   useEffect(() => {
-    console.log('Intranet laden...')
+    log('Intranet laden...')
     if (!ksh.isKSHLoaded()) {
-      console.log('Noch keine Daten.')
+      log('Noch keine Daten.')
       return;
     } // needs to load data
-    console.log('Intranet erfolgreich geladen!')
+    log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('08:29:55', 'HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('07:29:55', 'HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
-    console.log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
+    log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
     ksh.configureTimer(currentTime);
   }, [ksh.timeStamps, ksh.currentClass, ksh.refreshTimer]);

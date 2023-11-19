@@ -1,6 +1,7 @@
 import moment from "moment";
 import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
 import { useEffect, useState } from "react";
+import log from "./log";
 
 export default function useKSHManager() {
   // data relevant variables
@@ -27,6 +28,8 @@ export default function useKSHManager() {
   const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
   const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
   const [nextSubject, setNextSubject] = useState({}); // to display the next subject
+
+  const [isLogEnabled, setIsLogEnabled] = useState(true); // to enable logging
 
   useEffect(() => {
     if (!isKSHLoaded()) return;
@@ -69,8 +72,8 @@ export default function useKSHManager() {
   }
   
   function handleTimerComplete() {
-    console.log("fertig!");
-    console.log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
+    log("fertig!");
+    log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
     setRefreshTimer(refreshTimer + 1);
 
 
@@ -92,17 +95,18 @@ export default function useKSHManager() {
   }
 
   function configureTimer(currentTime) {
-    console.log("Schulzeiten: ", JSON.stringify(timeStamps));
+    log("Schulzeiten: ", JSON.stringify(timeStamps));
     const i = getActiveInterval(currentTime, timeStamps);
+    log('i: ', i);
     setActiveInterval(i); // finds current interval
 
     if (i === 0) {
-      console.log("keine Schule!");
+      log("keine Schule!");
       return;
     } // 0 means it is outside of the timetable
 
     setIsBreakTime(i.breakTime); // is it breaktime?
-    console.log(
+    log(
       "Dies ist zwischen:",
       i.current.start.format("HH:mm:ss"),
       "-",
@@ -110,14 +114,14 @@ export default function useKSHManager() {
     );
 
     setTotalDuration(i.current.end.diff(i.current.start, "seconds")); // sets the duration of the current interval either 45 minutes or 10 minutes
-    console.log(
+    log(
       "Das dauert genau:",
       i.current.end.diff(i.current.start, "seconds"),
       "Sekunden"
     );
 
     setRemainingTime(i.current.end.diff(currentTime, "seconds")); // sets the remaining time of the current interval
-    console.log(
+    log(
       "Es bleiben noch:",
       i.current.end.diff(currentTime, "seconds"),
       "Sekunden"
@@ -153,6 +157,7 @@ export default function useKSHManager() {
     remainingTime, setRemainingTime,
     timerFinished, setTimerFinished,
     nextSubject, setNextSubject,
+    isLogEnabled, setIsLogEnabled,
     restartTimer,
     isKSHLoaded,
     isActiveInterval,

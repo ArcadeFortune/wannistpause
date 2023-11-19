@@ -1,4 +1,5 @@
 import moment from "moment";
+import log from "./log";
 
 
 export function renderTime({ remainingTime }) {
@@ -35,7 +36,7 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
     const [start, end] = interval.trim().split(' - ').map(t => moment(t, 'HH:mm'));
 
     if (found) {
-      // console.log({ current: prevInterval, next: { start, end } })
+      // log({ current: prevInterval, next: { start, end } })
       return { current: prevInterval, timeIndex: i, breakTime: false };
     }
 
@@ -63,12 +64,12 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   // does not work
   // check if the current time is before the first interval
   // if (!found && !prevEnd) {
-  //   console.log('is before the first interval')
+  //   log('is before the first interval')
   //   return { current: null, next: null, gap: { after: nextStart } };
   // }
   // If currentTime falls within a gap, return the gap information.
   if (nextStart) {
-    // console.log({ current: { start: prevEnd, end: nextStart }, next: { start: nextStart }, gap: { before: prevEnd, after: nextStart } })
+    // log({ current: { start: prevEnd, end: nextStart }, next: { start: nextStart }, gap: { before: prevEnd, after: nextStart } })
     return { current: { start: prevEnd, end: nextStart }, timeIndex: i, breakTime: true };
   }
 
@@ -79,7 +80,7 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 export function getNextSubject(timeIndex, timestamps, todaysSubjectsClassHTML) {
   const currentClassList = todaysSubjectsClassHTML
 
-  // currentClassList.map(lesson => console.log(lesson.innerText.trim().split('\n\n')))
+  // currentClassList.map(lesson => log(lesson.innerText.trim().split('\n\n')))
   if (timeIndex > currentClassList.length - 1) return {subject: "FREI!!!"}; // if the current time is after the last lesson, return a free lesson
 
   // remove any deleted lessons from the returned object
@@ -88,7 +89,7 @@ export function getNextSubject(timeIndex, timestamps, todaysSubjectsClassHTML) {
 
   const nextLessonArray = currentClassList[timeIndex].innerText.trim().split('\n\n') //example: ['E', 'sor', '203']
 
-  console.log('Die nächste Lektion ist:', nextLessonArray)
+  log('Die nächste Lektion ist:', nextLessonArray)
   if (JSON.stringify(nextLessonArray) === '[""]') { // '[""]' this needs to be perfectly like this lol
     return {subject: "FREI!!!"};
   } else {

@@ -8,10 +8,10 @@ import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
 import TimeTable from "./Components/TimeTable";
+import Log from "./log";
 
 function App() {
   const ksh = useContext(KshManagerContext);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
