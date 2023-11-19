@@ -1,16 +1,24 @@
 import moment from "moment";
 import log from "./log";
 
+export function pad(num) { // turns 1 into 01
+  return String(num).padStart(2, "0");
+}
 
-export function renderTime({ remainingTime }) {
+export function renderTime({ remainingTime }) { // what a mess xd
   if (remainingTime === 0) return <div className="timer">Pause!</div>;
 
-  const formattedTime = moment.utc(remainingTime * 1000).format(remainingTime >= 3600 ? 'HH:mm:ss' : 'mm:ss');
+  // Create a moment duration from the remaining time
+  const duration = moment.duration(remainingTime, 'seconds');
+
+  // Format the duration
+  const formattedTime = `${pad(parseInt(duration.hours()) + parseInt(duration.days() * 24))}:${pad(duration.minutes())}:${pad(duration.seconds())}`;
+  const formattedTimeWithoutHours = `${pad(duration.minutes())}:${pad(duration.seconds())}`;
   return (
     <div className="timer">
       <div className="timer-text">Nur noch</div>
-      <div className="value">{formattedTime}</div>
-      <div className="timer-text">Minuten</div>
+      <div className="value">{remainingTime >= 3600 ? formattedTime : formattedTimeWithoutHours}</div>
+      <div className="timer-text">{remainingTime >= 3600 ? 'Stunden' : 'Minuten'}</div>
     </div>
   );
 }
@@ -25,22 +33,27 @@ export function cleanTimeStamps(timeStamps) {
 }
 
 
-export function getActiveInterval(currentTime, everyTimeStamp) {
+export function getActiveInterval(currentTime, currentDate, everyTimeStamp) {
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
   let found = false;
   let i = 0
 
+  // Function to combine date and time
+  const combineDateTime = (time) => {
+    return moment(`${currentDate} ${time}`, 'DD. MMMM YYYY HH:mm');
+  };
+
   // Check if currentTime is before the first interval.
-  const [firstStart] = everyTimeStamp[0].trim().split(' - ').map(t => moment(t, 'HH:mm'));
+  const [firstStart] = everyTimeStamp[0].trim().split(' - ').map(t => combineDateTime(t));
   if (currentTime.isBefore(firstStart)) {
     return { current: { start: currentTime, end: firstStart }, timeIndex: 0, breakTime: true };
   }
 
   for (i; i < everyTimeStamp.length; i++) {
     const interval = everyTimeStamp[i];
-    const [start, end] = interval.trim().split(' - ').map(t => moment(t, 'HH:mm'));
+    const [start, end] = interval.trim().split(' - ').map(t => combineDateTime(t));
 
     if (found) {
       return { current: prevInterval, timeIndex: i, breakTime: false };

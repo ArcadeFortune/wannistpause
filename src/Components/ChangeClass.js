@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import './ChangeClass.css';
-import { CrossMark } from '../SVGs/CrossMark';
 import { KshManagerContext } from '../KshManager';
 import log from '../log';
 

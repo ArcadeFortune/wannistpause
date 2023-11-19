@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import CountdownComponent from "./Components/Countdown";
 import "./App.css";
 import './Components/Menu.css';
@@ -8,7 +8,6 @@ import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
 import TimeTable from "./Components/TimeTable";
-import Log from "./log";
 
 function App() {
   const ksh = useContext(KshManagerContext);
@@ -41,7 +40,11 @@ function App() {
         const everyClass = Array.from(
           todaysSubjects.map((line) => line.querySelector('th').innerHTML)
         );
-          
+
+        // grab the current day of week
+        const date = kshdocument.querySelector('h1').innerHTML.split(', ')[1]; // "20. November 2023"
+
+        ksh.setDate(date);
         ksh.setTimeStamps(timeStamps);
         ksh.setTimeStampsClean(timeStamps);
         ksh.setTodaysSubjects(todaysSubjects);
@@ -57,7 +60,7 @@ function App() {
   return (
     <div className="App"> 
       <header className="App-header">
-        
+
         {/* Title */}
         <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         

@@ -1,10 +1,12 @@
 import moment from "moment";
+import 'moment/locale/de'; // Import German locale
 import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
 import { useEffect, useState } from "react";
 import log from "./log";
 
 export default function useKSHManager() {
 	// data relevant variables
+  const [date, setDate] = useState(moment().day()); // will be overwritten
 	const [timeStamps, setTimeStamps] = useState(null); // general timestamps
 	const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
@@ -80,6 +82,12 @@ export default function useKSHManager() {
 		}, 4000); // confetti refresh
 	}
 
+  // function parseDate(dateString) {
+  //   moment.locale('de'); // Set locale to German
+  //   setDate(moment(dateString, 'DD. MMMM YYYY'));
+  // }
+
+
 	function saveCurrentClass(currentClass) {
 		localStorage.setItem("currentClass", currentClass);
 		setCurrentClass(currentClass);
@@ -92,7 +100,8 @@ export default function useKSHManager() {
 
 	function configureTimer(currentTime) {
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
-		const i = getActiveInterval(currentTime, timeStamps);
+		const i = getActiveInterval(currentTime, date, timeStamps);
+    console.log('i: ', i);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
@@ -120,6 +129,7 @@ export default function useKSHManager() {
 
 	// return every variable
 	return {
+    date, setDate,
 		timeStamps, setTimeStamps,
 		timeStampsClean, setTimeStampsClean: cleanUpTimeStamps,
 		todaysSubjects, setTodaysSubjects,
@@ -139,13 +149,13 @@ export default function useKSHManager() {
 		remainingTime, setRemainingTime,
 		timerFinished, setTimerFinished,
 		nextSubject, setNextSubject,
-		restartTimer,
 		isKSHLoaded,
 		isActiveInterval,
 		handleBurgerClick,
 		handleChangeClassClick,
 		handleTimeTableClick,
-		configureTimer,
 		handleTimerComplete,
+		restartTimer,
+		configureTimer,
 	};
 }
