@@ -1,7 +1,7 @@
 import moment from "moment";
 import 'moment/locale/de'; // Import German locale
 import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import log from "./log";
 
 export default function useKSHManager() {
@@ -30,19 +30,6 @@ export default function useKSHManager() {
 	const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
 	const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
 	const [nextSubject, setNextSubject] = useState({}); // to display the next subject
-
-	useEffect(() => {
-		if (!isKSHLoaded()) return;
-
-		let todaysClassSubjectsList = [];
-		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
-		currentClassSubjects.forEach((subject) => {
-			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
-		});
-
-		setTodaysSubjectsClass(todaysClassSubjectsList);
-		setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
-	}, [todaysSubjects, currentClass]);
 
 	function isKSHLoaded() {
 		return timeStamps != null && todaysSubjects != null;
@@ -82,13 +69,34 @@ export default function useKSHManager() {
 		}, 4000); // confetti refresh
 	}
 
-  // function parseDate(dateString) {
-  //   moment.locale('de'); // Set locale to German
-  //   setDate(moment(dateString, 'DD. MMMM YYYY'));
-  // }
+  function saveTodaysSubjects(todaysSubjects) {
+    let todaysClassSubjectsList = [];
+		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
+		currentClassSubjects.forEach((subject) => {
+			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
+		});
+
+    setTodaysSubjects(todaysSubjects);
+		setTodaysSubjectsClass(todaysClassSubjectsList);
+		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
+		setTodaysSubjectsClassHTML(currentClassSubjects);
+  }
 
 
 	function saveCurrentClass(currentClass) {
+    // i am aware this is redundant to the function above, but the the parameters 'todaysSubjects' and 'currentClass' change in both scenarios.
+    let todaysClassSubjectsList = [];
+		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
+		currentClassSubjects.forEach((subject) => {
+			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
+		});
+
+    setTodaysSubjects(todaysSubjects);
+		setTodaysSubjectsClass(todaysClassSubjectsList);
+		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
+		setTodaysSubjectsClassHTML(currentClassSubjects);
+
+
 		localStorage.setItem("currentClass", currentClass);
 		setCurrentClass(currentClass);
 	}
@@ -100,8 +108,7 @@ export default function useKSHManager() {
 
 	function configureTimer(currentTime) {
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
-		const i = getActiveInterval(currentTime, date, timeStamps);
-    console.log('i: ', i);
+		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsClass);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
@@ -132,7 +139,7 @@ export default function useKSHManager() {
     date, setDate,
 		timeStamps, setTimeStamps,
 		timeStampsClean, setTimeStampsClean: cleanUpTimeStamps,
-		todaysSubjects, setTodaysSubjects,
+		todaysSubjects, setTodaysSubjects: saveTodaysSubjects,
 		todaysSubjectsClass, setTodaysSubjectsClass,
 		todaysSubjectsClassHTML, setTodaysSubjectsClassHTML,
 		everyClass, setEveryClass,

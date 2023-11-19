@@ -33,7 +33,8 @@ export function cleanTimeStamps(timeStamps) {
 }
 
 
-export function getActiveInterval(currentTime, currentDate, everyTimeStamp) {
+export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjectsClass) {
+  console.log('todaysSubjectsClass: ', todaysSubjectsClass);
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
