@@ -34,22 +34,26 @@ export function cleanTimeStamps(timeStamps) {
 
 
 export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjectsClass) {
-  console.log('todaysSubjectsClass: ', todaysSubjectsClass);
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
   let found = false;
   let i = 0
 
+  // set i to the first time a lesson starts
+  for (let j = 0; j < everyTimeStamp.length; j++) {
+    if (JSON.stringify(todaysSubjectsClass[j]) !== '[""]') {i = j; break;}
+  }
+  
   // Function to combine date and time
   const combineDateTime = (time) => {
     return moment(`${currentDate} ${time}`, 'DD. MMMM YYYY HH:mm');
   };
 
   // Check if currentTime is before the first interval.
-  const [firstStart] = everyTimeStamp[0].trim().split(' - ').map(t => combineDateTime(t));
+  const [firstStart] = everyTimeStamp[i].trim().split(' - ').map(t => combineDateTime(t));
   if (currentTime.isBefore(firstStart)) {
-    return { current: { start: currentTime, end: firstStart }, timeIndex: 0, breakTime: true };
+    return { current: { start: currentTime, end: firstStart }, timeIndex: i, breakTime: true };
   }
 
   for (i; i < everyTimeStamp.length; i++) {

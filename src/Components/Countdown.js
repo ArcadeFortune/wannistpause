@@ -19,7 +19,7 @@ const CountdownComponent = ({ className }) => {
     } // needs to load data
     log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('2023-11-20 07:00:00', 'YYYY-MM-DD HH:mm:ss') : moment();// for testing
+    const currentTime = process.env.NODE_ENV === 'development' ? moment('2023-11-20 11:45:00', 'YYYY-MM-DD HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
