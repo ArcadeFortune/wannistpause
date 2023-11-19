@@ -1,5 +1,3 @@
-export default function log(...info) {
-  const isLogEnabled = false
-  // const isLogEnabled = true
-  if (isLogEnabled) console.log(...info)
-}
+function log(...info) { if (true) console.log(...info)}
+export default log;
+// Watch: Date A Live

@@ -53,26 +53,21 @@ function App() {
 
     fetchData();
   }, []);
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [savedOption, setSavedOption] = useState(null);
 
-  const handleSave = (option) => {
-    setSavedOption(option);
-  };
-  
   return (
     <div className="App"> 
       <header className="App-header">
+        
+        {/* Title */}
+        <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
+        
+        {/* Change-Class Modal */}
         <ChangeClass
           options={ksh.everyClass} 
-          onSave={handleSave} 
-          onClose={() => setIsModalOpen(false)}
-        />
-        
-        {savedOption && <p>Saved Option: {savedOption}</p>}
-        <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}${ksh.isTimeTableOpen ? 'move ' : ''}full-title burger-menu`}></BurgerMenu>
+        />        
 
+        {/* Side-Menu */}
+        <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}${ksh.isTimeTableOpen ? 'move ' : ''}full-title burger-menu`}></BurgerMenu>
         <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}`} onClick={ksh.handleBurgerClick}></div>
         <div className={`menu${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}${ksh.isMenuAndTimeTableOpen ? ' close-right' : ''}`}>
           <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}menu-content`}>
@@ -86,8 +81,8 @@ function App() {
         <div className={`menu-timetable ${ksh.isTimeTableOpen ? 'move' : ''}`}>
           <TimeTable/>
         </div>
-
-        <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
+          
+        {/* Countdown */}
         <CountdownComponent className={`${ksh.isChangeClassOpen ? 'blur' : ''}`}></CountdownComponent>
       </header>
     </div>

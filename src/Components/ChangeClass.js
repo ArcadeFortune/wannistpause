@@ -4,7 +4,7 @@ import { CrossMark } from '../SVGs/CrossMark';
 import { KshManagerContext } from '../KshManager';
 import log from '../log';
 
-export default function ChangeClass({ options, onSave, onClose }) {
+export default function ChangeClass({ options }) {
   const ksh = useContext(KshManagerContext)
   const originalOption = ksh.currentClass; // this is the option that was selected when the modal was opened
   const [selectedOption, setSelectedOption] = useState(ksh.currentClass);

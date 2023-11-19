@@ -5,10 +5,11 @@ import log from "./log";
 export function renderTime({ remainingTime }) {
   if (remainingTime === 0) return <div className="timer">Pause!</div>;
 
+  const formattedTime = moment.utc(remainingTime * 1000).format(remainingTime >= 3600 ? 'HH:mm:ss' : 'mm:ss');
   return (
     <div className="timer">
       <div className="timer-text">Nur noch</div>
-      <div className="value">{moment.utc(remainingTime * 1000).format('mm:ss')}</div>
+      <div className="value">{formattedTime}</div>
       <div className="timer-text">Minuten</div>
     </div>
   );
@@ -31,12 +32,17 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   let found = false;
   let i = 0
 
+  // Check if currentTime is before the first interval.
+  const [firstStart] = everyTimeStamp[0].trim().split(' - ').map(t => moment(t, 'HH:mm'));
+  if (currentTime.isBefore(firstStart)) {
+    return { current: { start: currentTime, end: firstStart }, timeIndex: 0, breakTime: true };
+  }
+
   for (i; i < everyTimeStamp.length; i++) {
     const interval = everyTimeStamp[i];
     const [start, end] = interval.trim().split(' - ').map(t => moment(t, 'HH:mm'));
 
     if (found) {
-      // log({ current: prevInterval, next: { start, end } })
       return { current: prevInterval, timeIndex: i, breakTime: false };
     }
 
@@ -58,18 +64,11 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
 
   // check if the current time is after the last interval
   if (found && !nextStart) {
-    return { current: prevInterval, next: null, timeIndex: i };
+    return { current: prevInterval, timeIndex: i };
   }
 
-  // does not work
-  // check if the current time is before the first interval
-  // if (!found && !prevEnd) {
-  //   log('is before the first interval')
-  //   return { current: null, next: null, gap: { after: nextStart } };
-  // }
   // If currentTime falls within a gap, return the gap information.
   if (nextStart) {
-    // log({ current: { start: prevEnd, end: nextStart }, next: { start: nextStart }, gap: { before: prevEnd, after: nextStart } })
     return { current: { start: prevEnd, end: nextStart }, timeIndex: i, breakTime: true };
   }
 
@@ -77,7 +76,7 @@ export function getActiveInterval(currentTime, everyTimeStamp) {
   return 0;
 }
 
-export function getNextSubject(timeIndex, timestamps, todaysSubjectsClassHTML) {
+export function getNextSubject(timeIndex, todaysSubjectsClassHTML) {
   const currentClassList = todaysSubjectsClassHTML
 
   // currentClassList.map(lesson => log(lesson.innerText.trim().split('\n\n')))
