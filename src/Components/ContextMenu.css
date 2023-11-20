@@ -43,6 +43,7 @@
 }
 
 .context-menu.content {
+  transition: 0s;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -59,7 +60,7 @@
 .context-menu.content > div:hover, .select:hover {
   cursor: pointer;
   font-size: 0.82em; /* 1em is default font size */
-  /* letter-spacing: 2px; looks ugly af */
+  letter-spacing: 1px; 
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.877);
 }
 
