@@ -20,6 +20,8 @@ export default function useKSHManager() {
 	const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
 	const [isTimeTableOpen, setIsTimeTableOpen] = useState(false);
 	const [isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen] = useState(false);
+	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false);
 
 	// timer relevant variables
@@ -48,6 +50,21 @@ export default function useKSHManager() {
 			setIsMenuAndTimeTableOpen(false);
 		}
 		setIsMenuOpen(!isMenuOpen);
+	}
+
+	function handleContextMenuLeftClick(e) {
+		if (isContextMenuOpen) {
+			setContextMenuCoords({ x: e.clientX, y: e.clientY });
+			setIsContextMenuOpen(false);
+		}
+	}
+
+	function handleContextMenuRightClick(e) {
+		e.preventDefault();
+		if (!isChangeClassOpen) {
+			setContextMenuCoords({ x: e.clientX, y: e.clientY });
+			setIsContextMenuOpen(!isContextMenuOpen);
+		}
 	}
 
 	function handleChangeClassClick() {
@@ -148,6 +165,8 @@ export default function useKSHManager() {
 		isChangeClassOpen, setIsChangeClassOpen,
 		isTimeTableOpen, setIsTimeTableOpen,
 		isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen,
+		isContextMenuOpen, setIsContextMenuOpen,
+		contextMenuCoords, setContextMenuCoords,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
@@ -159,6 +178,8 @@ export default function useKSHManager() {
 		isKSHLoaded,
 		isActiveInterval,
 		handleBurgerClick,
+		handleContextMenuRightClick,
+		handleContextMenuLeftClick,
 		handleChangeClassClick,
 		handleTimeTableClick,
 		handleTimerComplete,

@@ -1,0 +1,80 @@
+.context-menu {
+  transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
+}
+
+.context-menu.main {
+  z-index: 420;
+  position: absolute;
+  /* min-width: 8em; */
+
+  background-color: #282c34;
+  height: auto;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  box-shadow: 0px 0px 14px 8px rgb(0 0 0 / 62%);
+
+  background-image: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%), radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%);
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: left center, right center;
+}
+
+.context-menu.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  
+  font-size: 1em;
+}
+
+.context-menu.divider {
+  background-image: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 100%;
+  height: 1px;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.context-menu.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.context-menu.content > div {
+  font-size: 0.8em;
+  transition: 0.2s;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.42);
+}
+
+/* all divs in the menu */
+.context-menu.content > div:hover, .select:hover {
+  cursor: pointer;
+  font-size: 0.82em; /* 1em is default font size */
+  /* letter-spacing: 2px; looks ugly af */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.877);
+}
+
+
+
+
+
+.context-menu.open {
+
+}
+
+.context-menu.close {
+  z-index: -420;
+  padding-top: 0;
+  opacity: 0.2;
+  color: #333333;
+  text-shadow: 0px 0px 0px #33333379;
+}

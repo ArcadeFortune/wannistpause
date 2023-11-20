@@ -8,6 +8,7 @@ import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
 import TimeTable from "./Components/TimeTable";
+import ContextMenu from "./Components/ContextMenu";
 
 function App() {
   const ksh = useContext(KshManagerContext);
@@ -58,9 +59,9 @@ function App() {
   }, []);
 
   return (
-    <div className="App"> 
+    <div className="App" onClick={ksh.handleContextMenuLeftClick} onContextMenu={ksh.handleContextMenuRightClick}> 
       <header className="App-header">
-
+        <ContextMenu/>
         {/* Title */}
         <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         

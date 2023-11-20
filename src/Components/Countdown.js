@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import moment from 'moment';
