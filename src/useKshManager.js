@@ -14,6 +14,8 @@ export default function useKSHManager() {
 
   // website relevant variables
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+  const [subMenuContent, setSubMenuContent] = useState(""); // the content of the submenu
   const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
   const [isTimeTableOpen, setIsTimeTableOpen] = useState(false);
   const [isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen] = useState(false);
@@ -50,6 +52,15 @@ export default function useKSHManager() {
     return activeInterval !== 0;
   }
 
+  function handleSubMenuClick() {
+    // if the timetalbe is open, close it
+    if (isTimeTableOpen) {
+      setIsTimeTableOpen(false);
+    }
+    console.log('test')
+    setIsSubMenuOpen(!isSubMenuOpen);
+  }
+
   function handleBurgerClick() {
     // if the time table and the menu are open,
     if (isMenuOpen && isTimeTableOpen) {
@@ -65,6 +76,10 @@ export default function useKSHManager() {
   }
 
   function handleTimeTableClick() {
+    // if a submenu is open, close it
+    if (isSubMenuOpen) {
+      setIsSubMenuOpen(false);
+    }
     setIsTimeTableOpen(!isTimeTableOpen);
   }
   
@@ -142,6 +157,8 @@ export default function useKSHManager() {
     everyClass, setEveryClass,
     currentClass, saveCurrentClass,
     isMenuOpen, setIsMenuOpen,
+    isSubMenuOpen, setIsSubMenuOpen,
+    subMenuContent, setSubMenuContent,
     isChangeClassOpen, setIsChangeClassOpen,
     isTimeTableOpen, setIsTimeTableOpen,
     isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen,
@@ -156,6 +173,7 @@ export default function useKSHManager() {
     restartTimer,
     isKSHLoaded,
     isActiveInterval,
+    handleSubMenuClick,
     handleBurgerClick,
     handleChangeClassClick,
     handleTimeTableClick,

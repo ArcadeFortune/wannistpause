@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import CountdownComponent from "./Components/Countdown";
 import "./App.css";
+import "./Components/SubMenu.css"
 import './Components/Menu.css';
 
 import { BurgerMenu } from "./SVGs/BurgerMenu";
@@ -8,6 +9,7 @@ import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
 import TimeTable from "./Components/TimeTable";
+import SubMenu from "./Components/SubMenu";
 
 function App() {
   const ksh = useContext(KshManagerContext);
@@ -72,7 +74,9 @@ function App() {
         
         {savedOption && <p>Saved Option: {savedOption}</p>}
         <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}${ksh.isTimeTableOpen ? 'move ' : ''}full-title burger-menu`}></BurgerMenu>
-
+        <div className={`sub-menu ${ksh.isSubMenuOpen ? 'open' : ''}`}>
+          <SubMenu/>
+        </div>
         <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}`} onClick={ksh.handleBurgerClick}></div>
         <div className={`menu${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}${ksh.isMenuAndTimeTableOpen ? ' close-right' : ''}`}>
           <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}menu-content`}>
