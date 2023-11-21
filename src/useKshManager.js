@@ -47,15 +47,15 @@ export default function useKSHManager() {
 
 	function handleContextMenuLeftClick(e) {
 		if (isContextMenuOpen) {
-			setContextMenuCoords({ x: e.clientX, y: e.clientY });
+			// setContextMenuCoords({ x: e.clientX, y: e.clientY });
 			setIsContextMenuOpen(false);
 		}
 	}
 
 	function handleContextMenuRightClick(e) {
 		e.preventDefault();
-		if (!isChangeClassOpen) {
-			setContextMenuCoords({ x: e.clientX, y: e.clientY });
+		if (!isChangeClassOpen) { // disable the context menu in the modal
+      if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu
 			setIsContextMenuOpen(!isContextMenuOpen);
 		}
 	}

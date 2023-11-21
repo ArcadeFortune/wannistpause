@@ -1,5 +1,5 @@
 .context-menu {
-  transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
+  transition: padding 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 ), transform 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 ), opacity 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 ), z-index 0.2s;
 }
 
 .context-menu.main {
@@ -75,7 +75,6 @@
 .context-menu.close {
   z-index: -420;
   padding-top: 0;
-  opacity: 0.2;
-  color: #333333;
-  text-shadow: 0px 0px 0px #33333379;
+  opacity: 0;
+  transform: scale(0.9);
 }
