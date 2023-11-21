@@ -45,11 +45,6 @@ a {
   text-decoration: none;
 }
 
-.blur {  
-  -webkit-filter: blur(1px); 
-  filter: blur(1px);
-}
-
 ::-moz-selection {
   --tw-text-opacity: 1;
   color: rgb(255, 255, 255);
