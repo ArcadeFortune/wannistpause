@@ -1,0 +1,26 @@
+/* CSS classes are applied in App.js */
+.sub-menu {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: #282c34;
+
+  position: fixed;
+  top: calc(2.3em + 2em);
+
+  transition: 0.3s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
+  transform: translateX(100%);
+
+  background-image: 
+  radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%), /* Left gradient */
+  radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%); /* Right gradient */
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  background-position: left center, right center; /* Aligns the gradient to the left and right */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sub-menu.open {
+  transform: translateX(0%);
+}

@@ -17,6 +17,8 @@ export default function useKSHManager() {
 
 	// website relevant variables
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+  const [subMenuContent, setSubMenuContent] = useState(""); // the content of the submenu
 	const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
 	const [isTimeTableOpen, setIsTimeTableOpen] = useState(false);
 	const [isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen] = useState(false);
@@ -113,10 +115,18 @@ export default function useKSHManager() {
 		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
 		setTodaysSubjectsClassHTML(currentClassSubjects);
 
-
 		localStorage.setItem("currentClass", currentClass);
 		setCurrentClass(currentClass);
-	}
+  }
+
+  function handleSubMenuClick() {
+    // if the timetalbe is open, close it
+    if (isTimeTableOpen) {
+      setIsTimeTableOpen(false);
+    }
+    console.log('test')
+    setIsSubMenuOpen(!isSubMenuOpen);
+  }
 
 	function restartTimer() {
 		setTimerKey(timerKey + 1);
@@ -162,6 +172,8 @@ export default function useKSHManager() {
 		everyClass, setEveryClass,
 		currentClass, saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
+    isSubMenuOpen, setIsSubMenuOpen,
+    subMenuContent, setSubMenuContent,
 		isChangeClassOpen, setIsChangeClassOpen,
 		isTimeTableOpen, setIsTimeTableOpen,
 		isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen,
@@ -177,6 +189,7 @@ export default function useKSHManager() {
 		nextSubject, setNextSubject,
 		isKSHLoaded,
 		isActiveInterval,
+    handleSubMenuClick,
 		handleBurgerClick,
 		handleContextMenuRightClick,
 		handleContextMenuLeftClick,

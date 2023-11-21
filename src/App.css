@@ -53,6 +53,11 @@
   }
 }
 
+.text {
+  text-align: left;
+  margin-inline: 2em;
+}
+
 .url {
   font-size: 0.8em;
   color: #aaa;
