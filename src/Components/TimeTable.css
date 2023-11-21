@@ -1,3 +1,19 @@
+.time-table-div {
+  background-color: #282c34;
+  z-index: 1;
+  position: fixed;
+  /* top: calc(2.3em + 2em); */
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .time-table {
   border-collapse: collapse;
 }

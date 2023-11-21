@@ -8,7 +8,6 @@ import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
-import TimeTable from "./Components/TimeTable";
 import ContextMenu from "./Components/ContextMenu";
 import SubMenu from "./Components/SubMenu";
 
@@ -70,15 +69,17 @@ function App() {
         {/* Change-Class Modal */}
         <ChangeClass
           options={ksh.everyClass} 
-        />        
+        />   
 
         {/* Side-Menu */}
-        <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}${ksh.isTimeTableOpen ? 'move ' : ''}full-title burger-menu`}></BurgerMenu>
-        <div className={`sub-menu ${ksh.isSubMenuOpen ? 'open' : ''}`}>
+        <div className={`sub-menu ${ksh.subMenuContent.length !== 0 ? 'open' : ''}`}>
           <SubMenu/>
         </div>
-        <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}`} onClick={ksh.handleBurgerClick}></div>
-        <div className={`menu${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}${ksh.isMenuAndTimeTableOpen ? ' close-right' : ''}`}>
+
+        {/* Main Menu */}
+        <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title burger-menu`}></BurgerMenu>
+        <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}`} onClick={ksh.handleBurgerClick}></div>
+        <div className={`menu${ksh.isMenuOpen ? ' open' : ''}`}>
           <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}menu-content`}>
             <span className="title">Menü</span>
             <BurgerMenu handleClick={ksh.handleBurgerClick} className="burger-menu"></BurgerMenu>
@@ -86,11 +87,6 @@ function App() {
           </div>
         </div>
         
-        {/* Stundenplan */}
-        <div className={`menu-timetable ${ksh.isTimeTableOpen ? 'move' : ''}`}>
-          <TimeTable/>
-        </div>
-          
         {/* Countdown */}
         <CountdownComponent className={`${ksh.isChangeClassOpen ? 'blur' : ''}`}></CountdownComponent>
       </header>
