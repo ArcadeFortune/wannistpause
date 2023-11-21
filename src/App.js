@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext } from "react";
 import CountdownComponent from "./Components/Countdown";
 import "./App.css";

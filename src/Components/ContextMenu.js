@@ -11,19 +11,12 @@ export default function ContextMenu() {
   }, [ksh.contextMenuCoords])
 
   return (
-    <>
-    {/* {ksh.isContextMenuOpen &&  */}
-
-      <div className={`context-menu main${ksh.isContextMenuOpen ? " open" : " close"}`} style={{top: ksh.contextMenuCoords.y, left: ksh.contextMenuCoords.x}}>
-        <div className="context-menu header">testing context menu</div>
-        <div className="context-menu divider"></div>
-        <div className="context-menu content">
-          <Menu/>
-
-        </div>
+    <div className={`context-menu main${ksh.isContextMenuOpen ? " open" : " close"}`} style={{top: ksh.contextMenuCoords.y, left: ksh.contextMenuCoords.x}}>
+      <div className="context-menu header">Context menu</div>
+      <div className="context-menu divider"></div>
+      <div className="context-menu content">
+        <Menu/>
       </div>
-
-    {/* } */}
-    </>
+    </div>
   )
 }
