@@ -17,9 +17,8 @@ export default function useKSHManager() {
 
 	// website relevant variables
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [subMenuContent, setSubMenuContent] = useState(""); // the content of the submenu
 	const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
-	const [isTimeTableOpen, setIsTimeTableOpen] = useState(false);
-	const [isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen] = useState(false);
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false);
@@ -43,12 +42,6 @@ export default function useKSHManager() {
 	}
 
 	function handleBurgerClick() {
-		// if the time table and the menu are open,
-		if (isMenuOpen && isTimeTableOpen) {
-			setIsMenuAndTimeTableOpen(!isMenuAndTimeTableOpen);
-		} else {
-			setIsMenuAndTimeTableOpen(false);
-		}
 		setIsMenuOpen(!isMenuOpen);
 	}
 
@@ -69,10 +62,6 @@ export default function useKSHManager() {
 
 	function handleChangeClassClick() {
 		setIsChangeClassOpen(!isChangeClassOpen);
-	}
-
-	function handleTimeTableClick() {
-		setIsTimeTableOpen(!isTimeTableOpen);
 	}
 
 	function handleTimerComplete() {
@@ -113,10 +102,24 @@ export default function useKSHManager() {
 		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
 		setTodaysSubjectsClassHTML(currentClassSubjects);
 
-
 		localStorage.setItem("currentClass", currentClass);
 		setCurrentClass(currentClass);
-	}
+  }
+
+  function handleSubMenuChange(newContent) {
+    // whenever a user clicks on a sub menu (example: about me), it would set the subMenuContent ("") to the newContent ("aboutme")
+    if (newContent === subMenuContent) {
+      // if the user clicks on the same sub menu ("aboutme") again, it would reset the subMenuContent ("aboutme")
+      setSubMenuContent("");
+    } else {
+      // if the user clicks on a different sub menu (example: "timetable"), it would reset the subMenuContent ("aboutme") and then set it to the newContent ("timetable")
+      setSubMenuContent("");
+      // run this function after 0.1 seconds
+      setTimeout(() => {
+        setSubMenuContent(newContent);
+      }, subMenuContent.length === 0 ? 0 : 200); // need to wait for the previous sub menu to close IF there was one.
+    }
+  }
 
 	function restartTimer() {
 		setTimerKey(timerKey + 1);
@@ -162,9 +165,8 @@ export default function useKSHManager() {
 		everyClass, setEveryClass,
 		currentClass, saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
+    subMenuContent, setSubMenuContent: handleSubMenuChange,  
 		isChangeClassOpen, setIsChangeClassOpen,
-		isTimeTableOpen, setIsTimeTableOpen,
-		isMenuAndTimeTableOpen, setIsMenuAndTimeTableOpen,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
 		timerKey, setTimerKey,
@@ -181,7 +183,6 @@ export default function useKSHManager() {
 		handleContextMenuRightClick,
 		handleContextMenuLeftClick,
 		handleChangeClassClick,
-		handleTimeTableClick,
 		handleTimerComplete,
 		restartTimer,
 		configureTimer,

@@ -1,5 +1,5 @@
 .menu-main {
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -11,7 +11,7 @@
 }
 
 .menu {
-  z-index: 4;
+  z-index: 5;
   position: fixed;
   top: 0;
   right: 0;
@@ -28,27 +28,6 @@
   background-position: left center, right center;
   padding-left: 1px;
   padding-right: 1px;
-}
-
-.menu-timetable {
-  background-color: #282c34;
-  z-index: 1;
-  position: fixed;
-  top: calc(2.3em + 2em);
-  right: 0;
-  width: 100%;
-  height: 100%;
-  transform: translateX(100%);
-  overflow-x: hidden;
-  transition: 0.2s cubic-bezier( 0.21, 0.82, 0.69, 0.97 );
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.menu-timetable.move {
-  transform: translateX(calc(-100vw + 100% - 2px));
 }
 
 .menu.open {
@@ -99,7 +78,7 @@ svg rect {
 }
 
 .burger-menu { 
-  z-index: 3;
+  z-index: 4;
 }
 
 .burger-menu:hover {

@@ -1,14 +1,15 @@
 import React, { useEffect, useContext } from "react";
 import CountdownComponent from "./Components/Countdown";
 import "./App.css";
+import "./Components/SubMenu.css"
 import './Components/Menu.css';
 
 import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
-import TimeTable from "./Components/TimeTable";
 import ContextMenu from "./Components/ContextMenu";
+import SubMenu from "./Components/SubMenu";
 
 function App() {
   const ksh = useContext(KshManagerContext);
@@ -63,31 +64,31 @@ function App() {
       <header className="App-header">
         <ContextMenu/>
         {/* Title */}
-        <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}full-title`} onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
+        <div className="full-title" onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         
         {/* Change-Class Modal */}
         <ChangeClass
           options={ksh.everyClass} 
-        />        
+        />   
 
         {/* Side-Menu */}
-        <BurgerMenu handleClick={ksh.handleBurgerClick} className={`${ksh.isChangeClassOpen ? 'blur ' : ''}${ksh.isTimeTableOpen ? 'move ' : ''}full-title burger-menu`}></BurgerMenu>
-        <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}`} onClick={ksh.handleBurgerClick}></div>
-        <div className={`menu${ksh.isMenuOpen ? ' open' : ''}${ksh.isTimeTableOpen ? ' move' : ''}${ksh.isMenuAndTimeTableOpen ? ' close-right' : ''}`}>
-          <div className={`${ksh.isChangeClassOpen ? 'blur ' : ''}menu-content`}>
+        <div className={`sub-menu ${ksh.subMenuContent.length !== 0 ? 'open' : ''}`}>
+          <SubMenu/>
+        </div>
+
+        {/* Main Menu */}
+        <BurgerMenu handleClick={ksh.handleBurgerClick} className="full-title burger-menu"></BurgerMenu>
+        <div className={`menu-main${ksh.isMenuOpen ? ' open' : ''}`} onClick={ksh.handleBurgerClick}></div>
+        <div className={`menu${ksh.isMenuOpen ? ' open' : ''}`}>
+          <div className="menu-content">
             <span className="title">Menü</span>
             <BurgerMenu handleClick={ksh.handleBurgerClick} className="burger-menu"></BurgerMenu>
             <Menu/>
           </div>
         </div>
-        
-        {/* Stundenplan */}
-        <div className={`menu-timetable ${ksh.isTimeTableOpen ? 'move' : ''}`}>
-          <TimeTable/>
-        </div>
-          
+
         {/* Countdown */}
-        <CountdownComponent className={`${ksh.isChangeClassOpen ? 'blur' : ''}`}></CountdownComponent>
+        <CountdownComponent/>
       </header>
     </div>
   );

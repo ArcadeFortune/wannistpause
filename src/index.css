@@ -13,6 +13,11 @@ code {
     monospace;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 @font-face {
   font-family: 'Kawi';
   src: url("/public/NotoSansKawi-Regular.ttf") format("truetype");
@@ -28,10 +33,16 @@ code {
   font-style: normal;
 }
 
+.link {
+  color: #61dafb;
+  text-decoration: 1px underline #61dafb;
+}
 
-.blur {  
-  -webkit-filter: blur(1px); 
-  filter: blur(1px);
+.link:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 8px #ffffff;
+  text-decoration: none;
 }
 
 ::-moz-selection {
