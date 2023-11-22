@@ -122,10 +122,13 @@ export default function useKSHManager() {
     if (newContent === modalContent) {
       setModalContent("");
     } else {
-      // setModalContent(""); // for the modal, this is not needed
 			setModalContent(newContent);
     }
   }
+
+	function startPomodoro(settings) {
+		log(settings)
+	}
 
 	function restartTimer() {
 		setTimerKey(timerKey + 1);
@@ -189,6 +192,7 @@ export default function useKSHManager() {
 		handleContextMenuRightClick,
 		handleContextMenuLeftClick,
 		handleTimerComplete,
+		startPomodoro,
 		restartTimer,
 		configureTimer,
 	};

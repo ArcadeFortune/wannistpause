@@ -20,12 +20,6 @@
   transition: text-decoration 0.2s;
 }
 
-.title {  
-  font-family: 'Kawi';
-  font-size: 1.5em;
-  font-weight: 600;
-  color: white;
-}
 
 .full-title:hover {
   cursor: pointer;

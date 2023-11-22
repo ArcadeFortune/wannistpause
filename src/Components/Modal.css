@@ -37,13 +37,13 @@
   background-color: #282c34;
   box-shadow: 0px 18px 19px rgb(0 0 0 / 62%);
   border-radius: 0.3em;
-  width: 17em;
-  height: 10em;
+  min-width: 10em;
+  min-height: 6.1em;
+  height: auto;
+  width: auto;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  padding: 1em;
+  display: initial;
 
   background-image: 
     radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%), /* Left gradient */
@@ -51,8 +51,8 @@
   background-size: 1px 100%;
   background-repeat: no-repeat;
   background-position: left center, right center; /* Aligns the gradient to the left and right */
-  padding-left: 1px;
-  padding-right: 1px;
+  padding-left: calc(2em + 1px);
+  padding-right: calc(2em + 1px);
 }
 
 .modal.box.close {
@@ -72,10 +72,13 @@
 
   -webkit-user-select: none;
   user-select: none;
-  
 }
 
 .modal.close-button:hover {
   text-shadow: 0 0 8px #ffffff;
   cursor: pointer;
+}
+
+.modal .title {
+  /* margin-top: 1em; */
 }

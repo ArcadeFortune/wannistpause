@@ -1,0 +1,30 @@
+.pomodoro.setting {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.pomodoro.input {
+  margin-left: 1em;
+}
+
+.pomodoro.number-input {
+  width: 3em;
+  margin-left: 0.32em;
+}
+
+.pomodoro.input-boolean {
+  width: 3em;
+  margin-left: 0.32em;
+}
+
+.pomodoro.input-boolean.true {
+  background-color: rgb(102, 250, 102);
+}
+
+.pomodoro.input-boolean.false {
+}
