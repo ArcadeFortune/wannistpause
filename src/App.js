@@ -11,6 +11,7 @@ import { KshManagerContext } from "./KshManager";
 import ChangeClass from "./Components/ChangeClass";
 import ContextMenu from "./Components/ContextMenu";
 import SubMenu from "./Components/SubMenu";
+import Modal from "./Components/Modal";
 
 function App() {
   const ksh = useContext(KshManagerContext);
@@ -67,13 +68,14 @@ function App() {
         {/* Title */}
         <div className="full-title" onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         
-        {/* Change-Class Modal */}
-        <ChangeClass
+        {/* Modal */}
+        <Modal content={ksh.modalContent}/>
+        {/* <ChangeClass
           options={ksh.everyClass} 
-        />   
+        />    */}
 
-        {/* Side-Menu */}
-        <div className={`sub-menu ${ksh.subMenuContent.length !== 0 ? 'open' : ''}`}>
+        {/* Sub-Menu */}
+        <div className={`sub-menu${ksh.subMenuContent.length !== 0 ? ' open' : ''}`}>
           <SubMenu/>
         </div>
 

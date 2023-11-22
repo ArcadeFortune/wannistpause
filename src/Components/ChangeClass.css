@@ -1,60 +1,3 @@
-.change-class {
-  z-index: 420;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  visibility: hidden;  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  transition: 0.2s cubic-bezier(0.21, 0.82, 0.69, 0.97);
-}
-
-.change-class.open {
-  visibility: visible;
-}
-
-.change-class.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: rgba(255, 255, 255, 0.137);
-}
-
-.change-class.overlay.open {
-  opacity: 1;
-}
-
-.change-class.modal {
-  position: absolute;
-  background-color: #282c34;
-  box-shadow: 0px 18px 19px rgb(0 0 0 / 62%);
-  border-radius: 0.3em;
-  width: 17em;
-  height: 10em;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-
-  background-image: 
-    radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%), /* Left gradient */
-    radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(84, 84, 84, 0) 100%); /* Right gradient */
-  background-size: 1px 100%;
-  background-repeat: no-repeat;
-  background-position: left center, right center; /* Aligns the gradient to the left and right */
-  padding-left: 1px;
-  padding-right: 1px;
-}
-
-.change-class.modal.close {
-  transform: scale(0.8);
-  opacity: 0;
-}
-
 .change-class.title {
   position: relative;
   height: initial;
@@ -98,35 +41,6 @@
   position: relative;
   height: initial;
   width: initial;
-}
-
-.change-class.close-button {
-  font-family: 'ArcadeFortune';
-  font-size: 1.6em;
-  margin: 0.1em;
-  top: 0em;
-  right: 0em;
-  width: 1em;
-  height: 1em;
-  position: absolute;
-
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.change-class.close-button:hover {
-  text-shadow: 0 0 8px #ffffff;
-  cursor: pointer;
-}
-
-.change-class.close-button:hover svg line {
-  stroke: red;
-}
-
-/* This is to ensure that the white border remains intact */
-.change-class.close-button:hover svg line:nth-child(1),
-.change-class.close-button:hover svg line:nth-child(2) {
-    stroke: black;
 }
 
 .change-class.save-button {
