@@ -8,7 +8,6 @@ import './Components/Menu.css';
 import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
-import ChangeClass from "./Components/ChangeClass";
 import ContextMenu from "./Components/ContextMenu";
 import SubMenu from "./Components/SubMenu";
 import Modal from "./Components/Modal";
@@ -70,9 +69,6 @@ function App() {
         
         {/* Modal */}
         <Modal content={ksh.modalContent}/>
-        {/* <ChangeClass
-          options={ksh.everyClass} 
-        />    */}
 
         {/* Sub-Menu */}
         <div className={`sub-menu${ksh.subMenuContent.length !== 0 ? ' open' : ''}`}>

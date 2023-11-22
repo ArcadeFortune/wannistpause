@@ -19,7 +19,6 @@ export default function useKSHManager() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [subMenuContent, setSubMenuContent] = useState(""); // the content of the submenu
 	const [modalContent, setModalContent] = useState(""); // the content of the modal
-	const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false);
@@ -59,10 +58,6 @@ export default function useKSHManager() {
       if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu
 			setIsContextMenuOpen(!isContextMenuOpen);
 		}
-	}
-
-	function handleChangeClassClick() {
-		setIsChangeClassOpen(!isChangeClassOpen);
 	}
 
 	function handleTimerComplete() {
@@ -178,7 +173,6 @@ export default function useKSHManager() {
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,
 		modalContent, setModalContent: handleModalChange,
-		isChangeClassOpen, setIsChangeClassOpen,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
 		timerKey, setTimerKey,
@@ -194,7 +188,6 @@ export default function useKSHManager() {
 		handleBurgerClick,
 		handleContextMenuRightClick,
 		handleContextMenuLeftClick,
-		handleChangeClassClick,
 		handleTimerComplete,
 		restartTimer,
 		configureTimer,
