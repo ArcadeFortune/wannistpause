@@ -18,6 +18,7 @@ export default function useKSHManager() {
 	// website relevant variables
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [subMenuContent, setSubMenuContent] = useState(""); // the content of the submenu
+	const [modalContent, setModalContent] = useState(""); // the content of the modal
 	const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
@@ -54,7 +55,7 @@ export default function useKSHManager() {
 
 	function handleContextMenuRightClick(e) {
 		e.preventDefault();
-		if (!isChangeClassOpen) { // disable the context menu in the modal
+		if (modalContent.length === 0) { // disable the context menu in the modal
       if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu
 			setIsContextMenuOpen(!isContextMenuOpen);
 		}
@@ -121,6 +122,16 @@ export default function useKSHManager() {
     }
   }
 
+	function handleModalChange(newContent) {
+		// pastet from handleSubMenuChange()
+    if (newContent === modalContent) {
+      setModalContent("");
+    } else {
+      // setModalContent(""); // for the modal, this is not needed
+			setModalContent(newContent);
+    }
+  }
+
 	function restartTimer() {
 		setTimerKey(timerKey + 1);
 		// setTimerFinished(false);
@@ -165,7 +176,8 @@ export default function useKSHManager() {
 		everyClass, setEveryClass,
 		currentClass, saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
-    subMenuContent, setSubMenuContent: handleSubMenuChange,  
+    subMenuContent, setSubMenuContent: handleSubMenuChange,
+		modalContent, setModalContent: handleModalChange,
 		isChangeClassOpen, setIsChangeClassOpen,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
