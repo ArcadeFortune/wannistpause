@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import { KshManagerContext } from "../KshManager"
 import './ContextMenu.css'
-import { Menu } from "./Menu"
+import Menu from "../Layouts/Menu"
 
 export default function ContextMenu() {
   const ksh = useContext(KshManagerContext)

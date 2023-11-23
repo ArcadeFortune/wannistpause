@@ -2,15 +2,16 @@
 import React, { useEffect, useContext } from "react";
 import CountdownComponent from "./Components/Countdown";
 import "./App.css";
-import "./Components/SubMenu.css"
-import './Components/Menu.css';
+import "./Layouts/SubMenu.css"
+import './Layouts/Menu.css';
 
 import { BurgerMenu } from "./SVGs/BurgerMenu";
-import { Menu } from "./Components/Menu";
 import { KshManagerContext } from "./KshManager";
 import ContextMenu from "./Components/ContextMenu";
-import SubMenu from "./Components/SubMenu";
-import Modal from "./Components/Modal";
+
+import Menu from "./Layouts/Menu";
+import SubMenu from "./Layouts/SubMenu";
+import Modal from "./Layouts/Modal";
 
 function App() {
   const ksh = useContext(KshManagerContext);

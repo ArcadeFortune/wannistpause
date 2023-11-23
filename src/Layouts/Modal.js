@@ -2,8 +2,8 @@ import { useContext, useState } from "react"
 import { KshManagerContext } from "../KshManager"
 import './Modal.css';
 
-import ChangeClass from "./ChangeClass";
-import Pomodoro from "./Pomodoro";
+import ChangeClass from "../Components/ChangeClass";
+import Pomodoro from "../Components/Pomodoro";
 
 export default function Modal({content}) {  
   const ksh = useContext(KshManagerContext)

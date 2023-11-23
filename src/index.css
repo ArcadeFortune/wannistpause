@@ -56,7 +56,7 @@ a {
   text-decoration: none;
 }
 
-select, input {
+select, input, .checkmark {
   transition: 0.2s;
 
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
@@ -66,7 +66,7 @@ select, input {
   outline: 1px solid #ffffff3b;
 
   background-color: #282c34;
-  text-shadow: 1px 1px 2px rgb(255 255 255 / 17%);
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
   color: #fff;
 
   padding: 6px 4px;
@@ -74,7 +74,7 @@ select, input {
   border-radius: 0.3em;
 }
 
-input {
+input, .checkmark {
   min-width: 2em;
   width: auto;
   max-width: 9.61em;
