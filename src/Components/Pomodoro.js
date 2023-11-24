@@ -22,7 +22,7 @@ export default function Pomodoro() {
     var checkbox = document.getElementById('myCheckbox');
     checkbox.checked = !checkbox.checked;
     // unfocus the button
-    // e.target.blur();
+    e.target.blur();
     setMusik(!musik)
   }
 
@@ -32,7 +32,7 @@ export default function Pomodoro() {
 			<div className="pomodoro setting">
 				Dein Ziel
 				<div className="pomodoro input">
-					<input type="text" placeholder={placeholderGoal} value={goal} onChange={(e) => setGoal(e.target.value)} className="pomodoro input-goal" />
+					<input tabIndex={1} type="text" placeholder={placeholderGoal} value={goal} onChange={(e) => setGoal(e.target.value)} className="pomodoro input-goal" />
 				</div>
 			</div>
 
@@ -73,7 +73,8 @@ export default function Pomodoro() {
         </label>
 			</div>
 
-			<div
+			<button
+        href=""
 				className="select"
 				onClick={() => {
 					ksh.startPomodoro({
@@ -86,7 +87,7 @@ export default function Pomodoro() {
           });
 				}}>
 				Starten
-			</div>
+			</button>
 		</div>
 	);
 }

@@ -34,7 +34,7 @@ const CountdownComponent = ({ className }) => {
   return (
     <>
       {ksh.timerFinished && document.hasFocus()&& <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={500} />}
-      {<div className={`${className} countdown`}>
+      <div className={`${className} countdown`}>
         <CountdownCircleTimer
           key={ksh.timerKey}
           isPlaying
@@ -49,9 +49,20 @@ const CountdownComponent = ({ className }) => {
         >
           {renderTime}
         </CountdownCircleTimer>
-        <div className='currentClass'>Klasse: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>
-        <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject information'>{ksh.nextSubject.subject}{ksh.nextSubject.room && <span>, {ksh.nextSubject.room}</span>} </span></div>
-      </div>}        
+        {ksh.isPomodoroRunning && (
+          <>
+            <div className='title'>{ksh.pomodoro.goal}</div>
+            <div className='pomodoro'>Pomodoro Timer</div>
+            <span className='pomodoro information'>test</span>
+          </>
+        )}
+        {!ksh.isPomodoroRunning && (
+          <>
+            <div className='currentClass'>Klasse: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>
+            <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject information'>{ksh.nextSubject.subject}{ksh.nextSubject.room && <span>, {ksh.nextSubject.room}</span>} </span></div>
+          </>
+        )}
+      </div>        
     </>
   );
 }

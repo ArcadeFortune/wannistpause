@@ -37,6 +37,16 @@ a {
   box-sizing: border-box;
 }
 
+.text {
+  text-align: left;
+  margin-inline: 2em;
+}
+
+.url {
+  font-size: 0.8em;
+  color: #aaa;
+}
+
 .title {  
   font-family: 'Kawi';
   font-size: 1.5em;

@@ -22,6 +22,9 @@ export default function useKSHManager() {
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false);
+	const [isPomodoroRunning, setIsPomodoroRunning] = useState(false);
+
+	const [pomodoro, setPomodoro] = useState({}) //setings
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -127,7 +130,13 @@ export default function useKSHManager() {
   }
 
 	function startPomodoro(settings) {
-		log(settings)
+		setPomodoro(settings)
+		setModalContent("");
+		setIsPomodoroRunning(true);
+	}
+
+	function stopPomodoro() {
+		setIsPomodoroRunning(false);
 	}
 
 	function restartTimer() {
@@ -178,6 +187,8 @@ export default function useKSHManager() {
 		modalContent, setModalContent: handleModalChange,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
+		isPomodoroRunning, setIsPomodoroRunning,
+		pomodoro, setPomodoro,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
@@ -193,6 +204,7 @@ export default function useKSHManager() {
 		handleContextMenuLeftClick,
 		handleTimerComplete,
 		startPomodoro,
+		stopPomodoro,
 		restartTimer,
 		configureTimer,
 	};
