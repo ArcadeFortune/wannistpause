@@ -1,52 +1,12 @@
-.change-class.title {
-  position: relative;
-  height: initial;
-  width: initial;
+.change-class.box {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .change-class-select {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
-  background-size: 80% 1px;
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  outline: 1px solid #ffffff3b;
-  transition: 0.2s;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.42);
-
-  color: #fff;
-  background-color: #282c34;
-  overflow: hidden;
-
-  padding: 5px 2px;
-  border: none;
-  border-radius: 3px;
-}
-
-.change-class-select:focus {
-  box-shadow: 0px 0px 6px 0px #b0aaaa;
-}
-
-.change-class-select:hover {
-  cursor: pointer;
-
-}
-
-@media (min-width: 700px) {
-  .change-class-select {
-    transform: scale(1.5);
-  }
-}
-
-.change-class.select { /* save button */
-  position: relative;
-  height: initial;
-  width: initial;
-}
-
-.change-class.save-button {
-  width: 6em;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+  margin: 1em;
 }

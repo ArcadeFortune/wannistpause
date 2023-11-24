@@ -2,7 +2,7 @@ import moment from "moment";
 import log from "./log";
 
 export function pad(num) { // turns 1 into 01
-  return String(num).padStart(2, "0");
+  return String(parseInt(num)).padStart(2, "0");
 }
 
 export function renderTime({ remainingTime }) { // what a mess xd

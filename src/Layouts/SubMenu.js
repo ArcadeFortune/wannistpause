@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { KshManagerContext } from "../KshManager"
-import AboutMe from "./AboutMe"
-import TimeTable from "./TimeTable"
+import AboutMe from "../Components/AboutMe"
+import TimeTable from "../Components/TimeTable"
 
 import './Menu.css';
 

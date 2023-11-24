@@ -19,10 +19,11 @@ export default function useKSHManager() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [subMenuContent, setSubMenuContent] = useState(""); // the content of the submenu
 	const [modalContent, setModalContent] = useState(""); // the content of the modal
-	const [isChangeClassOpen, setIsChangeClassOpen] = useState(false);
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
-	const [isBreakTime, setIsBreakTime] = useState(false);
+	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
+
+	const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -61,19 +62,56 @@ export default function useKSHManager() {
 		}
 	}
 
-	function handleChangeClassClick() {
-		setIsChangeClassOpen(!isChangeClassOpen);
-	}
-
 	function handleTimerComplete() {
-		log("fertig!");
-		log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
-		setRefreshTimer(refreshTimer + 1);
+		if (!pomodoro.isRunning) {
 
-		setTimerFinished(true);
-		setTimeout(() => {
-			setTimerFinished(false);
-		}, 4000); // confetti refresh
+			// normal timer
+			log("fertig!");
+			log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
+			setRefreshTimer(refreshTimer + 1);
+
+			setTimerFinished(true);
+			setTimeout(() => {
+				setTimerFinished(false);
+			}, 4000); // confetti refresh
+
+		} else {
+
+			// pomodoro timer
+			if (pomodoro.isWorking) {
+				// set the timer to breaktime
+				log('Pause!')
+				setRemainingTime(pomodoro.breakDuration);
+				setTotalDuration(pomodoro.breakDuration);
+				setIsBreakTime(true); // to change the title
+				restartTimer();
+
+			} else {
+
+				if (pomodoro.repeatedSoFar >= pomodoro.repeatAmount) {
+					// stop the timer
+					stopPomodoro();
+					return;
+				}
+
+				// add one repetition
+				setPomodoro(prevPomodoro => ({
+					...prevPomodoro, 
+					repeatedSoFar: prevPomodoro.repeatedSoFar + 1
+				}));
+				
+				// set the timer to worktime
+				setRemainingTime(pomodoro.duration);
+				setTotalDuration(pomodoro.duration);
+				setIsBreakTime(false); // to change the title
+				restartTimer();
+				
+			}
+			
+			// set breaktime or not
+			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));
+			
+		}
 	}
 
   function saveTodaysSubjects(todaysSubjects) {
@@ -127,17 +165,46 @@ export default function useKSHManager() {
     if (newContent === modalContent) {
       setModalContent("");
     } else {
-      // setModalContent(""); // for the modal, this is not needed
 			setModalContent(newContent);
     }
   }
+
+	function startPomodoro(settings) {
+		settings = {...settings, startedTime: moment(), isRunning: true, isWorking: true, repeatedSoFar: 0}
+		log('Starte Pomodoro Timer mit folgenden Einstellungen', settings)
+		// save the settings to localstorage
+		window.localStorage.setItem("pomodoro", JSON.stringify(settings))
+		setPomodoro(settings)
+		setModalContent("");
+
+		// set the timer
+		setRemainingTime(settings.duration);
+		setTotalDuration(settings.duration);
+		setIsBreakTime(false); // to change the title
+		restartTimer();
+	}
+
+// future: maybe remeber the previous pomodoro settings
+	function stopPomodoro() {
+		// remove from localstorage
+		window.localStorage.removeItem("pomodoro")
+		setPomodoro({})
+
+		configureTimer(moment());
+		restartTimer();
+	}
 
 	function restartTimer() {
 		setTimerKey(timerKey + 1);
 		// setTimerFinished(false);
 	}
 
-	function configureTimer(currentTime) {
+	function configureTimer() {
+		// determine the current time
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('10:45:00', 'HH:mm:ss') : moment();// for testing
+    currentTime.add(1, 'seconds'); // perhaps this will fix everything
+    log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
+
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
 		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsClass);
 		setActiveInterval(i); // finds current interval
@@ -178,9 +245,9 @@ export default function useKSHManager() {
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,
 		modalContent, setModalContent: handleModalChange,
-		isChangeClassOpen, setIsChangeClassOpen,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
+		pomodoro, setPomodoro,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
@@ -194,8 +261,9 @@ export default function useKSHManager() {
 		handleBurgerClick,
 		handleContextMenuRightClick,
 		handleContextMenuLeftClick,
-		handleChangeClassClick,
 		handleTimerComplete,
+		startPomodoro,
+		stopPomodoro,
 		restartTimer,
 		configureTimer,
 	};

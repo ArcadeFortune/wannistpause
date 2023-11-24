@@ -33,6 +33,32 @@ a {
   font-style: normal;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.text {
+  text-align: left;
+  margin-inline: 2em;
+}
+
+.url {
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+.title {  
+  font-family: 'Kawi';
+  font-size: 1.5em;
+  font-weight: 600;
+  color: white;
+}
+/* make up for the insane margin-bottom from font 'Kawi' */
+.subtitle {
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
+
 .link {
   color: #61dafb;
   text-decoration: 1px underline #61dafb;
@@ -43,6 +69,54 @@ a {
   color: rgb(255, 255, 255);
   text-shadow: 0 0 8px #ffffff;
   text-decoration: none;
+}
+
+select, input, .checkmark {
+  transition: 0.2s;
+
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
+  background-size: 80% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  outline: 1px solid #ffffff3b;
+
+  background-color: #282c34;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  color: #fff;
+
+  padding: 6px 4px;
+  border: none;
+  border-radius: 0.3em;
+}
+
+input, .checkmark {
+  min-width: 2em;
+  width: auto;
+  max-width: 9.61em;
+}
+
+select:focus, input:focus {
+  box-shadow: 0px 0px 6px 0px #b0aaaa;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
+input:hover {
+  cursor: text;
+}
+
+@media (min-width: 700px) {
+  select, input {
+    font-size: 1em;
+  }
+}
+
+/* i think that does not work */
+::grammar-error {
+  text-decoration: underline red;
+  color: red;
 }
 
 ::-moz-selection {
