@@ -20,11 +20,7 @@ const CountdownComponent = ({ className }) => {
     } // needs to load data
     log('Intranet erfolgreich geladen!')
 
-    const currentTime = process.env.NODE_ENV === 'development' ? moment('10:45:00', 'HH:mm:ss') : moment();// for testing
-    currentTime.add(1, 'seconds'); // perhaps this will fix everything
-    log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
-
-    ksh.configureTimer(currentTime);
+    ksh.configureTimer();
   }, [ksh.timeStamps, ksh.currentClass, ksh.refreshTimer]);
 
 
@@ -34,7 +30,8 @@ const CountdownComponent = ({ className }) => {
   return (
     <>
       {ksh.timerFinished && document.hasFocus()&& <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={500} />}
-      <div className={`${className} countdown`}>
+       
+      <div key={ksh.timerKey} className={`${className} countdown`}>
         <CountdownCircleTimer
           key={ksh.timerKey}
           isPlaying
@@ -49,14 +46,15 @@ const CountdownComponent = ({ className }) => {
         >
           {renderTime}
         </CountdownCircleTimer>
-        {ksh.isPomodoroRunning && (
+        {ksh.pomodoro.isRunning && (
           <>
-            <div className='title'>{ksh.pomodoro.goal}</div>
-            <div className='pomodoro'>Pomodoro Timer</div>
-            <span className='pomodoro information'>test</span>
+            <div className='title'>Pomodoro Timer</div>
+            <div className='pomodoro subtitle'>- {ksh.pomodoro.goal} -</div>
+            <span className='pomodoro'>Musik</span>
+            <span className='pomodoro information'>LOFI...</span>
           </>
         )}
-        {!ksh.isPomodoroRunning && (
+        {!ksh.pomodoro.isRunning && (
           <>
             <div className='currentClass'>Klasse: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>
             <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject information'>{ksh.nextSubject.subject}{ksh.nextSubject.room && <span>, {ksh.nextSubject.room}</span>} </span></div>

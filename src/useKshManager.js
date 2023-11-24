@@ -21,10 +21,9 @@ export default function useKSHManager() {
 	const [modalContent, setModalContent] = useState(""); // the content of the modal
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
-	const [isBreakTime, setIsBreakTime] = useState(false);
-	const [isPomodoroRunning, setIsPomodoroRunning] = useState(false);
+	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
 
-	const [pomodoro, setPomodoro] = useState({}) //setings
+	const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -64,14 +63,55 @@ export default function useKSHManager() {
 	}
 
 	function handleTimerComplete() {
-		log("fertig!");
-		log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
-		setRefreshTimer(refreshTimer + 1);
+		if (!pomodoro.isRunning) {
 
-		setTimerFinished(true);
-		setTimeout(() => {
-			setTimerFinished(false);
-		}, 4000); // confetti refresh
+			// normal timer
+			log("fertig!");
+			log("Die Jetztige Zeit ist nun:", moment().format("HH:mm:ss"));
+			setRefreshTimer(refreshTimer + 1);
+
+			setTimerFinished(true);
+			setTimeout(() => {
+				setTimerFinished(false);
+			}, 4000); // confetti refresh
+
+		} else {
+
+			// pomodoro timer
+			if (pomodoro.isWorking) {
+				// set the timer to breaktime
+				log('Pause!')
+				setRemainingTime(pomodoro.breakDuration);
+				setTotalDuration(pomodoro.breakDuration);
+				setIsBreakTime(true); // to change the title
+				restartTimer();
+
+			} else {
+
+				if (pomodoro.repeatedSoFar >= pomodoro.repeatAmount) {
+					// stop the timer
+					stopPomodoro();
+					return;
+				}
+
+				// add one repetition
+				setPomodoro(prevPomodoro => ({
+					...prevPomodoro, 
+					repeatedSoFar: prevPomodoro.repeatedSoFar + 1
+				}));
+				
+				// set the timer to worktime
+				setRemainingTime(pomodoro.duration);
+				setTotalDuration(pomodoro.duration);
+				setIsBreakTime(false); // to change the title
+				restartTimer();
+				
+			}
+			
+			// set breaktime or not
+			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));
+			
+		}
 	}
 
   function saveTodaysSubjects(todaysSubjects) {
@@ -130,13 +170,28 @@ export default function useKSHManager() {
   }
 
 	function startPomodoro(settings) {
+		settings = {...settings, startedTime: moment(), isRunning: true, isWorking: true, repeatedSoFar: 0}
+		log('Starte Pomodoro Timer mit folgenden Einstellungen', settings)
+		// save the settings to localstorage
+		window.localStorage.setItem("pomodoro", JSON.stringify(settings))
 		setPomodoro(settings)
 		setModalContent("");
-		setIsPomodoroRunning(true);
+
+		// set the timer
+		setRemainingTime(settings.duration);
+		setTotalDuration(settings.duration);
+		setIsBreakTime(false); // to change the title
+		restartTimer();
 	}
 
+// future: maybe remeber the previous pomodoro settings
 	function stopPomodoro() {
-		setIsPomodoroRunning(false);
+		// remove from localstorage
+		window.localStorage.removeItem("pomodoro")
+		setPomodoro({})
+
+		configureTimer(moment());
+		restartTimer();
 	}
 
 	function restartTimer() {
@@ -144,7 +199,12 @@ export default function useKSHManager() {
 		// setTimerFinished(false);
 	}
 
-	function configureTimer(currentTime) {
+	function configureTimer() {
+		// determine the current time
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('10:45:00', 'HH:mm:ss') : moment();// for testing
+    currentTime.add(1, 'seconds'); // perhaps this will fix everything
+    log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
+
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
 		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsClass);
 		setActiveInterval(i); // finds current interval
@@ -187,7 +247,6 @@ export default function useKSHManager() {
 		modalContent, setModalContent: handleModalChange,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
-		isPomodoroRunning, setIsPomodoroRunning,
 		pomodoro, setPomodoro,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
