@@ -65,13 +65,13 @@ export default function Pomodoro() {
         </div>
       </div>
 
-			{/* <div className="pomodoro setting">
+			<div className="pomodoro setting">
         Musik
         <label style={{position: 'relative'}}>
-          <input type="checkbox" className="pomodoro boolean-input hidden" id="myCheckbox" defaultChecked/>
+          <input type="checkbox" className="pomodoro boolean-input hidden" id="myCheckbox" onChange={() => setMusik(!musik)} defaultChecked/>
           <input type="text" placeholder={musik ? '': 'Nein'} value={musik ? 'Ja':''} className="pomodoro number-input" tabIndex={-1} onClick={handleBooleanClick} readOnly/>
         </label>
-			</div> */}
+			</div>
 
 			<button
         href=""

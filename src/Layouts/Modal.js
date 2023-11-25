@@ -9,9 +9,9 @@ export default function Modal({content}) {
   const ksh = useContext(KshManagerContext)
   
   return (
-    <div className={`${content.length !== 0 ? 'open' : 'close'} modal`}>
-      <div className={`${content.length !== 0 ? 'open' : 'close'} modal overlay`} onClick={() => {ksh.setModalContent('')}}></div>
-      <div className={`${content.length !== 0 ? 'open' : 'close'} modal box`}>
+    <div className={`${content.length !== 0 ? 'open ' : 'close '}modal`}>
+      <div className={`${content.length !== 0 ? 'open ' : 'close '}modal overlay`} onClick={() => {ksh.setModalContent('')}}></div>
+      <div className={`${content.length !== 0 ? 'open ' : 'close '}modal box`}>
         <div className='modal close-button' onClick={() => {ksh.setModalContent('')}}>x</div>
         <ModalContent />
       </div>

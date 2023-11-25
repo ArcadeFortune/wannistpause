@@ -13,7 +13,7 @@ import Menu from "./Layouts/Menu";
 import SubMenu from "./Layouts/SubMenu";
 import Modal from "./Layouts/Modal";
 
-function App() {
+export default function App() {
   const ksh = useContext(KshManagerContext);
   useEffect(() => {
     const fetchData = async () => {
@@ -64,7 +64,9 @@ function App() {
   return (
     <div className="App" onClick={ksh.handleContextMenuLeftClick} onContextMenu={ksh.handleContextMenuRightClick}> 
       <header className="App-header">
+        {/* Context Menu */}
         <ContextMenu/>
+
         {/* Title */}
         <div className="full-title" onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
         
@@ -93,5 +95,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
