@@ -85,6 +85,7 @@ export default function Pomodoro() {
             repeatAmount: repeatAmount.length === 0 ? 0 : parseInt(repeatAmount),
             musik: musik,
           });
+          ksh.handlePlayYT();
 				}}>
 				Starten
 			</button>

@@ -51,7 +51,7 @@ const CountdownComponent = ({ className }) => {
             <div className='title'>Pomodoro Timer</div>
             <div className='pomodoro subtitle'>- {ksh.pomodoro.goal} -</div>
             <span className='pomodoro'>Musik</span>
-            <span className='pomodoro information'>LOFI...</span>
+            {ksh.YTPlayerRef.current && ksh.YTPlayerRef.current.G && <span key={ksh.YTKey} className='pomodoro information'>{ksh.YTPlayerRef.current.getVideoData().title}</span>}
           </>
         )}
         {!ksh.pomodoro.isRunning && (

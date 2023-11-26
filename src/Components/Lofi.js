@@ -1,32 +1,56 @@
-import { useState } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { KshManagerContext } from "../KshManager";
+import { getYTId } from "../importantFunctions";
 
-export default function Lofi() {  
+export default function Lofi() {
+  const ksh = useContext(KshManagerContext)
+	useEffect(() => {
+		if (!window.YT) {
+			const tag = document.createElement("script");
+			tag.src = "https://www.youtube.com/iframe_api";
 
-  const [embedController, setEmbedController] = useState(null);
+			window.onYouTubeIframeAPIReady = loadVideo;
 
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    console.log('tset')
-    const element = document.getElementById('embed-iframe');
-    const options = {
-        uri: 'spotify:playlist:1JLw7Y5YvlsA10XjaKHTxE'
-      };
-    const callback = (EmbedController) => {
-      setEmbedController(EmbedController);
+			const firstScriptTag = document.getElementsByTagName("script")[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		} else {
+			loadVideo();
+		}
+	}, []);
 
-    };
-    IFrameAPI.createController(element, options, callback);
-  };
+	const loadVideo = () => {
+    const id = getYTId(ksh.YTURL)    
 
-    // Event handler for the button
-    const changeUri = () => {
-      if (embedController) {
-        embedController.play();
-      }
-    };
-  return (
-    <>
-      <div id ="embed-iframe">test</div>
-      <button onClick={changeUri}>click me</button>
-    </>
-  );
-};
+    if (id.type === 'playlist') {
+      ksh.YTPlayerRef.current = new window.YT.Player("youtube-player", {
+        playerVars: {
+          listType: 'playlist',
+          list: id.id,
+          autoplay: 0, // 0 to not autoplay, 1 to autoplay
+        },
+        events: {
+          'onStateChange': ksh.handleUpdateYT()
+        }
+      });
+    } else {
+      ksh.YTPlayerRef.current = new window.YT.Player("youtube-player", {
+        videoId: id.id,
+        playerVars: {
+          autoplay: 0, // 0 to not autoplay, 1 to autoplay
+        },
+        events: {
+          'onStateChange': ksh.handleUpdateYT()
+        }
+
+      });
+    }
+	};
+
+
+	return (
+		<div className="hidden">
+			<div id="youtube-player" />
+			<button onClick={ksh.handlePlayYT}>Play Video</button>
+		</div>
+	);
+}

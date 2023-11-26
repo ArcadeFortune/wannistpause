@@ -1,7 +1,7 @@
 import moment from "moment";
 import 'moment/locale/de'; // Import German locale
 import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import log from "./log";
 
 export default function useKSHManager() {
@@ -24,6 +24,9 @@ export default function useKSHManager() {
 	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
 
 	const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
+	const [YTURL, setYTURL] = useState("https://youtube.com/playlist?list=PLJqmOiiykIDULSNKWsAQhIrqlslureL6d&si=z_35wl0YdYDhuWbf"); // youtube url
+	const [YTKey, setYTKey] = useState(0);
+	const YTPlayerRef = useRef(null); // youtube player
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -85,6 +88,7 @@ export default function useKSHManager() {
 				setTotalDuration(pomodoro.breakDuration);
 				setIsBreakTime(true); // to change the title
 				restartTimer();
+				handlePlayYT(false); // pause the music
 
 			} else {
 
@@ -105,6 +109,7 @@ export default function useKSHManager() {
 				setTotalDuration(pomodoro.duration);
 				setIsBreakTime(false); // to change the title
 				restartTimer();
+				handlePlayYT(true); // play the music
 				
 			}
 			
@@ -112,6 +117,27 @@ export default function useKSHManager() {
 			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));
 			
 		}
+	}
+
+	function handlePlayYT(forceVar) {		
+		const player = YTPlayerRef.current;
+		
+		if (!player.G) return log('player not ready yet')
+		
+		if (forceVar === true) {player.playVideo(); return}
+		if (forceVar === false) {player.pauseVideo(); return}
+
+		// toggle play / pause
+		if (player.getPlayerState() === 1) {
+			player.pauseVideo();
+		} else {
+			player.playVideo();
+		}
+	}
+
+	function handleUpdateYT() {
+		console.log('UPDASINTG')
+		setYTKey(YTKey + 1);
 	}
 
   function saveTodaysSubjects(todaysSubjects) {
@@ -173,7 +199,7 @@ export default function useKSHManager() {
 		settings = {...settings, startedTime: moment(), isRunning: true, isWorking: true, repeatedSoFar: 0}
 		log('Starte Pomodoro Timer mit folgenden Einstellungen', settings)
 		// save the settings to localstorage
-		window.localStorage.setItem("pomodoro", JSON.stringify(settings))
+		// window.localStorage.setItem("pomodoro", JSON.stringify(settings)) //temporary
 		setPomodoro(settings)
 		setModalContent("");
 
@@ -187,7 +213,7 @@ export default function useKSHManager() {
 // future: maybe remeber the previous pomodoro settings
 	function stopPomodoro() {
 		// remove from localstorage
-		window.localStorage.removeItem("pomodoro")
+		// window.localStorage.removeItem("pomodoro") //temporary
 		setPomodoro({})
 
 		configureTimer(moment());
@@ -248,6 +274,9 @@ export default function useKSHManager() {
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
 		pomodoro, setPomodoro,
+		YTURL, setYTURL,
+		YTKey, setYTKey,
+		YTPlayerRef,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
@@ -262,6 +291,8 @@ export default function useKSHManager() {
 		handleContextMenuRightClick,
 		handleContextMenuLeftClick,
 		handleTimerComplete,
+		handlePlayYT,
+		handleUpdateYT,
 		startPomodoro,
 		stopPomodoro,
 		restartTimer,

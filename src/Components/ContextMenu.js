@@ -12,7 +12,7 @@ export default function ContextMenu() {
 
   return (
     <div className={`context-menu main${ksh.isContextMenuOpen ? " open" : " close"}`} style={{top: ksh.contextMenuCoords.y, left: ksh.contextMenuCoords.x}}>
-      <div className="context-menu header">Context menu</div>
+      <div className="context-menu header">Kontext menu</div>
       <div className="context-menu divider" ></div>
       <div className="context-menu content">
         <Menu/>
