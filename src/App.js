@@ -68,7 +68,7 @@ export default function App() {
         <ContextMenu/>
 
         {/* Title */}
-        <div className="full-title" onClick={() => {window.location.href = window.location.href = 'https://wannistpause.vercel.app';}}><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></div>
+        <div className="full-title"><a href="https://wannistpause.vercel.app"><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></a></div>
         
         {/* Modal */}
         <Modal content={ksh.modalContent}/>
