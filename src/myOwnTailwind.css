@@ -1,0 +1,44 @@
+.hidden {
+  display: none;
+}
+
+.text {
+  text-align: left;
+  margin-inline: 2em;
+}
+
+.url {
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+.title {  
+  font-family: 'Kawi';
+  font-size: 1.5em;
+  font-weight: 600;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .title {
+    font-size: 1.2em;
+  }
+}
+
+/* make up for the insane margin-bottom from font 'Kawi' */
+.subtitle {
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
+
+.link {
+  color: #61dafb;
+  text-decoration: 1px underline #61dafb;
+}
+
+.link:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 8px #ffffff;
+  text-decoration: none;
+}

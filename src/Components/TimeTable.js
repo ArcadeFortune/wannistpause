@@ -42,4 +42,4 @@ export default function TimeTable() {
       </tbody>)}
     </table>
   );
-}// {JSON.stringify(ksh.todaysSubjectsClass[index]) !== '[""]' ? ksh.todaysSubjectsClass[index].join(" ") : "Frei"}
+}

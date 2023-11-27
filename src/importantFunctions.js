@@ -123,3 +123,33 @@ export function getCurrentClass(todaysSubjects, currentClass) {
   }
   return 'test'
 }
+
+export function getYTId(url) {
+  // function to get the youtube id from the url.
+  // takes a string as an argument
+  // returns and object with the id and the type of url (playlist or video)
+
+  // check if the url is a playlist
+  const playlistRegex = /list=([a-zA-Z0-9_-]{34})/g;
+  const playlistMatch = playlistRegex.exec(url);
+  if (playlistMatch) {
+    return {id: playlistMatch[1], type: 'playlist'};
+  }
+
+  // check if the url is a video
+  const videoRegex = /v=([a-zA-Z0-9_-]{11})/g;
+  const videoMatch = videoRegex.exec(url);
+  if (videoMatch) {
+    return {id: videoMatch[1], type: 'video'};
+  }
+
+  // should be able to extract id from this url: https://youtu.be/WDISdIhIv6o?si=70ViJPThsG-ky8W1
+  const shortVideoRegex = /youtu.be\/([a-zA-Z0-9_-]{11})/g;
+  const shortVideoMatch = shortVideoRegex.exec(url);
+  if (shortVideoMatch) {
+    return {id: shortVideoMatch[1], type: 'video'};
+  } 
+
+  // if the url is neither a playlist nor a video, return false
+  return false;
+}

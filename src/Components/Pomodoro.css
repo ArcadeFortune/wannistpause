@@ -18,7 +18,7 @@
 /* 0.32em is good enough */
 .pomodoro.number-input {
   width: 3em;
-  margin-left: 0.32em;
+  margin-left: 0.31em;
 }
 
 /* styles for the yes/no setting */
@@ -44,4 +44,26 @@
   cursor: pointer;
   height: 0;
   width: 0;
+}
+
+@media (max-width: 700px) {
+  .pomodoro.setting {
+    flex-direction: column;
+  }
+
+  .pomodoro .input {
+    margin-right: 0.31em;
+    margin-left: 0.31em;
+  }
+  
+  .pomodoro.time > .pomodoro.number-input:first-child {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  /* select the lone, small inputs */
+  .pomodoro.setting > label > .pomodoro.number-input, .pomodoro.input > .pomodoro.number-input {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }

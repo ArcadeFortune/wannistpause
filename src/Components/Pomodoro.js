@@ -2,12 +2,10 @@ import { useContext, useState } from "react";
 import "./Pomodoro.css";
 import { KshManagerContext } from "../KshManager";
 import { pad } from "../importantFunctions";
-import log from "../log";
 
 export default function Pomodoro() {
 	const ksh = useContext(KshManagerContext);
 	const [goal, setGoal] = useState("");
-	const placeholderGoal = "Hausaufgaben";
 	const [durationHour, setDurationHour] = useState("");
 	const [durationMinute, setDurationMinute] = useState("");
 	const [durationSecond, setDurationSecond] = useState("");
@@ -15,7 +13,7 @@ export default function Pomodoro() {
   const [breakDurationMinute, setBreakDurationMinute] = useState("");
   const [breakDurationSecond, setBreakDurationSecond] = useState("");
   const [repeatAmount, setRepeatAmount] = useState("");
-	const [musik, setMusik] = useState(true);
+	const [musik, setMusik] = useState(false);
 
 
   function handleBooleanClick(e) {
@@ -32,7 +30,7 @@ export default function Pomodoro() {
 			<div className="pomodoro setting">
 				Dein Ziel
 				<div className="pomodoro input">
-					<input tabIndex={1} type="text" placeholder={placeholderGoal} value={goal} onChange={(e) => setGoal(e.target.value)} className="pomodoro input-goal" />
+					<input tabIndex={1} type="text" placeholder={'z.B. Hausaufgaben'} value={goal} onChange={(e) => setGoal(e.target.value)} className="pomodoro input-goal" />
 				</div>
 			</div>
 
@@ -65,20 +63,20 @@ export default function Pomodoro() {
         </div>
       </div>
 
-			{/* <div className="pomodoro setting">
+			<div className="pomodoro setting">
         Musik
         <label style={{position: 'relative'}}>
-          <input type="checkbox" className="pomodoro boolean-input hidden" id="myCheckbox" defaultChecked/>
+          <input type="checkbox" className="pomodoro boolean-input" id="myCheckbox" onChange={() => setMusik(!musik)} defaultChecked={musik}/>
           <input type="text" placeholder={musik ? '': 'Nein'} value={musik ? 'Ja':''} className="pomodoro number-input" tabIndex={-1} onClick={handleBooleanClick} readOnly/>
         </label>
-			</div> */}
+			</div>
 
 			<button
         href=""
 				className="select"
 				onClick={() => {
 					ksh.startPomodoro({
-						goal: goal || placeholderGoal,
+						goal: goal || 'Hausaufgaben',
 						// if all duration inputs are empty, return 25 mins
 						duration: durationHour.length === 0 && durationMinute.length === 0 && durationSecond.length === 0 ? 1500 : durationHour * 3600 + durationMinute * 60 + durationSecond * 1,
             breakDuration: breakDurationHour.length === 0 && breakDurationMinute.length === 0 && breakDurationSecond.length === 0 ? 300 : breakDurationHour * 3600 + breakDurationMinute * 60 + breakDurationSecond * 1,
