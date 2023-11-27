@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useRef } from "react";
 import { KshManagerContext } from "../KshManager";
 import { getYTId } from "../importantFunctions";
@@ -41,7 +42,6 @@ export default function Lofi() {
         events: {
           'onStateChange': ksh.handleUpdateYT()
         }
-
       });
     }
 	};

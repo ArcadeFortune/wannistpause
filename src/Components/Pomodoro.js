@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import "./Pomodoro.css";
 import { KshManagerContext } from "../KshManager";
 import { pad } from "../importantFunctions";
-import log from "../log";
 
 export default function Pomodoro() {
 	const ksh = useContext(KshManagerContext);
@@ -85,7 +84,6 @@ export default function Pomodoro() {
             repeatAmount: repeatAmount.length === 0 ? 0 : parseInt(repeatAmount),
             musik: musik,
           });
-          ksh.handlePlayYT();
 				}}>
 				Starten
 			</button>

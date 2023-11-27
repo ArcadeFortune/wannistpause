@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useContext } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import moment from 'moment';
 import './Countdown.css';
 import Confetti from 'react-confetti'
 import { renderTime } from '../importantFunctions';
@@ -46,14 +45,22 @@ const CountdownComponent = ({ className }) => {
         >
           {renderTime}
         </CountdownCircleTimer>
+
         {ksh.pomodoro.isRunning && (
           <>
             <div className='title'>Pomodoro Timer</div>
             <div className='pomodoro subtitle'>- {ksh.pomodoro.goal} -</div>
-            <span className='pomodoro'>Musik</span>
-            {ksh.YTPlayerRef.current && ksh.YTPlayerRef.current.G && <span key={ksh.YTKey} className='pomodoro information'>{ksh.YTPlayerRef.current.getVideoData().title}</span>}
+            {ksh.pomodoro.musik && ( 
+              <>
+                <span className='pomodoro'>Musik</span>
+                {ksh.YTPlayerRef.current && ksh.YTPlayerRef.current.G && (
+                  <span key={ksh.YTKey} className='pomodoro information'>{ksh.YTPlayerRef.current.getVideoData().title}</span>
+                )}
+              </>
+            )}
           </>
         )}
+
         {!ksh.pomodoro.isRunning && (
           <>
             <div className='currentClass'>Klasse: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>

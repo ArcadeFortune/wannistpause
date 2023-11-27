@@ -123,7 +123,7 @@ export default function useKSHManager() {
 		const player = YTPlayerRef.current;
 		
 		if (!player.G) return log('player not ready yet')
-		
+		if (pomodoro.musik === false) return console.log('musik ist ausgeschaltet')
 		if (forceVar === true) {player.playVideo(); return}
 		if (forceVar === false) {player.pauseVideo(); return}
 
@@ -136,7 +136,6 @@ export default function useKSHManager() {
 	}
 
 	function handleUpdateYT() {
-		console.log('UPDASINTG')
 		setYTKey(YTKey + 1);
 	}
 
@@ -208,6 +207,7 @@ export default function useKSHManager() {
 		setTotalDuration(settings.duration);
 		setIsBreakTime(false); // to change the title
 		restartTimer();
+		if (settings.musik) handlePlayYT(true); // play the music
 	}
 
 // future: maybe remeber the previous pomodoro settings
