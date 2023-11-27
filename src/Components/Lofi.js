@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { KshManagerContext } from "../KshManager";
 import { getYTId } from "../importantFunctions";
 
 export default function Lofi() {
   const ksh = useContext(KshManagerContext)
+
 	useEffect(() => {
 		if (!window.YT) {
 			const tag = document.createElement("script");
@@ -30,7 +31,7 @@ export default function Lofi() {
           autoplay: 0, // 0 to not autoplay, 1 to autoplay
         },
         events: {
-          'onStateChange': ksh.handleUpdateYT()
+          'onStateChange': ksh.handleUpdateYT
         }
       });
     } else {
@@ -40,7 +41,7 @@ export default function Lofi() {
           autoplay: 0, // 0 to not autoplay, 1 to autoplay
         },
         events: {
-          'onStateChange': ksh.handleUpdateYT()
+          'onStateChange': ksh.handleUpdateYT
         }
       });
     }

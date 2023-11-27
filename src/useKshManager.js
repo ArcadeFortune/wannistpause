@@ -119,11 +119,11 @@ export default function useKSHManager() {
 		}
 	}
 
-	function handlePlayYT(forceVar) {		
+	function handlePlayYT(forceVar) {
+		// btw the 'pomodoro' variable is undefined here, thankfully it is not needed here
 		const player = YTPlayerRef.current;
 		
 		if (!player.G) return log('player not ready yet')
-		if (pomodoro.musik === false) return console.log('musik ist ausgeschaltet')
 		if (forceVar === true) {player.playVideo(); return}
 		if (forceVar === false) {player.pauseVideo(); return}
 
@@ -136,7 +136,7 @@ export default function useKSHManager() {
 	}
 
 	function handleUpdateYT() {
-		setYTKey(YTKey + 1);
+		setYTKey(prevYTKey => prevYTKey + 1);
 	}
 
   function saveTodaysSubjects(todaysSubjects) {

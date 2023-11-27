@@ -54,7 +54,7 @@ const CountdownComponent = ({ className }) => {
               <>
                 <span className='pomodoro'>Musik</span>
                 {ksh.YTPlayerRef.current && ksh.YTPlayerRef.current.G && (
-                  <span key={ksh.YTKey} className='pomodoro information'>{ksh.YTPlayerRef.current.getVideoData().title}</span>
+                  <span key={ksh.YTKey} className='pomodoro information'>{ksh.YTPlayerRef.current.getVideoData().title || 'Laden...'}</span>
                 )}
               </>
             )}
