@@ -55,6 +55,13 @@
   padding-right: calc(2em + 1px);
 }
 
+@media (max-width: 700px) {
+  .modal.box {
+    padding-left: calc(1.5em + 1px);
+    padding-right: calc(1.5em + 1px);
+  }
+}
+
 .modal.box.close {
   transform: scale(0.8);
   opacity: 0;
