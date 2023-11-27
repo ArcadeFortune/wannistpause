@@ -14,9 +14,7 @@ export default function SubMenu() {
       case 'aboutme':
         return <AboutMe />
       case 'timetable':
-        return  <div className="time-table-div">
-                  <TimeTable/>
-                </div>
+        return <TimeTable/>
       default:
         return <div>Something went wrong, no sub-menus were selected</div>;
     }
