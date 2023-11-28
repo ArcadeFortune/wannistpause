@@ -12,20 +12,24 @@ import ContextMenu from "./Components/ContextMenu";
 import Menu from "./Layouts/Menu";
 import SubMenu from "./Layouts/SubMenu";
 import Modal from "./Layouts/Modal";
+import { parseTodaysSubjectsHTML } from "./importantFunctions";
+import log from "./log";
 
 export default function App() {
   const ksh = useContext(KshManagerContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        log("Intranet laden...")
         const response = await fetch(
           "https://intranet.tam.ch/ksh/public/timetable/daily-class-schedule", {
             method: 'GET',
             headers: {
-                'Accept-Language': 'de-DE,de;q=0.9' // This sets German as the preferred language
+              'Accept-Language': 'de-DE,de;q=0.9' // This sets German as the preferred language
             }
-        });
-         
+          });
+        log("Intranet erfolgreich geladet!")
+          
         const data = await response.text();
         const parser = new DOMParser();
         const kshdocument = parser.parseFromString(data, "text/html");
@@ -36,13 +40,16 @@ export default function App() {
         ).map((timeStamp) => timeStamp.innerHTML);
 
         // grab all the subjects
-        const todaysSubjects = Array.from(
+        const todaysSubjectsHTML = Array.from(
           kshdocument.querySelectorAll(".ttp-line")
         ).map((line) => line);
+
+        // parse the subjects into an object
+        const todaysSubjects = parseTodaysSubjectsHTML(todaysSubjectsHTML);
         
         // grab every class as a string list
         const everyClass = Array.from(
-          todaysSubjects.map((line) => line.querySelector('th').innerHTML)
+          todaysSubjectsHTML.map((line) => line.querySelector('th').innerHTML)
         );
 
         // grab the current day of week

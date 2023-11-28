@@ -37,6 +37,15 @@ export default function useKSHManager() {
 	const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
 	const [nextSubject, setNextSubject] = useState({}); // to display the next subject
 
+	function cleanUpTimeStamps(timeStamps) {
+		setTimeStampsClean(cleanTimeStamps(timeStamps));
+	}
+	
+	function saveCurrentClass(currentClass) {
+		localStorage.setItem("currentClass", currentClass);
+		setCurrentClass(currentClass);
+  }
+
 	function isKSHLoaded() {
 		return timeStamps != null && todaysSubjects != null;
 		// return timeStamps && everyClass; // if / else
@@ -114,8 +123,7 @@ export default function useKSHManager() {
 			}
 			
 			// set breaktime or not
-			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));
-			
+			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));			
 		}
 	}
 
@@ -138,37 +146,6 @@ export default function useKSHManager() {
 	function handleUpdateYT() {
 		setYTKey(prevYTKey => prevYTKey + 1);
 	}
-
-  function saveTodaysSubjects(todaysSubjects) {
-    let todaysClassSubjectsList = [];
-		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
-		currentClassSubjects.forEach((subject) => {
-			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
-		});
-
-    setTodaysSubjects(todaysSubjects);
-		setTodaysSubjectsClass(todaysClassSubjectsList);
-		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
-		setTodaysSubjectsClassHTML(currentClassSubjects);
-  }
-
-
-	function saveCurrentClass(currentClass) {
-    // i am aware this is redundant to the function above, but the the parameters 'todaysSubjects' and 'currentClass' change in both scenarios.
-    let todaysClassSubjectsList = [];
-		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
-		currentClassSubjects.forEach((subject) => {
-			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
-		});
-
-    setTodaysSubjects(todaysSubjects);
-		setTodaysSubjectsClass(todaysClassSubjectsList);
-		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
-		setTodaysSubjectsClassHTML(currentClassSubjects);
-
-		localStorage.setItem("currentClass", currentClass);
-		setCurrentClass(currentClass);
-  }
 
   function handleSubMenuChange(newContent) {
     // whenever a user clicks on a sub menu (example: about me), it would set the subMenuContent ("") to the newContent ("aboutme")
@@ -227,12 +204,12 @@ export default function useKSHManager() {
 
 	function configureTimer() {
 		// determine the current time
-		const currentTime = process.env.NODE_ENV === 'development' ? moment('10:45:00', 'HH:mm:ss') : moment();// for testing
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('08:45:00', 'HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
-		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsClass);
+		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjects);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
@@ -254,20 +231,14 @@ export default function useKSHManager() {
 		restartTimer();
 	}
 
-	function cleanUpTimeStamps(timeStamps) {
-		setTimeStampsClean(cleanTimeStamps(timeStamps));
-	}
-
 	// return every variable
 	return {
     date, setDate,
 		timeStamps, setTimeStamps,
 		timeStampsClean, setTimeStampsClean: cleanUpTimeStamps,
-		todaysSubjects, setTodaysSubjects: saveTodaysSubjects,
-		todaysSubjectsClass, setTodaysSubjectsClass,
-		todaysSubjectsClassHTML, setTodaysSubjectsClassHTML,
+		todaysSubjects, setTodaysSubjects,
 		everyClass, setEveryClass,
-		currentClass, saveCurrentClass,
+		currentClass, setCurrentClass: saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,
 		modalContent, setModalContent: handleModalChange,
