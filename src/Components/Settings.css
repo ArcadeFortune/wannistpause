@@ -1,4 +1,13 @@
 .settings.title {
+  display: inline-block;
+  
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
+  background-size: 80% 3px;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+
+  height: 1.5em;
+  margin-bottom: 1em;
 }
 
 .settings.content {

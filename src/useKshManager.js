@@ -28,7 +28,7 @@ export default function useKSHManager() {
 
 	// user experience relevant variables
 	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || "https://youtube.com/playlist?list=PLJqmOiiykIDULSNKWsAQhIrqlslureL6d&si=z_35wl0YdYDhuWbf"); // youtube url
-	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || false)); // auto save the settings
+	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || true)); // auto save the settings
 	const [contextMenu, setContextMenu] = useState(JSON.parse(window.localStorage.getItem('contextmenu') || true)); // auto save the settings
 
 	// timer relevant variables
@@ -48,6 +48,11 @@ export default function useKSHManager() {
 		localStorage.setItem("currentClass", currentClass);
 		setCurrentClass(currentClass);
   }
+
+	function saveAutoSave(autoSave) {
+		localStorage.setItem("autosave", autoSave);
+		setAutoSave(autoSave);
+	}
 
 	function isKSHLoaded() {
 		return timeStamps != null && todaysSubjects != null;
@@ -251,7 +256,7 @@ export default function useKSHManager() {
 		YTKey, setYTKey,
 		YTPlayerRef,
 		YTURL, setYTURL,
-		autoSave, setAutoSave,
+		autoSave, setAutoSave: saveAutoSave,
 		contextMenu, setContextMenu,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,

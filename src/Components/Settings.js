@@ -17,6 +17,14 @@ export default function Settings() {
             <Input value={ksh.autoSave} setValue={ksh.setAutoSave} type='checkbox' className='settings checkbox'/>
           </div>
         </div>
+        <button
+        href=""
+				className="select"
+				onClick={() => {
+          ksh.setSubMenuContent('settings')
+        }}>
+				Okay
+			</button>
       </div>
     </div>
   )
