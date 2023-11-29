@@ -1,0 +1,11 @@
+.full-title {
+  text-decoration-color: #aaaaaa00; 
+  transition: text-decoration 0.2s;
+}
+
+.full-title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #aaaaaa75;
+  text-decoration-thickness: 1px;
+}

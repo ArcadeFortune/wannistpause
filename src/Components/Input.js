@@ -33,7 +33,7 @@ export default function Input({type, value, setValue, defaultValue, className, p
 
   if (type === 'number') {
     return (
-      <input tabIndex={1} type="number" min={min || 0} max={max || 99999} placeholder={placeholder} value={value.length === 0 ? value : pad(value)} onChange={(e) => setValue(e.target.value)} className={`number-input ${className}`} onFocus={() => {if (value === "") setValue(defaultValue)}}/>    
+      <input tabIndex={1} type="number" min={min || 0} max={max || 99999} placeholder={placeholder} value={!value ? ' ' : value.length === 0 ? value : pad(value)} onChange={(e) => setValue(e.target.value)} className={`number-input ${className}`} onFocus={() => {if (value === "") setValue(defaultValue)}}/>    
     )
   }
   return (
