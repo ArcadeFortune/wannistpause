@@ -5,7 +5,6 @@ import './Countdown.css';
 import Confetti from 'react-confetti'
 import { renderTime } from '../importantFunctions';
 import { KshManagerContext } from '../KshManager';
-import log from '../log';
 
 
 const CountdownComponent = ({ className }) => {

@@ -10,8 +10,6 @@ export default function useKSHManager() {
 	const [timeStamps, setTimeStamps] = useState(null); // general timestamps
 	const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
-	const [todaysSubjectsClass, setTodaysSubjectsClass] = useState(null); // all the subjects of the current class
-	const [todaysSubjectsClassHTML, setTodaysSubjectsClassHTML] = useState(null); // all the subjects of the current class
 	const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
 	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || "I3a"); // school class selected by the user
 

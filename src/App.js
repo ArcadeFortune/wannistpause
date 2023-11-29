@@ -14,6 +14,7 @@ import SubMenu from "./Layouts/SubMenu";
 import Modal from "./Layouts/Modal";
 import { parseTodaysSubjectsHTML } from "./importantFunctions";
 import log from "./log";
+import WannIstPause from "./PureComponents/WannIstPause";
 
 export default function App() {
   const ksh = useContext(KshManagerContext);
@@ -75,15 +76,13 @@ export default function App() {
         <ContextMenu/>
 
         {/* Title */}
-        <div className="full-title"><a href="https://wannistpause.vercel.app"><span className='url'>https://</span><span className='title'><span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span><span className='url'>.vercel.app</span></a></div>
+        <div className="full-title"><a href="https://wannistpause.vercel.app"><span className='url'>https://</span><WannIstPause/><span className='url'>.vercel.app</span></a></div>
         
         {/* Modal */}
         <Modal content={ksh.modalContent}/>
 
         {/* Sub-Menu */}
-        <div className={`sub-menu${ksh.subMenuContent.length !== 0 ? ' open' : ''}`}>
-          <SubMenu/>
-        </div>
+        <SubMenu subMenuContent={ksh.subMenuContent}/>
 
         {/* Main Menu */}
         <BurgerMenu handleClick={ksh.handleBurgerClick} className="full-title burger-menu"></BurgerMenu>

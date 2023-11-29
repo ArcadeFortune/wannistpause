@@ -68,7 +68,7 @@ export function cleanTimeStamps(timeStamps) {
 }
 
 
-export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjectsClass) {
+export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjects) {
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
@@ -77,7 +77,7 @@ export function getActiveInterval(currentTime, currentDate, everyTimeStamp, toda
 
   // set i to the first time a lesson starts
   for (let j = 0; j < everyTimeStamp.length; j++) {
-    if (JSON.stringify(todaysSubjectsClass[j]) !== '[""]') {i = j; break;}
+    if (JSON.stringify(todaysSubjects[j]) !== '[""]') {i = j; break;}
   }
   
   // Function to combine date and time
@@ -129,8 +129,8 @@ export function getActiveInterval(currentTime, currentDate, everyTimeStamp, toda
   return 0;
 }
 
-export function getNextSubject(timeIndex, todaysSubjectsClassHTML) {
-  const currentClassList = todaysSubjectsClassHTML
+export function getNextSubject(timeIndex, todaysSubjects) {
+  const currentClassList = todaysSubjects
 
   if (timeIndex > currentClassList.length - 1) return {subject: "FREI!!!"}; // if the current time is after the last lesson, return a free lesson
 

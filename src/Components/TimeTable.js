@@ -18,8 +18,8 @@ export default function TimeTable() {
   return (
     <div className="time-table-div">
       <table className='time-table'>
-        {ksh.todaysSubjectsClass && (
-        <tbody>
+        {ksh.todaysSubjects && (
+          <tbody>
           {ksh.timeStamps.map((time, index) => {
             const duration = calculateDuration(time);
 
@@ -27,7 +27,7 @@ export default function TimeTable() {
               <React.Fragment key={index}>
                 <tr style={{ height: `${duration}px` }}>
                   <td className='col1'>{time}</td>
-                  <td className='col2'>{ksh.todaysSubjectsClass[index][1] != null ? ksh.todaysSubjectsClass[index].join(" ") : "Frei"}</td>
+                  <td className='col2'>{ksh.todaysSubjects[ksh.currentClass][index][1] != null ? ksh.todaysSubjects[ksh.currentClass][index].join(" ") : "Frei"}</td>
                   <td className='col3'></td>
                 </tr>
                 {index < ksh.timeStamps.length - 1 && (
