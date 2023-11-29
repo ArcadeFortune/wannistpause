@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import "./Pomodoro.css";
 import { KshManagerContext } from "../KshManager";
-import { pad } from "../importantFunctions";
+import Input from "./Input";
 
 export default function Pomodoro() {
 	const ksh = useContext(KshManagerContext);
@@ -16,21 +16,13 @@ export default function Pomodoro() {
 	const [musik, setMusik] = useState(false);
 
 
-  function handleBooleanClick(e) {
-    var checkbox = document.getElementById('myCheckbox');
-    checkbox.checked = !checkbox.checked;
-    // unfocus the button
-    e.target.blur();
-    setMusik(!musik)
-  }
-
 	return (
 		<div className="pomodoro box">
 			<div className="title">Pomodoro Timer</div>
 			<div className="pomodoro setting">
 				Dein Ziel
 				<div className="pomodoro input">
-					<input tabIndex={1} type="text" placeholder={'z.B. Hausaufgaben'} value={goal} onChange={(e) => setGoal(e.target.value)} className="pomodoro input-goal" />
+          <Input type='text' value={goal} setValue={setGoal} placeholder={'z.B. Hausaufgaben'}/>
 				</div>
 			</div>
 
@@ -38,9 +30,9 @@ export default function Pomodoro() {
 				Dauer
         <div className="pomodoro input">
           <div className="pomodoro time">
-            <input type="number" min="0" placeholder="Std" value={durationHour.length === 0 ? durationHour : pad(durationHour)} onChange={(e) => setDurationHour(e.target.value)} className="pomodoro number-input" />
-            <input type="number" min="0" placeholder="Min" max="59" value={durationMinute.length === 0 ? durationMinute : pad(durationMinute)} onChange={(e) => setDurationMinute(e.target.value)} onFocus={() => {if (durationMinute === "") setDurationMinute(25)}} className="pomodoro number-input" />
-            <input type="number" min="1" placeholder="Sek" max="59" value={durationSecond.length === 0 ? durationSecond : pad(durationSecond)} onChange={(e) => setDurationSecond(e.target.value)} className="pomodoro number-input" />
+            <Input type='number' min="0" placeholder="Std" value={durationHour} setValue={setDurationHour} className={'pomodoro number-input'}/>
+            <Input type='number' min="0" placeholder="Min" max="59" value={durationMinute} setValue={setDurationMinute} className={'pomodoro number-input'} defaultValue={25}/>
+            <Input type='number' min="1" placeholder="Sek" max="59" value={durationSecond} setValue={setDurationSecond} className={'pomodoro number-input'}/>
           </div>
         </div>
 			</div>
@@ -49,9 +41,9 @@ export default function Pomodoro() {
 				Pausendauer
         <div className="pomodoro input">
           <div className="pomodoro time">
-            <input type="number" min="0" placeholder="Std" value={breakDurationHour.length === 0 ? breakDurationHour : pad(breakDurationHour)} onChange={(e) => setBreakDurationHour(e.target.value)} className="pomodoro number-input" />
-            <input type="number" min="0" placeholder="Min" max="59" value={breakDurationMinute.length === 0 ? breakDurationMinute : pad(breakDurationMinute)} onChange={(e) => setBreakDurationMinute(e.target.value)} onFocus={() => {if (breakDurationMinute === "") setBreakDurationMinute(5)}} className="pomodoro number-input" />
-            <input type="number" min="1" placeholder="Sek" max="59" value={breakDurationSecond.length === 0 ? breakDurationSecond : pad(breakDurationSecond)} onChange={(e) => setBreakDurationSecond(e.target.value)} className="pomodoro number-input" />
+            <Input type='number' min="0" placeholder="Std" value={breakDurationHour} setValue={setBreakDurationHour} className={'pomodoro number-input'}/>
+            <Input type='number' min="0" placeholder="Min" max="59" value={breakDurationMinute} setValue={setBreakDurationMinute} className={'pomodoro number-input'} defaultValue={5}/>
+            <Input type='number' min="1" placeholder="Sek" max="59" value={breakDurationSecond} setValue={setBreakDurationSecond} className={'pomodoro number-input'}/>
           </div>
         </div>
 			</div>
@@ -59,16 +51,15 @@ export default function Pomodoro() {
       <div className="pomodoro setting">
         Iterationen
         <div className="pomodoro input">
-          <input type="number" min="0" placeholder="0" value={repeatAmount} onChange={(e) => setRepeatAmount(e.target.value)} className="pomodoro number-input" />
+          <Input type='number' min="0" max="99999" value={repeatAmount} setValue={setRepeatAmount} placeholder="0"/>
         </div>
       </div>
 
 			<div className="pomodoro setting">
         Musik
-        <label style={{position: 'relative'}}>
-          <input type="checkbox" className="pomodoro boolean-input" id="myCheckbox" onChange={() => setMusik(!musik)} defaultChecked={musik}/>
-          <input type="text" placeholder={musik ? '': 'Nein'} value={musik ? 'Ja':''} className="pomodoro number-input" tabIndex={-1} onClick={handleBooleanClick} readOnly/>
-        </label>
+        <div className="pomodoro input">
+          <Input type='checkbox' value={musik} setValue={setMusik}/>
+        </div>
 			</div>
 
 			<button
@@ -78,8 +69,8 @@ export default function Pomodoro() {
 					ksh.startPomodoro({
 						goal: goal || 'Hausaufgaben',
 						// if all duration inputs are empty, return 25 mins
-						duration: durationHour.length === 0 && durationMinute.length === 0 && durationSecond.length === 0 ? 1500 : durationHour * 3600 + durationMinute * 60 + durationSecond * 1,
-            breakDuration: breakDurationHour.length === 0 && breakDurationMinute.length === 0 && breakDurationSecond.length === 0 ? 300 : breakDurationHour * 3600 + breakDurationMinute * 60 + breakDurationSecond * 1,
+						duration: (durationHour.length === 0 || parseInt(durationHour) === 0) && (durationMinute.length === 0 || parseInt(durationMinute) === 0) && (durationSecond.length === 0 || parseInt(durationSecond) === 0) ? 1500 : durationHour * 3600 + durationMinute * 60 + durationSecond * 1,
+            breakDuration: (breakDurationHour.length === 0 || parseInt(breakDurationHour) === 0) && (breakDurationMinute.length === 0 || parseInt(breakDurationMinute) === 0) && (breakDurationSecond.length === 0 || parseInt(breakDurationSecond) === 0) ? 300 : breakDurationHour * 3600 + breakDurationMinute * 60 + breakDurationSecond * 1,
             repeatAmount: repeatAmount.length === 0 ? 0 : parseInt(repeatAmount),
             musik: musik,
           });

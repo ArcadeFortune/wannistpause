@@ -17,33 +17,7 @@
 /* styles for the time input (hh:mm:ss)  */
 /* 0.32em is good enough */
 .pomodoro.number-input {
-  width: 3em;
   margin-left: 0.31em;
-}
-
-/* styles for the yes/no setting */
-/* the cursor for both input elements (in the same parent element) should be pointer */
-.pomodoro.boolean-input ~ .pomodoro.number-input {
-  cursor: pointer;
-}
-
-/* the visible input should be checked when the hidden input is checked (some shenanigans happening) */
-.pomodoro.boolean-input:checked + .pomodoro.number-input {
-  background-color: #9C9EA2;
-}
-
-/* the visible input should have focus styles when the hidden input is focused */
-.pomodoro.boolean-input:focus + .pomodoro.number-input {
-  box-shadow: 0px 0px 6px 0px #b0aaaa;
-}
-
-/* hide the supposed-to-be-hidden input */
-.pomodoro.boolean-input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
 }
 
 @media (max-width: 700px) {
