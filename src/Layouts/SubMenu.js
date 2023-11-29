@@ -3,18 +3,20 @@ import './Menu.css';
 import AboutMe from "../Components/AboutMe"
 import TimeTable from "../Components/TimeTable"
 import Settings from "../Components/Settings";
+import WannIstPause from "../Components/WannIstPause";
 
 export default function SubMenu({subMenuContent}) {
 
   return (
     // <div className='sub-menu'>
-      // <div className='sub-menu title'>Untermenü</div>
-      // <div className='sub-menu content'>
-      <div className={`sub-menu${subMenuContent.length !== 0 ? ' open' : ''}`}>
-
-        <SubMenuContent subMenuContent={subMenuContent}/>
-        </div>
-  )
+    // <div className='sub-menu content'>
+    <div className={`sub-menu main${subMenuContent.length !== 0 ? ' open' : ''}`}>
+      <div className='sub-menu logo'>
+        <WannIstPause/>
+      </div>
+      <SubMenuContent subMenuContent={subMenuContent}/>
+    </div>
+  ) 
 }
 
 function SubMenuContent({subMenuContent}) {

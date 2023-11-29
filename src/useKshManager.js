@@ -21,10 +21,15 @@ export default function useKSHManager() {
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
 
-	const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
-	const [YTURL, setYTURL] = useState("https://youtube.com/playlist?list=PLJqmOiiykIDULSNKWsAQhIrqlslureL6d&si=z_35wl0YdYDhuWbf"); // youtube url
+	// const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
+	const [pomodoro, setPomodoro] = useState({}); // pomodoro settings
 	const [YTKey, setYTKey] = useState(0);
 	const YTPlayerRef = useRef(null); // youtube player
+
+	// user experience relevant variables
+	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || "https://youtube.com/playlist?list=PLJqmOiiykIDULSNKWsAQhIrqlslureL6d&si=z_35wl0YdYDhuWbf"); // youtube url
+	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || false)); // auto save the settings
+	const [contextMenu, setContextMenu] = useState(JSON.parse(window.localStorage.getItem('contextmenu') || true)); // auto save the settings
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -243,9 +248,11 @@ export default function useKSHManager() {
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
 		pomodoro, setPomodoro,
-		YTURL, setYTURL,
 		YTKey, setYTKey,
 		YTPlayerRef,
+		YTURL, setYTURL,
+		autoSave, setAutoSave,
+		contextMenu, setContextMenu,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,

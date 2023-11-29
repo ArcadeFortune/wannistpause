@@ -1,0 +1,21 @@
+.settings.title {
+}
+
+.settings.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settings.row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  
+  margin-bottom: 12px;
+}
+
+/* minimum space between text and input */
+.settings.options {
+  margin-left: 1em;
+}
