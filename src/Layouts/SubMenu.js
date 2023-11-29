@@ -4,18 +4,21 @@ import AboutMe from "../Components/AboutMe"
 import TimeTable from "../Components/TimeTable"
 
 import './Menu.css';
+import Settings from "../Components/Settings";
 
 export default function SubMenu() {
   const ksh = useContext(KshManagerContext)
 
     switch (ksh.subMenuContent) {
       case '':
-        return <div>nix</div>
+        return <div>No sub-menus were selected.</div>;
       case 'aboutme':
         return <AboutMe />
       case 'timetable':
         return <TimeTable/>
+      case 'settings':
+        return <Settings/>
       default:
-        return <div>Something went wrong, no sub-menus were selected</div>;
+        return <div>This sub-menu does not exist.</div>;
     }
 }

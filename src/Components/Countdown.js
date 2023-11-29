@@ -12,12 +12,9 @@ const CountdownComponent = ({ className }) => {
   const ksh = useContext(KshManagerContext);
 
   useEffect(() => {
-    log('Intranet laden...')
     if (!ksh.isKSHLoaded()) {
-      log('Noch keine Daten.')
       return;
     } // needs to load data
-    log('Intranet erfolgreich geladen!')
 
     ksh.configureTimer();
   }, [ksh.timeStamps, ksh.currentClass, ksh.refreshTimer]);

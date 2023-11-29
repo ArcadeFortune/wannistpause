@@ -64,7 +64,7 @@
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #aaa, rgba(0, 0, 0, 0));
   background-size: 80% 1px; 
   background-repeat: no-repeat; /* To make sure the gradient doesn't repeat */
-  background-position: bottom center; 
+  background-position: bottom center;
   transition: 0.2s;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.42);
 }
