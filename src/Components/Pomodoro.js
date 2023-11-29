@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import "./Pomodoro.css";
 import { KshManagerContext } from "../KshManager";
-import Input from "../PureComponents/Input";
+import Input from "../Components/Input";
 
 export default function Pomodoro() {
 	const ksh = useContext(KshManagerContext);
