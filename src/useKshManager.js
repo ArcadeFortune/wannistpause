@@ -168,6 +168,11 @@ export default function useKSHManager() {
         setSubMenuContent(newContent);
       }, subMenuContent.length === 0 ? 0 : 200); // need to wait for the previous sub menu to close IF there was one.
     }
+
+		// finally close the menu if it is open
+		if (isMenuOpen) setIsMenuOpen(false);
+
+		return newContent;
   }
 
 	function handleModalChange(newContent) {
@@ -177,6 +182,11 @@ export default function useKSHManager() {
     } else {
 			setModalContent(newContent);
     }
+		
+		// finally close the menu if it is open
+		if (isMenuOpen) setIsMenuOpen(false);
+
+		return newContent;
   }
 
 	function startPomodoro(settings) {
