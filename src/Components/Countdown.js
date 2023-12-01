@@ -20,7 +20,7 @@ const CountdownComponent = ({ className }) => {
 
 
   if (!ksh.isKSHLoaded()) return <div>Intranet laden...</div>;
-  if (!ksh.isActiveInterval()) return <><div className='countdown'>Kein Unterricht!</div><Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} /></>;
+  if (!ksh.isActiveInterval() && !ksh.pomodoro.isRunning) return <><div className='countdown'>Kein Unterricht!</div><Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} /></>;
 
   return (
     <>
