@@ -16,30 +16,32 @@ export default function TimeTable() {
   };
 
   return (
-    <table className='time-table'>
-      {ksh.todaysSubjectsClass && (
-      <tbody>
-        {ksh.timeStamps.map((time, index) => {
-          const duration = calculateDuration(time);
+    <div className="time-table-div">
+      <table className='time-table'>
+        {ksh.todaysSubjects && (
+          <tbody>
+          {ksh.timeStamps.map((time, index) => {
+            const duration = calculateDuration(time);
 
-          return (
-            <React.Fragment key={index}>
-              <tr style={{ height: `${duration}px` }}>
-                <td className='col1'>{time}</td>
-                <td className='col2'>{ksh.todaysSubjectsClass[index][1] != null ? ksh.todaysSubjectsClass[index].join(" ") : "Frei"}</td>
-                <td className='col3'></td>
-              </tr>
-              {index < ksh.timeStamps.length - 1 && (
-                <tr className='break'style={{ height: `${calculateDuration(ksh.timeStamps[index + 1].split(' ')[0] + ' - ' + time.split(' ')[2]) * -1}px` }}>
-                  <td className='col1'></td>
-                  <td className='col2 break'></td>
+            return (
+              <React.Fragment key={index}>
+                <tr style={{ height: `${duration}px` }}>
+                  <td className='col1'>{time}</td>
+                  <td className='col2'>{ksh.todaysSubjects[ksh.currentClass][index][1] != null ? ksh.todaysSubjects[ksh.currentClass][index].join(" ") : "Frei"}</td>
                   <td className='col3'></td>
                 </tr>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </tbody>)}
-    </table>
+                {index < ksh.timeStamps.length - 1 && (
+                  <tr className='break'style={{ height: `${calculateDuration(ksh.timeStamps[index + 1].split(' ')[0] + ' - ' + time.split(' ')[2]) * -1}px` }}>
+                    <td className='col1'></td>
+                    <td className='col2 break'></td>
+                    <td className='col3'></td>
+                  </tr>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </tbody>)}
+      </table>
+    </div>
   );
 }

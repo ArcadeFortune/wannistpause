@@ -10,8 +10,6 @@ export default function useKSHManager() {
 	const [timeStamps, setTimeStamps] = useState(null); // general timestamps
 	const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
-	const [todaysSubjectsClass, setTodaysSubjectsClass] = useState(null); // all the subjects of the current class
-	const [todaysSubjectsClassHTML, setTodaysSubjectsClassHTML] = useState(null); // all the subjects of the current class
 	const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
 	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || "I3a"); // school class selected by the user
 
@@ -23,10 +21,15 @@ export default function useKSHManager() {
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
 
-	const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
-	const [YTURL, setYTURL] = useState("https://youtube.com/playlist?list=PLJqmOiiykIDULSNKWsAQhIrqlslureL6d&si=z_35wl0YdYDhuWbf"); // youtube url
+	// const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
+	const [pomodoro, setPomodoro] = useState({}); // pomodoro settings
 	const [YTKey, setYTKey] = useState(0);
 	const YTPlayerRef = useRef(null); // youtube player
+
+	// user experience relevant variables
+	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || ''); // youtube url
+	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || true)); // auto save the settings
+	const [contextMenu, setContextMenu] = useState(JSON.parse(window.localStorage.getItem('contextmenu') || true)); // auto save the settings
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -36,6 +39,30 @@ export default function useKSHManager() {
 	const [remainingTime, setRemainingTime] = useState(null); // remaining time of the current interval [seconds]
 	const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
 	const [nextSubject, setNextSubject] = useState({}); // to display the next subject
+
+	function cleanUpTimeStamps(timeStamps) {
+		setTimeStampsClean(cleanTimeStamps(timeStamps));
+	}
+	
+	function saveCurrentClass(currentClass) {
+		localStorage.setItem("currentClass", currentClass);
+		setCurrentClass(currentClass);
+  }
+
+	function saveAutoSave(autoSave) {
+		localStorage.setItem("autosave", autoSave);
+		setAutoSave(autoSave);
+	}
+
+	function saveContextMenu(contextMenu) {
+		localStorage.setItem("contextmenu", contextMenu);
+		setContextMenu(contextMenu);
+	}
+
+	function saveYTURL(YTURL) {
+		localStorage.setItem("yturl", YTURL);
+		setYTURL(YTURL);
+	}
 
 	function isKSHLoaded() {
 		return timeStamps != null && todaysSubjects != null;
@@ -58,6 +85,7 @@ export default function useKSHManager() {
 	}
 
 	function handleContextMenuRightClick(e) {
+		if (contextMenu === false) return; // if the user disabled the context menu, show the normal context menu
 		e.preventDefault();
 		if (modalContent.length === 0) { // disable the context menu in the modal
       if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu
@@ -114,8 +142,7 @@ export default function useKSHManager() {
 			}
 			
 			// set breaktime or not
-			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));
-			
+			setPomodoro(prevPomodoro => ({...prevPomodoro, isWorking: !pomodoro.isWorking}));			
 		}
 	}
 
@@ -139,37 +166,6 @@ export default function useKSHManager() {
 		setYTKey(prevYTKey => prevYTKey + 1);
 	}
 
-  function saveTodaysSubjects(todaysSubjects) {
-    let todaysClassSubjectsList = [];
-		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
-		currentClassSubjects.forEach((subject) => {
-			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
-		});
-
-    setTodaysSubjects(todaysSubjects);
-		setTodaysSubjectsClass(todaysClassSubjectsList);
-		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
-		setTodaysSubjectsClassHTML(currentClassSubjects);
-  }
-
-
-	function saveCurrentClass(currentClass) {
-    // i am aware this is redundant to the function above, but the the parameters 'todaysSubjects' and 'currentClass' change in both scenarios.
-    let todaysClassSubjectsList = [];
-		const currentClassSubjects = getCurrentClass(todaysSubjects, currentClass);
-		currentClassSubjects.forEach((subject) => {
-			todaysClassSubjectsList.push(subject.innerText.trim().split("\n\n"));
-		});
-
-    setTodaysSubjects(todaysSubjects);
-		setTodaysSubjectsClass(todaysClassSubjectsList);
-		// setTodaysSubjectsClassHTML(getCurrentClass(todaysSubjects, currentClass));
-		setTodaysSubjectsClassHTML(currentClassSubjects);
-
-		localStorage.setItem("currentClass", currentClass);
-		setCurrentClass(currentClass);
-  }
-
   function handleSubMenuChange(newContent) {
     // whenever a user clicks on a sub menu (example: about me), it would set the subMenuContent ("") to the newContent ("aboutme")
     if (newContent === subMenuContent) {
@@ -183,6 +179,11 @@ export default function useKSHManager() {
         setSubMenuContent(newContent);
       }, subMenuContent.length === 0 ? 0 : 200); // need to wait for the previous sub menu to close IF there was one.
     }
+
+		// finally close the menu if it is open
+		if (isMenuOpen) setIsMenuOpen(false);
+
+		return newContent;
   }
 
 	function handleModalChange(newContent) {
@@ -192,6 +193,11 @@ export default function useKSHManager() {
     } else {
 			setModalContent(newContent);
     }
+		
+		// finally close the menu if it is open
+		if (isMenuOpen) setIsMenuOpen(false);
+
+		return newContent;
   }
 
 	function startPomodoro(settings) {
@@ -227,12 +233,12 @@ export default function useKSHManager() {
 
 	function configureTimer() {
 		// determine the current time
-		const currentTime = process.env.NODE_ENV === 'development' ? moment('10:45:00', 'HH:mm:ss') : moment();// for testing
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('08:45:00', 'HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
-		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsClass);
+		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjects);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
@@ -254,29 +260,25 @@ export default function useKSHManager() {
 		restartTimer();
 	}
 
-	function cleanUpTimeStamps(timeStamps) {
-		setTimeStampsClean(cleanTimeStamps(timeStamps));
-	}
-
 	// return every variable
 	return {
     date, setDate,
 		timeStamps, setTimeStamps,
 		timeStampsClean, setTimeStampsClean: cleanUpTimeStamps,
-		todaysSubjects, setTodaysSubjects: saveTodaysSubjects,
-		todaysSubjectsClass, setTodaysSubjectsClass,
-		todaysSubjectsClassHTML, setTodaysSubjectsClassHTML,
+		todaysSubjects, setTodaysSubjects,
 		everyClass, setEveryClass,
-		currentClass, saveCurrentClass,
+		currentClass, setCurrentClass: saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,
 		modalContent, setModalContent: handleModalChange,
 		isContextMenuOpen, setIsContextMenuOpen,
 		contextMenuCoords, setContextMenuCoords,
 		pomodoro, setPomodoro,
-		YTURL, setYTURL,
 		YTKey, setYTKey,
 		YTPlayerRef,
+		YTURL, setYTURL: saveYTURL,
+		autoSave, setAutoSave: saveAutoSave,
+		contextMenu, setContextMenu: saveContextMenu,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,

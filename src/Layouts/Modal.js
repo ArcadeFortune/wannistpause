@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { KshManagerContext } from "../KshManager"
 import './Modal.css';
 
@@ -13,17 +13,16 @@ export default function Modal({content}) {
       <div className={`${content.length !== 0 ? 'open ' : 'close '}modal overlay`} onClick={() => {ksh.setModalContent('')}}></div>
       <div className={`${content.length !== 0 ? 'open ' : 'close '}modal box`}>
         <div className='modal close-button' onClick={() => {ksh.setModalContent('')}}>x</div>
-        <ModalContent />
+        <ModalContent modalContent={content}/>
       </div>
     </div>
   )
 }
 
-function ModalContent() {
+function ModalContent({modalContent}) {
   // copied from SubMenu.js
-  const ksh = useContext(KshManagerContext)
 
-  switch (ksh.modalContent) {
+  switch (modalContent) {
     case '':
       return <div></div>
     case 'changeclass':

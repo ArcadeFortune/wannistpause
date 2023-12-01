@@ -3,7 +3,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: #282c34;
+  background: radial-gradient(circle at center bottom,#31363f 0%, #282c34 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,22 +14,14 @@
   color: white;
 }
 
-.full-title {
+.the-title {
   position: absolute;
+
   top: 2.3em;
-  text-decoration-color: #aaaaaa00;
-  transition: text-decoration 0.2s;
-}
-
-
-.full-title:hover {
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: #aaaaaa75;
-  text-decoration-thickness: 1px;
 }
 
 .full-title.burger-menu {
+  position: absolute;
   margin: 0;
   right: 4em;
   top: 3em;

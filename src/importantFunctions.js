@@ -23,6 +23,41 @@ export function renderTime({ remainingTime }) { // what a mess xd
   );
 }
 
+export function parseTodaysSubjectsHTML(todaysSubjectsHTML) {
+  let todaysSubjects = {};
+
+  for (let oneClass of todaysSubjectsHTML) {
+    const className = oneClass.querySelector('th').innerText.trim() // 'I1a'
+
+    // clone the node so we can remove elements without affecting the original
+    let filteredSubjects = oneClass.cloneNode(true) 
+
+    // remove the th element
+    filteredSubjects.removeChild(filteredSubjects.querySelector('th'))
+
+    // remove the deleted lessons
+    filteredSubjects.querySelectorAll('.ttp-mod-deleted').forEach(lesson => lesson.remove());
+
+    // turn the node into an array
+    filteredSubjects = [...filteredSubjects.children].map(lesson => lesson.innerText.trim().split('\n\n'));
+
+    // // remove lessons ["Kraft", "#", "Box"]
+    // filteredSubjects = filteredSubjects.filter(lesson => JSON.stringify(lesson.innerText.trim().split('\n\n')) !== 'Kraft' && lesson !== '#' && lesson !== 'Box')
+    filteredSubjects = filteredSubjects.map(lessonArray => {
+      if (lessonArray.length > 3) {
+        // hardcode-remove lesson 'Kraft # Box' if they collide with other lessons
+        return lessonArray.filter(lesson => lesson !== 'Kraft' && lesson !== '#' && lesson !== 'Box');
+      }
+      return lessonArray;
+    });
+
+    // save the array to the todaysSubjects object
+    todaysSubjects[className] = filteredSubjects
+  }
+
+  return todaysSubjects
+}
+
 export function cleanTimeStamps(timeStamps) {
   let timestamps = [];
   for (let range of timeStamps) {
@@ -33,7 +68,7 @@ export function cleanTimeStamps(timeStamps) {
 }
 
 
-export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjectsClass) {
+export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjects) {
   let prevEnd = null;
   let nextStart = null;
   let prevInterval = null;
@@ -42,7 +77,7 @@ export function getActiveInterval(currentTime, currentDate, everyTimeStamp, toda
 
   // set i to the first time a lesson starts
   for (let j = 0; j < everyTimeStamp.length; j++) {
-    if (JSON.stringify(todaysSubjectsClass[j]) !== '[""]') {i = j; break;}
+    if (JSON.stringify(todaysSubjects[j]) !== '[""]') {i = j; break;}
   }
   
   // Function to combine date and time
@@ -94,17 +129,12 @@ export function getActiveInterval(currentTime, currentDate, everyTimeStamp, toda
   return 0;
 }
 
-export function getNextSubject(timeIndex, todaysSubjectsClassHTML) {
-  const currentClassList = todaysSubjectsClassHTML
+export function getNextSubject(timeIndex, todaysSubjects) {
+  const currentClassList = todaysSubjects
 
-  // currentClassList.map(lesson => log(lesson.innerText.trim().split('\n\n')))
   if (timeIndex > currentClassList.length - 1) return {subject: "FREI!!!"}; // if the current time is after the last lesson, return a free lesson
 
-  // remove any deleted lessons from the returned object
-  let deletedLessons = currentClassList[timeIndex].querySelectorAll('.ttp-mod-deleted')
-  if (deletedLessons) deletedLessons.forEach(lesson => lesson.remove())
-
-  const nextLessonArray = currentClassList[timeIndex].innerText.trim().split('\n\n') //example: ['E', 'sor', '203']
+  const nextLessonArray = currentClassList[timeIndex] //example: ['E', 'sor', '203']
 
   log('Die nächste Lektion ist:', nextLessonArray)
   if (JSON.stringify(nextLessonArray) === '[""]') { // '[""]' this needs to be perfectly like this lol
@@ -115,13 +145,7 @@ export function getNextSubject(timeIndex, todaysSubjectsClassHTML) {
 }
 
 export function getCurrentClass(todaysSubjects, currentClass) {
-  
-  for (let oneClass of todaysSubjects) {
-    if (oneClass.querySelector('th').innerText.trim() === currentClass) {
-      return [...oneClass.children].filter(child => child.tagName !== 'TH'); // return all elements of the correct row without the TH element
-    }
-  }
-  return 'test'
+  return todaysSubjects[currentClass];
 }
 
 export function getYTId(url) {

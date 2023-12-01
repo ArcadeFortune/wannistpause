@@ -1,23 +1,35 @@
-import { useContext } from "react"
-import { KshManagerContext } from "../KshManager"
-import AboutMe from "../Components/AboutMe"
-import TimeTable from "../Components/TimeTable"
-
 import './Menu.css';
 
-export default function SubMenu() {
-  const ksh = useContext(KshManagerContext)
+import AboutMe from "../Components/AboutMe"
+import TimeTable from "../Components/TimeTable"
+import Settings from "../Components/Settings";
+import WannIstPause from "../Components/WannIstPause";
 
-    switch (ksh.subMenuContent) {
+export default function SubMenu({subMenuContent}) {
+
+  return (
+    // <div className='sub-menu'>
+    // <div className='sub-menu content'>
+    <div className={`sub-menu main${subMenuContent.length !== 0 ? ' open' : ''}`}>
+      <div className='sub-menu logo'>
+        <WannIstPause/>
+      </div>
+      <SubMenuContent subMenuContent={subMenuContent}/>
+    </div>
+  ) 
+}
+
+function SubMenuContent({subMenuContent}) {
+    switch (subMenuContent) {
       case '':
-        return <div>nix</div>
+        return <div>No sub-menus were selected.</div>;
       case 'aboutme':
         return <AboutMe />
       case 'timetable':
-        return  <div className="time-table-div">
-                  <TimeTable/>
-                </div>
+        return <TimeTable/>
+      case 'settings':
+        return <Settings/>
       default:
-        return <div>Something went wrong, no sub-menus were selected</div>;
+        return <div>This sub-menu does not exist.</div>;
     }
 }
