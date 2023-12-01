@@ -27,7 +27,7 @@ export default function useKSHManager() {
 	const YTPlayerRef = useRef(null); // youtube player
 
 	// user experience relevant variables
-	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || "https://youtube.com/playlist?list=PLJqmOiiykIDULSNKWsAQhIrqlslureL6d&si=z_35wl0YdYDhuWbf"); // youtube url
+	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || ''); // youtube url
 	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || true)); // auto save the settings
 	const [contextMenu, setContextMenu] = useState(JSON.parse(window.localStorage.getItem('contextmenu') || true)); // auto save the settings
 

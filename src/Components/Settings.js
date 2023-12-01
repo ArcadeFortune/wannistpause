@@ -15,14 +15,28 @@ export default function Settings() {
         <div className="settings row">
           Autospeichern
           <div className='settings options'>
-            <Input value={ksh.autoSave} setValue={ksh.setAutoSave} type='checkbox' className='settings checkbox'/>
+            <Input type='checkbox' value={ksh.autoSave} setValue={ksh.setAutoSave} className='settings checkbox'/>
           </div>
         </div>
 
         <div className="settings row">
           Spezieller Rechts-Click-Menü
           <div className='settings options'>
-            <Input value={ksh.contextMenu} setValue={ksh.setContextMenu} type='checkbox' className='settings checkbox'/>
+            <Input type='checkbox' value={ksh.contextMenu} setValue={ksh.setContextMenu} className='settings checkbox'/>
+          </div>
+        </div>
+
+        <div className="settings row">
+          YouTube Playlist
+          <div className='settings options'>
+            <Input type='text' value={ksh.YTURL} setValue={ksh.setYTURL} placeholder={'www.youtube.com/...'}/>
+          </div>
+        </div>
+        
+        <div className="settings row">
+          Alle Einstellungen löschen
+          <div className='settings options'>
+            <Input type='checkbox' value={ksh.contextMenu} setValue={ksh.setContextMenu} className='settings checkbox'/>
           </div>
         </div>
 
