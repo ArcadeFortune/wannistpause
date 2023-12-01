@@ -1,27 +1,35 @@
 /* styles for the time input (hh:mm:ss)  */
 /* 0.32em is good enough */
-.number-input {
+.number-input, .boolean-input  {
   width: 3em;
 }
 
 /* styles for the yes/no setting */
 /* the cursor for both input elements (in the same parent element) should be pointer */
-.boolean-input ~ .number-input {
+.boolean-input-hidden ~ .boolean-input {
   cursor: pointer;
 }
 
 /* the visible input should be checked when the hidden input is checked (some shenanigans happening) */
-.boolean-input:checked + .number-input {
+.boolean-input-hidden:checked + .boolean-input {
   background-color: #9C9EA2;
 }
 
-/* the visible input should have focus styles when the hidden input is focused */
-.boolean-input:focus + .number-input {
+/* the visible input should look focused styles when either the hidden input is focused via keyboard, or hovered on */
+.boolean-input-hidden:focus + .boolean-input, input:hover {
   box-shadow: 0px 0px 6px 0px #b0aaaa;
 }
 
+/* when input has 'fatal' (dangerous) class name */
+.boolean-input-hidden:checked + .boolean-input.fatal:hover, .fatal:hover {
+  box-shadow: 0px 0px 6px 0px #ff5a5a;
+  background-color: #ff0000;
+  background-image: none;
+  color: #c8c8c8;
+}
+
 /* hide the supposed-to-be-hidden input */
-.boolean-input {
+.boolean-input-hidden {
   position: absolute;
   opacity: 0;
   cursor: pointer;

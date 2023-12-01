@@ -19,8 +19,8 @@ export default function Input({type, value, setValue, defaultValue, className, p
   if (type === 'checkbox') {
     return (
       <label style={{position: 'relative'}}>
-        <input type="checkbox" ref={booleanRef} className="pomodoro boolean-input" id="myCheckbox" onChange={() => setValue(!value)} defaultChecked={value}/>
-        <input type="text" placeholder={value ? '': 'Nein'} value={value ? 'Ja':''} className={`number-input ${className}`} tabIndex={-1} onClick={handleBooleanClick} readOnly/>
+        <input type="checkbox" ref={booleanRef} className="pomodoro boolean-input-hidden" id="myCheckbox" onChange={() => setValue(!value)} defaultChecked={value}/>
+        <input type="text" placeholder={value ? '': 'Nein'} value={value ? 'Ja':''} className={`boolean-input ${className}`} tabIndex={-1} onClick={handleBooleanClick} readOnly/>
       </label>
     )
   }

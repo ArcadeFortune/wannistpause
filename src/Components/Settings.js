@@ -33,10 +33,13 @@ export default function Settings() {
           </div>
         </div>
         
+        
+      <div className="settings divider"></div>
+
         <div className="settings row">
           Einstellungen zurücksetzen
           <div className='settings options'>
-            <Input type='checkbox' value={'somethign'} setValue={() => {localStorage.clear(); window.location.reload();}}/>
+            <Input type='checkbox' value={'somethign'} setValue={() => {localStorage.clear(); window.location.reload();}} className={'fatal'}/>
           </div>
         </div>
 

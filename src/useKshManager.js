@@ -54,6 +54,16 @@ export default function useKSHManager() {
 		setAutoSave(autoSave);
 	}
 
+	function saveContextMenu(contextMenu) {
+		localStorage.setItem("contextmenu", contextMenu);
+		setContextMenu(contextMenu);
+	}
+
+	function saveYTURL(YTURL) {
+		localStorage.setItem("yturl", YTURL);
+		setYTURL(YTURL);
+	}
+
 	function isKSHLoaded() {
 		return timeStamps != null && todaysSubjects != null;
 		// return timeStamps && everyClass; // if / else
@@ -266,9 +276,9 @@ export default function useKSHManager() {
 		pomodoro, setPomodoro,
 		YTKey, setYTKey,
 		YTPlayerRef,
-		YTURL, setYTURL,
+		YTURL, setYTURL: saveYTURL,
 		autoSave, setAutoSave: saveAutoSave,
-		contextMenu, setContextMenu,
+		contextMenu, setContextMenu: saveContextMenu,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
