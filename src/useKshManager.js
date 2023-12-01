@@ -75,6 +75,7 @@ export default function useKSHManager() {
 	}
 
 	function handleContextMenuRightClick(e) {
+		if (contextMenu === false) return; // if the user disabled the context menu, show the normal context menu
 		e.preventDefault();
 		if (modalContent.length === 0) { // disable the context menu in the modal
       if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu

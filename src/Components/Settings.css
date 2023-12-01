@@ -11,16 +11,19 @@
 }
 
 .settings.content {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
 }
 
 .settings.row {
+  width: 100%;
+
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: baseline;
-  
+
   margin-bottom: 12px;
 }
 

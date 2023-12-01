@@ -10,6 +10,7 @@ export default function Settings() {
   return (
     <div className='settings'>
       <div className="settings title">Einstellungen</div>
+      <br />
       <div className="settings content">
         <div className="settings row">
           Autospeichern
