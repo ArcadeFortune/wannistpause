@@ -15,7 +15,7 @@
 }
 
 /* styles for the time input (hh:mm:ss)  */
-/* 0.32em is good enough */
+/* 0.31em is good enough */
 .pomodoro.number-input {
   margin-left: 0.31em;
 }
@@ -23,6 +23,7 @@
 @media (max-width: 700px) {
   .pomodoro.setting {
     flex-direction: column;
+    align-items: center;
   }
 
   .pomodoro .input {
@@ -31,12 +32,6 @@
   }
   
   .pomodoro.time > .pomodoro.number-input:first-child {
-    margin-right: 0;
-    margin-left: 0;
-  }
-  
-  /* select the lone, small inputs */
-  .pomodoro.setting > label > .pomodoro.number-input, .pomodoro.input > .pomodoro.number-input {
     margin-right: 0;
     margin-left: 0;
   }
