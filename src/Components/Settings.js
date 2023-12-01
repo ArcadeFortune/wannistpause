@@ -17,6 +17,14 @@ export default function Settings() {
             <Input value={ksh.autoSave} setValue={ksh.setAutoSave} type='checkbox' className='settings checkbox'/>
           </div>
         </div>
+
+        <div className="settings row">
+          Spezieller Rechts-Click-Menü
+          <div className='settings options'>
+            <Input value={ksh.contextMenu} setValue={ksh.setContextMenu} type='checkbox' className='settings checkbox'/>
+          </div>
+        </div>
+
         <button
         href=""
 				className="select"
