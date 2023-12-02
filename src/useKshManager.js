@@ -13,7 +13,7 @@ export default function useKSHManager() {
 	const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
 	const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
-	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || "I3a"); // school class selected by the user
+	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || ""); // school class selected by the user
 
 	// website relevant variables
 	const [isMenuOpen, setIsMenuOpen] = useState(false);

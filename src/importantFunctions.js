@@ -145,7 +145,8 @@ export function getNextSubject(timeIndex, todaysSubjects) {
 }
 
 export function getCurrentClass(todaysSubjects, currentClass) {
-  return todaysSubjects[currentClass];
+  
+  return todaysSubjects[currentClass || 'I3a'];
 }
 
 export function getYTId(url) {
