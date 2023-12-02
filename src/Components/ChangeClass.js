@@ -10,7 +10,7 @@ export default function ChangeClass() {
 
   return (
     <div className='change-class box'>
-      <div className='change-class title'>Klasse wechseln</div>
+      <div className='change-class title'>Wähle deine Klasse</div>
 
       <select value={selectedOption} onChange={(e) => {setSelectedOption(e.target.value); if (ksh.autoSave) {ksh.setCurrentClass(e.target.value);};}} className='change-class-select'>
         {options.map(option => (
@@ -19,9 +19,7 @@ export default function ChangeClass() {
           </option>
         ))}
       </select>
-      {!ksh.autoSave && (
-        <div className='change-class save-button select' onClick={() => {ksh.setModalContent(''); log('saving', selectedOption); ksh.setCurrentClass(selectedOption);}}><span className='select-text'>Speichern</span></div>
-      )}
+      <div className='change-class save-button select' onClick={() => {ksh.navigate(''); log('saving', selectedOption); ksh.setCurrentClass(selectedOption);}}><span className='select-text'>Speichern</span></div>
     </div>
   );
 }

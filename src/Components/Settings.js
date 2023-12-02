@@ -35,11 +35,10 @@ export default function Settings() {
         
         
       <div className="settings divider"></div>
-
         <div className="settings row">
           Einstellungen zurücksetzen
           <div className='settings options'>
-            <Input type='checkbox' value={'somethign'} setValue={() => {localStorage.clear(); window.location.reload();}} className={'fatal'}/>
+            <Input type='checkbox' value={'somethign'} setValue={() => {localStorage.clear(); window.location.href = '/';}} className={'fatal'}/>
           </div>
         </div>
 
@@ -47,7 +46,7 @@ export default function Settings() {
         href=""
 				className="select"
 				onClick={() => {
-          ksh.setSubMenuContent('settings')
+          ksh.navigate('/settings')
         }}>
 				Okay
 			</button>

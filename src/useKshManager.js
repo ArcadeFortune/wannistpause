@@ -1,8 +1,10 @@
 import moment from "moment";
 import 'moment/locale/de'; // Import German locale
 import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import log from "./log";
+import { useLocation, useNavigate } from "react-router-dom";
+import menuItems from "./menuItems";
 
 export default function useKSHManager() {
 	// data relevant variables
@@ -11,7 +13,7 @@ export default function useKSHManager() {
 	const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
 	const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
-	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || "I3a"); // school class selected by the user
+	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || ""); // school class selected by the user
 
 	// website relevant variables
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,6 +22,8 @@ export default function useKSHManager() {
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
+	const navigate = useNavigate() // https://stackoverflow.com/a/70274942
+	const location = useLocation() // https://stackoverflow.com/a/60736742
 
 	// const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
 	const [pomodoro, setPomodoro] = useState({}); // pomodoro settings
@@ -40,6 +44,11 @@ export default function useKSHManager() {
 	const [timerFinished, setTimerFinished] = useState(false); // to procc the confetti
 	const [nextSubject, setNextSubject] = useState({}); // to display the next subject
 
+	function customNavigate(path) {
+		if (path === location.pathname) navigate('/'); // if the user clicks on the same link
+		else navigate(path);
+	}
+	
 	function cleanUpTimeStamps(timeStamps) {
 		setTimeStampsClean(cleanTimeStamps(timeStamps));
 	}
@@ -167,38 +176,40 @@ export default function useKSHManager() {
 	}
 
   function handleSubMenuChange(newContent) {
-    // whenever a user clicks on a sub menu (example: about me), it would set the subMenuContent ("") to the newContent ("aboutme")
-    if (newContent === subMenuContent) {
-      // if the user clicks on the same sub menu ("aboutme") again, it would reset the subMenuContent ("aboutme")
-      setSubMenuContent("");
-    } else {
-      // if the user clicks on a different sub menu (example: "timetable"), it would reset the subMenuContent ("aboutme") and then set it to the newContent ("timetable")
-      setSubMenuContent("");
-      // run this function after 0.1 seconds
-      setTimeout(() => {
-        setSubMenuContent(newContent);
-      }, subMenuContent.length === 0 ? 0 : 200); // need to wait for the previous sub menu to close IF there was one.
-    }
+    // whenever a user clicks on a sub menu (example: aboutme), it would set current the subMenuContent ("") to the newContent ("aboutme")
+ 		// if the user clicks on a different sub menu (example: "timetable"), it would reset the subMenuContent ("aboutme") and then set it to the newContent ("timetable")
+		// to let the animation play
+		setSubMenuContent("");
+		// run this function after 0.1 seconds
+		setTimeout(() => {
+			setSubMenuContent(newContent);
+		}, subMenuContent.length === 0 ? 0 : 200); // need to wait for the previous sub menu to close IF there was one.
 
-		// finally close the menu if it is open
+		// finally close the side menu if it is open
 		if (isMenuOpen) setIsMenuOpen(false);
 
 		return newContent;
   }
 
 	function handleModalChange(newContent) {
-		// pastet from handleSubMenuChange()
-    if (newContent === modalContent) {
-      setModalContent("");
-    } else {
-			setModalContent(newContent);
-    }
+		setModalContent(newContent);
 		
-		// finally close the menu if it is open
+		// close the side menu if it is open
 		if (isMenuOpen) setIsMenuOpen(false);
 
 		return newContent;
   }
+
+	function showContent(content) {
+		// example: content = { name: "Stundenplan", content: "timetable", type: "submenu" }
+		if (!content) { setSubMenuContent(''); setModalContent(''); return; } // if the user is on the homepage, set the current view to the default view
+
+		if (content.type === 'modal') {
+			handleModalChange(content.content);
+		} else if (content.type === 'submenu') {
+			handleSubMenuChange(content.content);
+		}
+	}
 
 	function startPomodoro(settings) {
 		settings = {...settings, startedTime: moment(), isRunning: true, isWorking: true, repeatedSoFar: 0}
@@ -216,7 +227,7 @@ export default function useKSHManager() {
 		if (settings.musik) handlePlayYT(true); // play the music
 	}
 
-// future: maybe remeber the previous pomodoro settings
+	// future: maybe remeber the previous pomodoro settings
 	function stopPomodoro() {
 		// remove from localstorage
 		// window.localStorage.removeItem("pomodoro") //temporary
@@ -227,6 +238,7 @@ export default function useKSHManager() {
 	}
 
 	function restartTimer() {
+		navigate('/')
 		setTimerKey(timerKey + 1);
 		// setTimerFinished(false);
 	}
@@ -260,6 +272,20 @@ export default function useKSHManager() {
 		restartTimer();
 	}
 
+	useEffect(() => {
+		if (location.pathname === '/') {
+			showContent(); // homepage
+		}
+
+		menuItems.forEach((item) => {
+			if (location.pathname === `/${item.content}`) {
+				showContent(item);
+				return;
+			}
+		})
+		
+	}, [location.pathname]);
+
 	// return every variable
 	return {
     date, setDate,
@@ -287,6 +313,7 @@ export default function useKSHManager() {
 		remainingTime, setRemainingTime,
 		timerFinished, setTimerFinished,
 		nextSubject, setNextSubject,
+		navigate: customNavigate,
 		isKSHLoaded,
 		isActiveInterval,
 		handleBurgerClick,
@@ -295,6 +322,7 @@ export default function useKSHManager() {
 		handleTimerComplete,
 		handlePlayYT,
 		handleUpdateYT,
+		showContent,
 		startPomodoro,
 		stopPomodoro,
 		restartTimer,

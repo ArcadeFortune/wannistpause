@@ -10,8 +10,8 @@ export default function WannIstPause() {
   return (
     <div className="full-title">
       <a href="https://wannistpause.vercel.app" tabIndex={-1}>
-        <span className='url'>https://</span><span className='title'>
-          <span>{ksh.isBreakTime ? <span>Es</span> : <span>Wann</span>}</span>IstPause</span>
+        <span className='url'>https://</span>
+        <span className='title'>{ksh.isBreakTime ? 'Es' : 'Wann'}IstPause</span>
         <span className='url'>.vercel.app</span>
       </a>
     </div>
