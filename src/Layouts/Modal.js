@@ -10,9 +10,9 @@ export default function Modal({content}) {
   
   return (
     <div className={`${content.length !== 0 ? 'open ' : 'close '}modal`}>
-      <div className={`${content.length !== 0 ? 'open ' : 'close '}modal overlay`} onClick={() => {ksh.setModalContent('')}}></div>
+      <div className={`${content.length !== 0 ? 'open ' : 'close '}modal overlay`} onClick={() => {ksh.navigate('/')}}></div>
       <div className={`${content.length !== 0 ? 'open ' : 'close '}modal box`}>
-        <div className='modal close-button' onClick={() => {ksh.setModalContent('')}}>x</div>
+        <div className='modal close-button' onClick={() => {ksh.navigate('/')}}>x</div>
         <ModalContent modalContent={content}/>
       </div>
     </div>

@@ -18,11 +18,7 @@ export default function RouteMe() {
 								<Route
 									key={index}
 									path={`/${item.content}`}
-									element={
-										<App
-											currentView={item}
-										/>
-									}
+									element={ <App currentView={item}/> }
 								/>
 							);
 					})}
