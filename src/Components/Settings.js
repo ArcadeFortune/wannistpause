@@ -46,7 +46,7 @@ export default function Settings() {
         href=""
 				className="select"
 				onClick={() => {
-          ksh.setSubMenuContent('settings')
+          ksh.navigate('/settings')
         }}>
 				Okay
 			</button>

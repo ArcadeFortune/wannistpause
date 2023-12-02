@@ -227,7 +227,7 @@ export default function useKSHManager() {
 		if (settings.musik) handlePlayYT(true); // play the music
 	}
 
-// future: maybe remeber the previous pomodoro settings
+	// future: maybe remeber the previous pomodoro settings
 	function stopPomodoro() {
 		// remove from localstorage
 		// window.localStorage.removeItem("pomodoro") //temporary
@@ -238,6 +238,7 @@ export default function useKSHManager() {
 	}
 
 	function restartTimer() {
+		navigate('/')
 		setTimerKey(timerKey + 1);
 		// setTimerFinished(false);
 	}

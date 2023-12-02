@@ -14,11 +14,6 @@ const menuItems = [
     content: "pomodoro",
     type: "modal",
   },
-  {
-    name: "Pomodoro Stoppen",
-    content: "pomodoroStop",
-    type: "modal",
-  },
   { 
     name: "Über mich", 
     content: "aboutme", 
