@@ -9,16 +9,22 @@ import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { KshManagerContext } from "./KshManager";
 import ContextMenu from "./Components/ContextMenu";
 
+import { parseTodaysSubjectsHTML } from "./importantFunctions";
 import Menu from "./Layouts/Menu";
 import SubMenu from "./Layouts/SubMenu";
 import Modal from "./Layouts/Modal";
-import { parseTodaysSubjectsHTML } from "./importantFunctions";
 import log from "./log";
 import WannIstPause from "./Components/WannIstPause";
 
-export default function App() {
+export default function App({ currentView }) {
   const ksh = useContext(KshManagerContext);
   useEffect(() => {
+
+    // set the current view. example: if website is on /changeclass, it should show the modal 'changeclass'
+    if (currentView) {
+      ksh.showContent(currentView);
+    }
+
     const fetchData = async () => {
       try {
         log("Intranet laden...")

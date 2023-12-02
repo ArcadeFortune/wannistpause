@@ -1,8 +1,10 @@
 import moment from "moment";
 import 'moment/locale/de'; // Import German locale
 import { getActiveInterval, getNextSubject, getCurrentClass, cleanTimeStamps } from "./importantFunctions";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import log from "./log";
+import { useLocation, useNavigate } from "react-router-dom";
+import menuItems from "./menuItems";
 
 export default function useKSHManager() {
 	// data relevant variables
@@ -20,6 +22,8 @@ export default function useKSHManager() {
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
 	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
+	const navigate = useNavigate() // https://stackoverflow.com/a/70274942
+	const location = useLocation() // https://stackoverflow.com/a/60736742
 
 	// const [pomodoro, setPomodoro] = useState(JSON.parse(window.localStorage.getItem("pomodoro")) || {}); // pomodoro settings
 	const [pomodoro, setPomodoro] = useState({}); // pomodoro settings
@@ -171,12 +175,14 @@ export default function useKSHManager() {
     if (newContent === subMenuContent) {
       // if the user clicks on the same sub menu ("aboutme") again, it would reset the subMenuContent ("aboutme")
       setSubMenuContent("");
+			navigate(`/${newContent}`)
     } else {
-      // if the user clicks on a different sub menu (example: "timetable"), it would reset the subMenuContent ("aboutme") and then set it to the newContent ("timetable")
+			// if the user clicks on a different sub menu (example: "timetable"), it would reset the subMenuContent ("aboutme") and then set it to the newContent ("timetable")
       setSubMenuContent("");
       // run this function after 0.1 seconds
       setTimeout(() => {
-        setSubMenuContent(newContent);
+				setSubMenuContent(newContent);
+				navigate(`/${newContent}`)
       }, subMenuContent.length === 0 ? 0 : 200); // need to wait for the previous sub menu to close IF there was one.
     }
 
@@ -187,6 +193,7 @@ export default function useKSHManager() {
   }
 
 	function handleModalChange(newContent) {
+		navigate(`/${newContent}`)
 		// pastet from handleSubMenuChange()
     if (newContent === modalContent) {
       setModalContent("");
@@ -199,6 +206,17 @@ export default function useKSHManager() {
 
 		return newContent;
   }
+
+	function showContent(content) {
+		// example: content = { name: "Stundenplan", content: "timetable", type: "submenu" }
+		if (!content) { setSubMenuContent(''); setModalContent(''); return; } // if the user is on the homepage, set the current view to the default view
+
+		if (content.type === 'modal') {
+			setModalContent(content.content);
+		} else if (content.type === 'submenu') {
+			setSubMenuContent(content.content);
+		}
+	}
 
 	function startPomodoro(settings) {
 		settings = {...settings, startedTime: moment(), isRunning: true, isWorking: true, repeatedSoFar: 0}
@@ -260,6 +278,21 @@ export default function useKSHManager() {
 		restartTimer();
 	}
 
+	useEffect(() => {
+		
+		if (location.pathname === '/') {
+			showContent(); // homepage
+		}
+
+		menuItems.forEach((item) => {
+			if (location.pathname === `/${item.content}`) {
+				showContent(item);
+				return;
+			}
+		})
+		
+	}, [location.pathname]);
+
 	// return every variable
 	return {
     date, setDate,
@@ -295,6 +328,7 @@ export default function useKSHManager() {
 		handleTimerComplete,
 		handlePlayYT,
 		handleUpdateYT,
+		showContent,
 		startPomodoro,
 		stopPomodoro,
 		restartTimer,
