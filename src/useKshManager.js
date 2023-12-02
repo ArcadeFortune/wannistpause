@@ -272,8 +272,6 @@ export default function useKSHManager() {
 	}
 
 	useEffect(() => {
-		console.log('useEffect: ', useEffect);
-		
 		if (location.pathname === '/') {
 			showContent(); // homepage
 		}

@@ -20,7 +20,7 @@ export default function ChangeClass() {
         ))}
       </select>
       {!ksh.autoSave && (
-        <div className='change-class save-button select' onClick={() => {ksh.setModalContent(''); log('saving', selectedOption); ksh.setCurrentClass(selectedOption);}}><span className='select-text'>Speichern</span></div>
+        <div className='change-class save-button select' onClick={() => {ksh.navigate(''); log('saving', selectedOption); ksh.setCurrentClass(selectedOption);}}><span className='select-text'>Speichern</span></div>
       )}
     </div>
   );
