@@ -1,10 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./Pomodoro.css";
 import { KshManagerContext } from "../KshManager";
 import Input from "../Components/Input";
 
 export default function Pomodoro() {
 	const ksh = useContext(KshManagerContext);
+
 	const [goal, setGoal] = useState("");
 	const [durationHour, setDurationHour] = useState("");
 	const [durationMinute, setDurationMinute] = useState("");
@@ -15,6 +16,25 @@ export default function Pomodoro() {
   const [repeatAmount, setRepeatAmount] = useState("");
 	const [musik, setMusik] = useState(false);
 
+  // in react, how do i make it so that when the user presses 'enter', it would then count as clicking a specific button?
+  const buttonRef = useRef(null)
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // Programmatically click the button when 'Enter' is pressed
+      buttonRef.current.click();
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener
+    window.addEventListener('keypress', handleKeyPress);
+
+    // Clean up
+    return () => {
+      window.removeEventListener('keypress', handleKeyPress);
+    };
+  }, []);
 
 	return (
 		<div className="pomodoro box">
@@ -64,6 +84,7 @@ export default function Pomodoro() {
 
 			<button
         href=""
+        ref={buttonRef}
 				className="select"
 				onClick={() => {
 					ksh.startPomodoro({
