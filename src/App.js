@@ -20,10 +20,10 @@ export default function App({ currentView }) {
   const ksh = useContext(KshManagerContext);
   useEffect(() => {
     // set the current view. example: if website is on /changeclass, it should show the modal 'changeclass'
-    if (!ksh.currentClass) {
-      ksh.showContent('changeclass');
+    if (!ksh.currentClass || ksh.currentClass === '') {
+      ksh.navigate('changeclass');
     } else if (currentView) {
-      ksh.showContent(currentView);
+      ksh.navigate(currentView);
     }
 
     const fetchData = async () => {

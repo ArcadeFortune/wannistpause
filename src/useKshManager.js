@@ -245,12 +245,13 @@ export default function useKSHManager() {
 
 	function configureTimer() {
 		// determine the current time
-		const currentTime = process.env.NODE_ENV === 'development' ? moment('08:45:00', 'HH:mm:ss') : moment();// for testing
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('7:55:00', 'HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
-		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjects);
+		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjects, currentClass);
+		console.log('i: ', i);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
@@ -277,6 +278,7 @@ export default function useKSHManager() {
 			showContent(); // homepage
 		}
 
+		// show the content of the spcecific menu item.
 		menuItems.forEach((item) => {
 			if (location.pathname === `/${item.content}`) {
 				showContent(item);
