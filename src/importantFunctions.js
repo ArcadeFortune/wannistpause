@@ -67,62 +67,76 @@ export function cleanTimeStamps(timeStamps) {
   return timestamps;
 }
 
-
-export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjects) {
+export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjects, currentClass) {
+  currentClass = currentClass || 'I3a';
+  let prevStart = null;
   let prevEnd = null;
-  let nextStart = null;
-  let prevInterval = null;
-  let found = false;
-  let i = 0
+  let i = 0  
 
-  // set i to the first time a lesson starts
-  for (let j = 0; j < everyTimeStamp.length; j++) {
-    if (JSON.stringify(todaysSubjects[j]) !== '[""]') {i = j; break;}
-  }
-  
   // Function to combine date and time
   const combineDateTime = (time) => {
     return moment(`${currentDate} ${time}`, 'DD. MMMM YYYY HH:mm');
   };
 
+  // handle times before the first lesson //
+  // set i to the first time a lesson starts
+  for (let j = 0; j < everyTimeStamp.length; j++) {
+    if (JSON.stringify(todaysSubjects[currentClass][j]) !== '[""]') {i = j; break;}
+  }    
   // Check if currentTime is before the first interval.
   const [firstStart] = everyTimeStamp[i].trim().split(' - ').map(t => combineDateTime(t));
   if (currentTime.isBefore(firstStart)) {
     return { current: { start: currentTime, end: firstStart }, timeIndex: i, breakTime: true };
   }
 
+  // loop through every school lesson until it finds the current lesson with the current time
   for (i; i < everyTimeStamp.length; i++) {
     const interval = everyTimeStamp[i];
-    const [start, end] = interval.trim().split(' - ').map(t => combineDateTime(t));
+    const [start, end] = interval.trim().split(' - ').map(t => combineDateTime(t)); // start and end times for the current interval
 
-    if (found) {
-      return { current: prevInterval, timeIndex: i, breakTime: false };
-    }
-
-    // Check if currentTime is between the end of the previous interval and the start of the current.
+    // Check if currentTime is between the end of the previous interval and the start of the current (breaktime).
     if (prevEnd && currentTime.isBetween(prevEnd, start, null, '[)')) {
-      nextStart = start; // The start of the next interval after the gap.
-      break; // We found the gap, break the loop.
-    }
+      // if the next lesson is not a lesson (=== '[""]'), set the 'end' of the break to the start of the next real lesson (!== '[""]')
+      const nextLesson = todaysSubjects[currentClass][i];
+      let startOfNextLesson = start;
+      if (JSON.stringify(nextLesson) === '[""]') {
+        for (let j = i + 1; j < everyTimeStamp.length; j++) {
+          if (JSON.stringify(todaysSubjects[currentClass][j]) !== '[""]') {
+            startOfNextLesson = combineDateTime(everyTimeStamp[j].trim().split(' - ')[0]);
+            i = j;
+            prevEnd = prevStart;
+            break;
+          }
+        }
+      }
 
-    // Check if currentTime is within the current interval.
+      // return the break information
+      return { current: { start: prevEnd, end: startOfNextLesson }, timeIndex: i, breakTime: true }
+      // return { current: { start: prevEnd, end: startOfNextLesson}, timeIndex: i + 1, breakTime: true };
+    }
+    
+    // Check if currentTime is within the current interval. (in a lesson)
     if (currentTime.isBetween(start, end, null, '[)')) {
-      found = true;
-      prevInterval = { start, end };
+      // if currently, there is no lesson (=== '[""]'), set the 'end' of the lesson to the start of the next real lesson (!== '[""]')
+      const currentLesson = todaysSubjects[currentClass][i];
+      let endOfCurrentBreak = end;
+      if (JSON.stringify(currentLesson) === '[""]') {
+        for (let j = i + 1; j < everyTimeStamp.length; j++) {
+          if (JSON.stringify(todaysSubjects[currentClass][j]) !== '[""]') {
+            endOfCurrentBreak = combineDateTime(everyTimeStamp[j].trim().split(' - ')[0]);
+            i = j;
+            break;
+          }
+        }
+      }
+
+      const currentInterval = { start, end: endOfCurrentBreak };
+      return { current: currentInterval, timeIndex: i + 1, breakTime: false };
     }
-
+    
     // Update prevEnd for the next iteration to check gaps.
+    prevStart = start;
     prevEnd = end;
-  }
-
-  // check if the current time is after the last interval
-  if (found && !nextStart) {
-    return { current: prevInterval, timeIndex: i };
-  }
-
-  // If currentTime falls within a gap, return the gap information.
-  if (nextStart) {
-    return { current: { start: prevEnd, end: nextStart }, timeIndex: i, breakTime: true };
   }
 
   // If no conditions met, currentTime is not within any intervals or gaps.
@@ -144,8 +158,7 @@ export function getNextSubject(timeIndex, todaysSubjects) {
   }
 }
 
-export function getCurrentClass(todaysSubjects, currentClass) {
-  
+export function getCurrentClass(todaysSubjects, currentClass) {  
   return todaysSubjects[currentClass || 'I3a'];
 }
 
