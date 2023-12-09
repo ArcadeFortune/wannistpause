@@ -8,6 +8,8 @@ export default function ChangeClass() {
   const [selectedOption, setSelectedOption] = useState(ksh.currentClass);
   const options = ksh.everyClass;
 
+  if (!ksh.isKSHLoaded()) return <div>Intranet laden...</div>;
+  
   return (
     <div className='change-class box'>
       <div className='change-class title'>Wähle deine Klasse</div>

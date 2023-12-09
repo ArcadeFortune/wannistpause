@@ -245,7 +245,7 @@ export default function useKSHManager() {
 
 	function configureTimer() {
 		// determine the current time
-		const currentTime = process.env.NODE_ENV === 'development' ? moment('7:55:00', 'HH:mm:ss') : moment();// for testing
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('12:55:00', 'HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 

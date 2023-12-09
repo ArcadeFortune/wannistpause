@@ -19,6 +19,7 @@ import WannIstPause from "./Components/WannIstPause";
 export default function App({ currentView }) {
   const ksh = useContext(KshManagerContext);
   useEffect(() => {
+    log('STARTING APPLICATION ')
     // set the current view. example: if website is on /changeclass, it should show the modal 'changeclass'
     if (!ksh.currentClass || ksh.currentClass === '') {
       ksh.navigate('changeclass');
