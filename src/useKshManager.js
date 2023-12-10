@@ -237,8 +237,8 @@ export default function useKSHManager() {
 		restartTimer();
 	}
 
-	function restartTimer() {
-		navigate('/')
+	function restartTimer(shouldRefresh=true) {
+		if (shouldRefresh) navigate('/')
 		setTimerKey(timerKey + 1);
 		// setTimerFinished(false);
 	}
@@ -270,7 +270,7 @@ export default function useKSHManager() {
 
 		setNextSubject(getNextSubject(i.timeIndex, getCurrentClass(todaysSubjects, currentClass))); // sets the next subject
 
-		restartTimer();
+		restartTimer(false);
 	}
 
 	useEffect(() => {
