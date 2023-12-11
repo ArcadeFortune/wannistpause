@@ -52,7 +52,7 @@ export default function Pomodoro() {
 					<div className="pomodoro time">
 						<Input type='number' min="0" placeholder="Std" value={durationHour} setValue={setDurationHour} className={'pomodoro number-input'} />
 						<Input type='number' min="0" placeholder="Min" max="59" value={durationMinute} setValue={setDurationMinute} className={'pomodoro number-input'} defaultValue={25} />
-						<Input type='number' min="1" placeholder="Sek" max="59" value={durationSecond} setValue={setDurationSecond} className={'pomodoro number-input'} />
+						<Input type='number' min="0" placeholder="Sek" max="59" value={durationSecond} setValue={setDurationSecond} className={'pomodoro number-input'} />
 					</div>
 				</div>
 			</div>
@@ -63,7 +63,7 @@ export default function Pomodoro() {
 					<div className="pomodoro time">
 						<Input type='number' min="0" placeholder="Std" value={breakDurationHour} setValue={setBreakDurationHour} className={'pomodoro number-input'} />
 						<Input type='number' min="0" placeholder="Min" max="59" value={breakDurationMinute} setValue={setBreakDurationMinute} className={'pomodoro number-input'} defaultValue={5} />
-						<Input type='number' min="1" placeholder="Sek" max="59" value={breakDurationSecond} setValue={setBreakDurationSecond} className={'pomodoro number-input'} />
+						<Input type='number' min="0" placeholder="Sek" max="59" value={breakDurationSecond} setValue={setBreakDurationSecond} className={'pomodoro number-input'} />
 					</div>
 				</div>
 			</div>
