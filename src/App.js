@@ -18,14 +18,12 @@ import WannIstPause from "./Components/WannIstPause";
 
 export default function App({ currentView }) {
   const ksh = useContext(KshManagerContext);
-  useEffect(() => {
-    // set the current view. example: if website is on /changeclass, it should show the modal 'changeclass'
-    if (!ksh.currentClass || ksh.currentClass === '') {
-      ksh.navigate('changeclass');
-    } else if (currentView) {
-      ksh.navigate(currentView);
-    }
 
+  useEffect(() => {
+    if (!ksh.currentClass || JSON.stringify(ksh.currentClass ) === '""') {
+      ksh.navigate('changeclass');
+    } 
+    
     const fetchData = async () => {
       try {
         log("Intranet laden...")

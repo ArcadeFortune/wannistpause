@@ -112,7 +112,6 @@ export function getActiveInterval(currentTime, currentDate, everyTimeStamp, toda
 
       // return the break information
       return { current: { start: prevEnd, end: startOfNextLesson }, timeIndex: i, breakTime: true }
-      // return { current: { start: prevEnd, end: startOfNextLesson}, timeIndex: i + 1, breakTime: true };
     }
     
     // Check if currentTime is within the current interval. (in a lesson)

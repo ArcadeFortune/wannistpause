@@ -13,12 +13,13 @@ export default function RouteMe() {
 
 				<Routes>
 					<Route path="/" element={<App />} />
+					<Route path="/test" element={<div>test</div>} />
 					{menuItems.map((item, index) => {
 							return (
 								<Route
 									key={index}
 									path={`/${item.content}`}
-									element={ <App currentView={item}/> }
+									element={ <App/> }
 								/>
 							);
 					})}
