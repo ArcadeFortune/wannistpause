@@ -20,9 +20,16 @@ export default function Settings() {
         </div>
 
         <div className="settings row">
-          Spezieller Rechts-Click-Menü
+          Lehrermodus
           <div className='settings options'>
             <Input type='checkbox' value={ksh.contextMenu} setValue={ksh.setContextMenu} className='settings checkbox'/>
+          </div>
+        </div>
+
+        <div className="settings row">
+          Spezieller Rechts-Click-Menü
+          <div className='settings options'>
+            <Input type='checkbox' value={ksh.contextMenu} setValue={ksh.setContextMenu} className='settings checkbox' placeholder={'www.youtube.com/...'}/>
           </div>
         </div>
 
@@ -38,7 +45,7 @@ export default function Settings() {
         <div className="settings row">
           Einstellungen zurücksetzen
           <div className='settings options'>
-            <Input type='checkbox' value={'somethign'} setValue={() => {localStorage.clear(); window.location.href = '/';}} className={'fatal'}/>
+            <Input type='checkbox' value={''} setValue={() => {localStorage.clear(); window.location.href = '/';}} className={'fatal'}/>
           </div>
         </div>
 

@@ -77,6 +77,7 @@ export default function App({ currentView }) {
   return (
     <div className="App" onClick={ksh.handleContextMenuLeftClick} onContextMenu={ksh.handleContextMenuRightClick}> 
       <header className="App-header">
+        <button onClick={() => console.log(ksh.settings)}></button>
         {/* Context Menu */}
         <ContextMenu/>
 

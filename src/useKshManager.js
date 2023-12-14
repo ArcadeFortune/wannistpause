@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import log from "./log";
 import { useLocation, useNavigate } from "react-router-dom";
 import menuItems from "./menuItems";
+import allSettings from "./settings";
+
 
 export default function useKSHManager() {
 	// data relevant variables
@@ -31,6 +33,7 @@ export default function useKSHManager() {
 	const YTPlayerRef = useRef(null); // youtube player
 
 	// user experience relevant variables
+	const [settings, setSettings] = useState(JSON.parse(window.localStorage.getItem('settings')) || allSettings); // user settings
 	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || ''); // youtube url
 	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || true)); // auto save the settings
 	const [contextMenu, setContextMenu] = useState(JSON.parse(window.localStorage.getItem('contextmenu') || true)); // auto save the settings
@@ -71,6 +74,13 @@ export default function useKSHManager() {
 	function saveYTURL(YTURL) {
 		localStorage.setItem("yturl", YTURL);
 		setYTURL(YTURL);
+	}
+
+	function saveSetting(id, newSetting) {
+		// Function to update a specific item
+		setSettings(settings.map(item => 
+			item.id === id ? { ...item, ...newSetting } : item
+		));
 	}
 
 	function isKSHLoaded() {
@@ -307,6 +317,7 @@ export default function useKSHManager() {
 		YTURL, setYTURL: saveYTURL,
 		autoSave, setAutoSave: saveAutoSave,
 		contextMenu, setContextMenu: saveContextMenu,
+		settings, setSettings: saveSetting,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
