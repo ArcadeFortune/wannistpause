@@ -12,7 +12,7 @@ export default function Settings() {
       <div className="settings title">Einstellungen</div>
       <br />
       <div className="settings content">
-        
+    {console.log(ksh.settings)}
       {
       Object.keys(ksh.settings).map((settingId) => (
         // ksh.settings.map((setting, index) => (
@@ -23,35 +23,6 @@ export default function Settings() {
           </div>
         </div>
       ))}
-
-{/*       
-        <div className="settings row">
-          Autospeichern
-          <div className='settings options'>
-            <Input type='checkbox' value={ksh.autoSave} setValue={ksh.setAutoSave} className='settings checkbox' />
-          </div>
-        </div>
-
-        <div className="settings row">
-          Lehrermodus
-          <div className='settings options'>
-            <Input type='checkbox' value={ksh.contextMenu} setValue={ksh.setContextMenu} className='settings checkbox' />
-          </div>
-        </div>
-
-        <div className="settings row">
-          Spezieller Rechts-Click-Menü
-          <div className='settings options'>
-            <Input type='checkbox' value={ksh.contextMenu} setValue={ksh.setContextMenu} />
-          </div>
-        </div>
-
-        <div className="settings row">
-          YouTube Playlist
-          <div className='settings options'>
-            <Input type='text' value={ksh.YTURL} setValue={ksh.setYTURL} placeholder={'www.youtube.com/...'} />
-          </div>
-        </div> */}
 
         <div className="settings divider"></div>
 

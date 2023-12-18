@@ -34,9 +34,6 @@ export default function useKSHManager() {
 
 	// user experience relevant variables
 	const [settings, setSettings] = useState(JSON.parse(window.localStorage.getItem('settings')) || allSettings); // user settings
-	const [YTURL, setYTURL] = useState(JSON.parse(window.localStorage.getItem('yturl')) || ''); // youtube url
-	const [autoSave, setAutoSave] = useState(JSON.parse(window.localStorage.getItem('autosave') || true)); // auto save the settings
-	const [contextMenu, setContextMenu] = useState(JSON.parse(window.localStorage.getItem('contextmenu') || true)); // auto save the settings
 
 	// timer relevant variables
 	const [timerKey, setTimerKey] = useState(0); // to restart the timer
@@ -61,21 +58,6 @@ export default function useKSHManager() {
 		setCurrentClass(currentClass);
   }
 
-	function saveAutoSave(autoSave) {
-		localStorage.setItem("autosave", autoSave);
-		setAutoSave(autoSave);
-	}
-
-	function saveContextMenu(contextMenu) {
-		localStorage.setItem("contextmenu", contextMenu);
-		setContextMenu(contextMenu);
-	}
-
-	function saveYTURL(YTURL) {
-		localStorage.setItem("yturl", YTURL);
-		setYTURL(YTURL);
-	}
-
 	function saveSetting(newValue, key) {
 		const updatedSettings = {
       ...settings,
@@ -84,7 +66,7 @@ export default function useKSHManager() {
         value: newValue,
       },
     };
-		
+
     // Update local storage
     localStorage.setItem('settings', JSON.stringify(updatedSettings));
 
@@ -114,7 +96,7 @@ export default function useKSHManager() {
 	}
 
 	function handleContextMenuRightClick(e) {
-		if (contextMenu === false) return; // if the user disabled the context menu, show the normal context menu
+		if (settings.contextMenu === false) return; // if the user disabled the context menu, show the normal context menu
 		e.preventDefault();
 		if (modalContent.length === 0) { // disable the context menu in the modal
       if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu
@@ -323,9 +305,6 @@ export default function useKSHManager() {
 		pomodoro, setPomodoro,
 		YTKey, setYTKey,
 		YTPlayerRef,
-		YTURL, setYTURL: saveYTURL,
-		autoSave, setAutoSave: saveAutoSave,
-		contextMenu, setContextMenu: saveContextMenu,
 		settings, setSettings: saveSetting,
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,

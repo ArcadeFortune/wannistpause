@@ -13,8 +13,7 @@ export default function ChangeClass() {
   return (
     <div className='change-class box'>
       <div className='change-class title'>Wähle deine Klasse</div>
-
-      <select value={selectedOption} onChange={(e) => {setSelectedOption(e.target.value); if (ksh.autoSave) {ksh.setCurrentClass(e.target.value);};}} className='change-class-select'>
+      <select value={selectedOption} onChange={(e) => {setSelectedOption(e.target.value); if (ksh.settings['autoSave'].value) {ksh.setCurrentClass(e.target.value);};}} className='change-class-select'>
         {options.map(option => (
           <option key={option} value={option}>
             {option}

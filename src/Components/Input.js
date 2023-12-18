@@ -13,7 +13,7 @@ export default function Input({type, value, setValue, defaultValue, valueId, cla
 
     // unfocus the button
     e.target.blur();
-    console.log(setValue); setValue(!value, valueId)
+    setValue(!value, valueId)
   }
 
   if (type === 'checkbox') {

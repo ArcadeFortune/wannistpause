@@ -21,7 +21,7 @@ const settings = {
     viewName: "YouTube Playlist",
     type: "text",
     placeholder: "www.youtube.com/...",
-    value: 'https://www.youtube.com/watch?v=A7uNvvAKsYU&list=PLXIclLvfETS3AgCnZg4N6QqHu_T27XKIq',
+    value: undefined,
   },
 };
 
