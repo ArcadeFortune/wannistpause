@@ -12,6 +12,7 @@ export default function Settings() {
       <div className="settings title">Einstellungen</div>
       <br />
       <div className="settings content">
+        
       {
       Object.keys(ksh.settings).map((settingId) => (
         // ksh.settings.map((setting, index) => (
@@ -22,7 +23,7 @@ export default function Settings() {
           </div>
         </div>
       ))}
-      
+
 {/*       
         <div className="settings row">
           Autospeichern

@@ -77,13 +77,19 @@ export default function useKSHManager() {
 	}
 
 	function saveSetting(newValue, key) {
-		setSettings((prevSettings) => ({
-			...prevSettings,
-			[key]: {
-				...prevSettings[key],
-				value: newValue,
-			},
-		}));
+		const updatedSettings = {
+      ...settings,
+      [key]: {
+        ...settings[key],
+        value: newValue,
+      },
+    };
+		
+    // Update local storage
+    localStorage.setItem('settings', JSON.stringify(updatedSettings));
+
+    // Update state
+    setSettings(updatedSettings);
 	}
 	
 
