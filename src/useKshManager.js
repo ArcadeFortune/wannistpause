@@ -76,12 +76,16 @@ export default function useKSHManager() {
 		setYTURL(YTURL);
 	}
 
-	function saveSetting(id, newSetting) {
-		// Function to update a specific item
-		setSettings(settings.map(item => 
-			item.id === id ? { ...item, ...newSetting } : item
-		));
+	function saveSetting(newValue, key) {
+		setSettings((prevSettings) => ({
+			...prevSettings,
+			[key]: {
+				...prevSettings[key],
+				value: newValue,
+			},
+		}));
 	}
+	
 
 	function isKSHLoaded() {
 		return timeStamps != null && todaysSubjects != null;
@@ -261,7 +265,6 @@ export default function useKSHManager() {
 
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
 		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjects, currentClass);
-		console.log('i: ', i);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
