@@ -58,6 +58,41 @@ export function parseTodaysSubjectsHTML(todaysSubjectsHTML) {
   return todaysSubjects
 }
 
+// GPT4: in javascript, i have an object, where each value is an array, and in each array, there are a specific amount of nested arrays, though, the amount of nested arrays are common through every value. meaning, every value has one array with the same amount of nested arrays. in every nested array contains a combination of three letters as the second element (index [1])
+// for example like the following object:
+// const obj = {
+//   key1: [['a', 'abc'], ['b', 'xyz']],
+//   key2: [['c', 'def'], ['d', 'abc']],
+//   key3: [[""],['e','def']],
+// };
+// notice how the 'abc' and 'def' appears twice. my object, with real data, is similarly built, meaning the three letters (always in index [1]) can appear multiple times, but never in the same index.
+// now, i need an alternate version of that same object, where the three letters become the keys, and their values will be the arrays in which those letters appear in, the order of the arrays where they appear in, is kept, and if the three letters do not have any appearance in an index, it would be an empty array ([""]). it is imperative that any information of the nested arrays are kept ('a', 'b', etc.) as well as every value having the same amount of arrays. the key, where the three letters appear in, will be the index[1] of the nested array. in this example, the object would have the 'abc' as the first key, with the value as the two arrays in which those letters appeared, in the first nested array of the new object, having the information 'a' as the index[0] and 'key1' as the index[1], and in the second nested array, having 'd' as the index[0] and 'key2' as the index[1]. and so on.
+// how would the new alternate object look like in this case?
+export function getEveryTeacherSubject(todaysSubjectsObj) {
+  const obj = todaysSubjectsObj;
+  const transformedObj = {};
+
+  // Iterate over each key-value pair in the original object
+  for (const key in obj) {
+    obj[key].forEach((nestedArray, index) => {
+      const letterCombo = nestedArray[1];
+      
+      if (!letterCombo) return;
+      
+      // Initialize the arrays for each letter combination if not already present
+      if (!transformedObj[letterCombo]) {
+        transformedObj[letterCombo] = Array(obj[key].length).fill([""]);
+      }
+  
+      // Replace the empty array with the new array containing relevant data
+      transformedObj[letterCombo][index] = [nestedArray[0], key];
+    });
+  }
+
+  return transformedObj;
+}
+
+
 export function cleanTimeStamps(timeStamps) {
   let timestamps = [];
   for (let range of timeStamps) {
@@ -69,6 +104,8 @@ export function cleanTimeStamps(timeStamps) {
 
 export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjects, currentClass) {
   currentClass = currentClass || 'I3a';
+  console.log('currentClass: ', currentClass);
+  console.log('todaysSubjects: ', todaysSubjects);
   let prevStart = null;
   let prevEnd = null;
   let i = 0  
