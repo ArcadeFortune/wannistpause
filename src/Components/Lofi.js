@@ -24,10 +24,10 @@ export default function Lofi() {
         ksh.YTPlayerRef.current.destroy(); // Clean up on component unmount
       }
     };
-  }, [ksh.settings.YTURL]); // Depend on YTURL to re-run effect
+  }, [ksh.settings.YTURL.value]); // Depend on YTURL to re-run effect
 
 	const loadVideo = (autoplay=0) => {
-    const id = getYTId(ksh.settings.YTURL || 'https://www.youtube.com/watch?v=A7uNvvAKsYU&list=PLXIclLvfETS3AgCnZg4N6QqHu_T27XKIq')    
+    const id = getYTId(ksh.settings.YTURL.value || 'https://www.youtube.com/watch?v=A7uNvvAKsYU&list=PLXIclLvfETS3AgCnZg4N6QqHu_T27XKIq')    
 
     if (id.type === 'playlist') {
       ksh.YTPlayerRef.current = new window.YT.Player("youtube-player", {

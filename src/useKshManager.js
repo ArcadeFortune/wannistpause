@@ -15,6 +15,7 @@ export default function useKSHManager() {
 	const [timeStampsClean, setTimeStampsClean] = useState(null); // perhaps useless
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
 	const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
+	const [todaysSubjectsTeacher, setTodaysSubjectsTeacher] = useState([]); // all the classes as a string list [for the dropdown menu]
 	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || ""); // school class selected by the user
 
 	// website relevant variables
@@ -90,13 +91,12 @@ export default function useKSHManager() {
 
 	function handleContextMenuLeftClick(e) {
 		if (isContextMenuOpen) {
-			// setContextMenuCoords({ x: e.clientX, y: e.clientY });
 			setIsContextMenuOpen(false);
 		}
 	}
 
 	function handleContextMenuRightClick(e) {
-		if (settings.contextMenu === false) return; // if the user disabled the context menu, show the normal context menu
+		if (settings.contextMenu.value === false) return; // if the user disabled the context menu, show the normal context menu
 		e.preventDefault();
 		if (modalContent.length === 0) { // disable the context menu in the modal
       if (!isContextMenuOpen) setContextMenuCoords({ x: e.clientX, y: e.clientY }); // only change the coords when the user opens the context menu
@@ -246,13 +246,17 @@ export default function useKSHManager() {
 	}
 
 	function configureTimer() {
+		// if the teacher is using the website, use the big object for the teachers
+		// hardcoding todaysSubjectsObj is not good, using a useEffect to change this global variable is not fast enough, so i hardcode it
+		const todaysSubjectsObj = settings.teacherView.value ? todaysSubjectsTeacher : todaysSubjects;
+		
 		// determine the current time
 		const currentTime = process.env.NODE_ENV === 'development' ? moment('12:55:00', 'HH:mm:ss') : moment();// for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
-		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjects, currentClass);
+		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsObj, currentClass);
 		setActiveInterval(i); // finds current interval
 
 		if (i === 0) {
@@ -269,7 +273,7 @@ export default function useKSHManager() {
 		setRemainingTime(i.current.end.diff(currentTime, "seconds")); // sets the remaining time of the current interval
 		log("Es bleiben noch:", i.current.end.diff(currentTime, "seconds"), "Sekunden");
 
-		setNextSubject(getNextSubject(i.timeIndex, getCurrentClass(todaysSubjects, currentClass))); // sets the next subject
+		setNextSubject(getNextSubject(i.timeIndex, getCurrentClass(todaysSubjectsObj, currentClass))); // sets the next subject
 
 		restartTimer(false);
 	}
@@ -296,6 +300,7 @@ export default function useKSHManager() {
 		timeStampsClean, setTimeStampsClean: cleanUpTimeStamps,
 		todaysSubjects, setTodaysSubjects,
 		everyClass, setEveryClass,
+		todaysSubjectsTeacher, setTodaysSubjectsTeacher,
 		currentClass, setCurrentClass: saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,

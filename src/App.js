@@ -9,7 +9,7 @@ import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { KshManagerContext } from "./KshManager";
 import ContextMenu from "./Components/ContextMenu";
 
-import { parseTodaysSubjectsHTML } from "./importantFunctions";
+import { getEveryTeacherSubject, parseTodaysSubjectsHTML } from "./importantFunctions";
 import Menu from "./Layouts/Menu";
 import SubMenu from "./Layouts/SubMenu";
 import Modal from "./Layouts/Modal";
@@ -21,7 +21,7 @@ export default function App({ currentView }) {
 
   useEffect(() => {
     if (!ksh.currentClass || JSON.stringify(ksh.currentClass ) === '""') {
-      ksh.navigate('changeclass');
+      ksh.navigate('/changeclass');
     } 
     
     const fetchData = async () => {
@@ -53,6 +53,8 @@ export default function App({ currentView }) {
         // parse the subjects into an object
         const todaysSubjects = parseTodaysSubjectsHTML(todaysSubjectsHTML);
         
+        const todaysSubjectsTeacher = getEveryTeacherSubject(todaysSubjects);
+
         // grab every class as a string list
         const everyClass = Array.from(
           todaysSubjectsHTML.map((line) => line.querySelector('th').innerHTML)
@@ -66,6 +68,7 @@ export default function App({ currentView }) {
         ksh.setTimeStampsClean(timeStamps);
         ksh.setTodaysSubjects(todaysSubjects);
         ksh.setEveryClass(everyClass);
+        ksh.setTodaysSubjectsTeacher(todaysSubjectsTeacher);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -77,7 +80,6 @@ export default function App({ currentView }) {
   return (
     <div className="App" onClick={ksh.handleContextMenuLeftClick} onContextMenu={ksh.handleContextMenuRightClick}> 
       <header className="App-header">
-        <button onClick={() => console.log(ksh.settings[3])}></button>
         {/* Context Menu */}
         <ContextMenu/>
 

@@ -59,7 +59,7 @@ const CountdownComponent = ({ className }) => {
 
         {!ksh.pomodoro.isRunning && (
           <>
-            <div className='currentClass'>Klasse: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>
+            <div className='currentClass'>{ksh.settings.teacherView ? 'Lehrer' : 'Klasse'}: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>
             <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject information'>{ksh.nextSubject.subject}{ksh.nextSubject.room && <span>, {ksh.nextSubject.room}</span>} </span></div>
           </>
         )}

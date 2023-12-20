@@ -85,7 +85,7 @@ export function getEveryTeacherSubject(todaysSubjectsObj) {
       }
   
       // Replace the empty array with the new array containing relevant data
-      transformedObj[letterCombo][index] = [nestedArray[0], key];
+    transformedObj[letterCombo][index] = [nestedArray[0], key, ...nestedArray.slice(2)];
     });
   }
 
@@ -104,8 +104,6 @@ export function cleanTimeStamps(timeStamps) {
 
 export function getActiveInterval(currentTime, currentDate, everyTimeStamp, todaysSubjects, currentClass) {
   currentClass = currentClass || 'I3a';
-  console.log('currentClass: ', currentClass);
-  console.log('todaysSubjects: ', todaysSubjects);
   let prevStart = null;
   let prevEnd = null;
   let i = 0  

@@ -5,11 +5,11 @@ const settings = {
     placeholder: "",
     value: true,
   },
-  "teacherView":{
+  "teacherView": {
     viewName: "Lehrer Ansicht",
     type: "checkbox",
     placeholder: "",
-    value: true,
+    value: false,
   },
   "contextMenu": {
     viewName: "Spezieller Rechts-Click-Menü",

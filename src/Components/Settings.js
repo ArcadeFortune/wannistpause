@@ -12,17 +12,16 @@ export default function Settings() {
       <div className="settings title">Einstellungen</div>
       <br />
       <div className="settings content">
-    {console.log(ksh.settings)}
       {
-      Object.keys(ksh.settings).map((settingId) => (
-        // ksh.settings.map((setting, index) => (
+        Object.keys(ksh.settings).map((settingId) => (
           <div key={settingId} className="settings row">
-          {ksh.settings[settingId].viewName}
-          <div className='settings options'>
-            <Input type={ksh.settings[settingId].type} value={ksh.settings[settingId].value} setValue={ksh.setSettings} valueId={settingId}/>
+            {ksh.settings[settingId].viewName}
+            <div className='settings options'>
+              <Input type={ksh.settings[settingId].type} value={ksh.settings[settingId].value} setValue={ksh.setSettings} valueId={settingId} placeholder={ksh.settings[settingId].placeholder}/>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
 
         <div className="settings divider"></div>
 
