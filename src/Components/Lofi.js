@@ -16,7 +16,7 @@ export default function Lofi() {
 			const firstScriptTag = document.getElementsByTagName("script")[0];
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 		} else {
-			loadVideo(ksh.pomodoro.isRunning ? ksh.pomodoro.musik === true ? 1 : 0 : 0);
+			loadVideo((ksh.pomodoro.isRunning && ksh.pomodoro.musik) ? 1 : 0); // when changing the video url, it should autoplay it but ONLY if the pomodoro is running and the music is enabled
 		}
     
     return () => {

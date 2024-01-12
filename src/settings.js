@@ -5,16 +5,16 @@ const settings = {
     value: 'I3a',
     invisible: true,
   },
-  "autoSave": {
+  "autoSave": { // this is useless
     viewName: "Autospeichern",
     type: "checkbox",
     value: true,
-    invisible: true, // this is useless
+    invisible: true, 
   },
   "teacherView": {
     viewName: "Lehrer Ansicht",
     type: "checkbox",
-    value: false,
+    value: 0, // this will go through a parseInt(), so using true and false is not advisable here. // does not work if default value is true
   },
   "contextMenu": {
     viewName: "Spezieller Rechts-Click-Menü",

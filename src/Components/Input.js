@@ -3,7 +3,7 @@ import  "./Input.css";
 import { pad } from "../importantFunctions";
 
 
-export default function Input({ type, value, setValue, defaultValue, valueId, specialAction, options, className, placeholder, min, max }) {
+export default function Input({ type, value, setValue, defaultValue, valueId, specialAction, options, optionsValueCounter, className, placeholder, min, max }) {
   const booleanRef = useRef(null)
 
   if (!specialAction) specialAction = () => {};
@@ -35,9 +35,9 @@ export default function Input({ type, value, setValue, defaultValue, valueId, sp
 
   if (type === 'select') {
     return (
-      <select tabIndex={1} value={value} onChange={(e) => {setValue(e.target.value, valueId)}} className={`select-input ${className}`}>
-        {options.map(option => (
-          <option key={option} value={option}>
+      <select tabIndex={1} value={value} onChange={(e) => setValue(optionsValueCounter ? parseInt(e.target.value) : e.target.value, valueId)} className={`select-input ${className}`}>
+        {options.map((option, index) => (
+          <option key={option} value={optionsValueCounter ? index : option}> {/* doing parseInt() here instead does NOTHING */}
             {option}
           </option>
         ))}

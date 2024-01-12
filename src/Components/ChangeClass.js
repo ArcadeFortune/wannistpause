@@ -10,7 +10,7 @@ export default function ChangeClass() {
   
   return (
     <div className='change-class box'>
-      <div className='change-class title'>Wähle deine Klasse</div>
+      <div className='change-class title'>Wähle deine <Input type='select' value={ksh.settings.teacherView.value} setValue={ksh.setSettings} valueId='teacherView' options={['Klasse', 'Lehrperson']} optionsValueCounter={true} className='change-class-select'/></div>
       <Input type='select' value={ksh.settings.currentClass.value} setValue={ksh.setSettings} valueId='currentClass' options={options} className='change-class-select'/>
 
       {/* <div className='change-class save-button select' onClick={() => {ksh.navigate('/'); log('saving', selectedOption); ksh.setCurrentClass(selectedOption);}}><span className='select-text'>Speichern</span></div> */}
