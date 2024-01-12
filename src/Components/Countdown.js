@@ -16,7 +16,7 @@ const CountdownComponent = ({ className }) => {
     } // needs to load data
 
     ksh.configureTimer();
-  }, [ksh.timeStamps, ksh.settings.currentClass.value, ksh.refreshTimer]);
+  }, [ksh.timeStamps, ksh.settings.currentClass.value, ksh.settings.teacherView.value, ksh.refreshTimer]);
 
 
   if (!ksh.isKSHLoaded()) return <div>Intranet laden...</div>;

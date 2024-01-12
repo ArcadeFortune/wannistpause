@@ -35,7 +35,7 @@ export default function Input({ type, value, setValue, defaultValue, valueId, sp
 
   if (type === 'select') {
     return (
-      <select tabIndex={1} value={value} onChange={(e) => setValue(optionsValueCounter ? parseInt(e.target.value) : e.target.value, valueId)} className={`select-input ${className}`}>
+      <select tabIndex={1} value={value} onChange={(e) => {setValue(optionsValueCounter ? parseInt(e.target.value) : e.target.value, valueId); specialAction()}} className={`select-input ${className}`}>
         {options.map((option, index) => (
           <option key={option} value={optionsValueCounter ? index : option}> {/* doing parseInt() here instead does NOTHING */}
             {option}

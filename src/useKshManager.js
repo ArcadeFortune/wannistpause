@@ -254,6 +254,7 @@ export default function useKSHManager() {
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
 
 		const currentClass = settings.currentClass.value;
+		if (todaysSubjectsObj[settings.currentClass.value] === undefined) {saveSetting(Object.keys(todaysSubjectsObj)[0], 'currentClass'); return;} // if the current class does not exist, pick a random one (here the first one), the useEffect dependencie then reruns this function
 		log('Du bist:', currentClass)
 
 		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsObj, currentClass);

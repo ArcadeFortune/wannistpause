@@ -54,6 +54,7 @@ export default function App({ currentView }) {
         const todaysSubjects = parseTodaysSubjectsHTML(todaysSubjectsHTML);
         
         const todaysSubjectsTeacher = sortObj(getEveryTeacherSubject(todaysSubjects));
+        delete todaysSubjectsTeacher['#']; // ooooh boi. also '#' stands for 'no teacher'
 
         // grab every class as a string list
         const everyClass = Array.from(

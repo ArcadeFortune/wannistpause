@@ -18,7 +18,7 @@ export default function Settings() {
           <div key={settingId} className="settings row">
             {ksh.settings[settingId].viewName}
             <div className='settings options'>
-              <Input type={ksh.settings[settingId].type} value={ksh.settings[settingId].value} setValue={ksh.setSettings} valueId={settingId} specialAction={settingId === 'teacherView' ? () => ksh.navigate('/changeclass') : undefined } placeholder={ksh.settings[settingId].placeholder}/>
+              <Input type={ksh.settings[settingId].type} value={ksh.settings[settingId].value} setValue={ksh.setSettings} valueId={settingId} specialAction={ settingId === 'teacherView' ? () => {ksh.navigate('/changeclass'); } : undefined } placeholder={ksh.settings[settingId].placeholder}/>
             </div>
           </div>
         ))
