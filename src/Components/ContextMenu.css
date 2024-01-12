@@ -16,6 +16,8 @@
   background-size: 1px 100%;
   background-repeat: no-repeat;
   background-position: left center, right center;
+
+  min-width: 7em;
 }
 
 .context-menu.header {
