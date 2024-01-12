@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+# Wann ist Pause?
+Erfahre in nur wenigen Sekunden die Zeit bis zur nächsten Pause sowie das dazugehörige Zimmer.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Das kleine im Leben macht den Unterschied
+- Du kannst auf den Titel klicken! Das bringt dich zur Haupseite zurück.
+- Verwende die mittlere Maustaste (Mausrad drücken) um Links auf einen neuen Tab zu öffnen!
+- Im Menü kannst du deine Klasse wechseln!
+- Du kannst auch zwischen Lehrer wechseln!
+- Im Menü kannst du den täglichen Stundenplan anschauen! (leider nicht der von Morgen...)
+- Wenn du satt von der Pausentimer hast, kannst du auch deinen eigenen Timer machen! Im Menü ist es unter "Pomodoro".
+- Du kannst im Pomodorotimer auch Musik aktivieren, dann kannst du mit entspannter Lofi-Musik deine Hausaufgaben erledigen!
+- Keine Lust auf Lofi-Musik mehr? In den Einstellungen kannst du deine eigenen YouTube-Playlist Link konfigurieren!
+- Es gibt einen ganz spezieller Kontext-Menü! (Rechte Maustaste drücken) Der hat das gleiche wie das normale Menü.
+- Natürlich kannst du mit dem Kontext-Menü Text kopieren, einfach markieren und rechtsclick!
+- Wenn du deine lieblings YouTube-Playlist bereits kopiert hast, kannst du es im Kontext-Menü bequem konfigurieren, ohne in die Einstellungen zu wechseln!
+- Du kannst Links direkt im Kontext-Menü kopieren! Deine Maus muss nur über so einen Link schweben.
+- Vielleicht befindet siche unter "Vorschau" mehr coole Features!
+- Willst du etwas bestimmtes mehr? Schreibe einen 'Issue' in meinem [GitHub](https://github.com/ArcadeFortune/wannistpause/issues) dazu!

@@ -24,6 +24,7 @@ export default function useKSHManager() {
 	const [modalContent, setModalContent] = useState(""); // the content of the modal
 	const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 	const [contextMenuCoords, setContextMenuCoords] = useState({ x: 0, y: 0 });
+	const [hoveredLink, setHoveredLink] = useState(''); // to make the link copyable from the context menu
 	const [isBreakTime, setIsBreakTime] = useState(false); // to change the title
 	const navigate = useNavigate() // https://stackoverflow.com/a/70274942
 	const location = useLocation() // https://stackoverflow.com/a/60736742
@@ -314,11 +315,13 @@ export default function useKSHManager() {
 		timerKey, setTimerKey,
 		refreshTimer, setRefreshTimer,
 		activeInterval, setActiveInterval,
+		hoveredLink, setHoveredLink,
 		isBreakTime, setIsBreakTime,
 		totalDuration, setTotalDuration,
 		remainingTime, setRemainingTime,
 		timerFinished, setTimerFinished,
 		nextSubject, setNextSubject,
+		location,
 		navigate: customNavigate,
 		isKSHLoaded,
 		isActiveInterval,

@@ -5,6 +5,24 @@ export function pad(num) { // turns 1 into 01
   return String(parseInt(num)).padStart(2, "0");
 }
 
+export async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+export async function pasteText() {
+  try {
+    const text = await navigator.clipboard.readText();
+    return text;
+  } catch (error) {
+    console.error(error.message);
+  }
+
+}
+
 export function renderTime({ remainingTime }) { // what a mess xd
   if (remainingTime === 0) return <div className="timer">Pause!</div>;
 

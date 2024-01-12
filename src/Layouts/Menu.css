@@ -79,9 +79,9 @@
 }
 
 /* burger menu */
-svg rect {
+.burger-menu rect {
   fill: #aaa;
-  stroke: #aaaaaa8a;  /* The color of the border/stroke */
+  stroke: #aaaaaa8a;  
   stroke-width: 1;  /* The width of the border/stroke */
   transition: fill 0.2s, stroke 0.5s;
 }

@@ -7,6 +7,10 @@
   margin-inline: 2em;
 }
 
+.unhighlightable {
+  user-select: none;
+}
+
 .url {
   font-size: 0.8em;
   color: #aaa;
