@@ -3,7 +3,7 @@ import  "./Input.css";
 import { pad } from "../importantFunctions";
 
 
-export default function Input({ type, value, setValue, defaultValue, valueId, options, className, placeholder, min, max }) {
+export default function Input({ type, value, setValue, defaultValue, valueId, specialAction, options, className, placeholder, min, max }) {
   const booleanRef = useRef(null)
 
   function handleBooleanClick(e) {
@@ -20,7 +20,7 @@ export default function Input({ type, value, setValue, defaultValue, valueId, op
     return (
       <label style={{position: 'relative'}}>
         <input type="checkbox" ref={booleanRef} className="pomodoro boolean-input-hidden" id="myCheckbox" onChange={() => {console.log(value); setValue(!value, valueId)}} defaultChecked={value}/>
-        <input type="text" placeholder={value ? '': 'Nein'} value={value ? 'Ja':''} className={`boolean-input ${className}`} tabIndex={-1} onClick={handleBooleanClick} readOnly/>
+        <input type="text" placeholder={value ? '': 'Nein'} value={value ? 'Ja':''} className={`boolean-input ${className}`} tabIndex={-1} onClick={(e) => {handleBooleanClick(e); specialAction()}} readOnly/>
       </label>
     )
   }

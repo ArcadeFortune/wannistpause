@@ -54,11 +54,6 @@ export default function useKSHManager() {
 		setTimeStampsClean(cleanTimeStamps(timeStamps));
 	}
 	
-	function saveCurrentClass(currentClass) {
-		localStorage.setItem("currentClass", currentClass);
-		// setCurrentClass(currentClass);
-  }
-
 	function saveSetting(newValue, key) {
 		console.log(`Ändere Einstellung '${key}':`, newValue);
 		const updatedSettings = {
@@ -306,7 +301,6 @@ export default function useKSHManager() {
 		todaysSubjects, setTodaysSubjects,
 		everyClass, setEveryClass,
 		todaysSubjectsTeacher, setTodaysSubjectsTeacher,
-		// currentClass, setCurrentClass: saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,
 		modalContent, setModalContent: handleModalChange,
