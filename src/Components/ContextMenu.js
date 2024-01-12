@@ -5,7 +5,7 @@ import Menu from "../Layouts/Menu"
 import Copy from "../SVGs/Copy"
 import Paste from "../SVGs/Paste"
 import Cut from "../SVGs/Cut"
-import { getYTId, pasteText } from "../importantFunctions"
+import { getYTId } from "../importantFunctions"
 import Back from "../SVGs/Back"
 import Forward from "../SVGs/Forward"
 import Reload from "../SVGs/Reload"
@@ -38,15 +38,19 @@ export default function ContextMenu() {
     }
 
     // save the clipboard text
-    navigator.clipboard.readText().then((data) => {
-      setReadText(data);
-
-      // if readText is a valid youtube link, show the paste button
-      if (getYTId(data)) {
-        setIsYTLink(true);
-      }
-    });
-
+    try {
+      navigator.clipboard.readText().then((data) => {
+        setReadText(data);
+        
+        // if readText is a valid youtube link, show the paste button
+        if (getYTId(data)) {
+          setIsYTLink(true);
+        }
+      });
+    } catch (error) {
+      console.error("Don't use firefox, I can't see what you have copied.")
+    }
+      
     // adjust the position of the context menu, incase of overflow
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect();
@@ -57,7 +61,6 @@ export default function ContextMenu() {
         ksh.setContextMenuCoords({x: ksh.contextMenuCoords.x, y: window.innerHeight - rect.height - 50})
       }
     }
-    console.log(ksh.contextMenuCoords)
   }, [ksh.contextMenuCoords])
 
 

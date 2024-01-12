@@ -13,16 +13,6 @@ export async function copyText(text) {
   }
 }
 
-export async function pasteText() {
-  try {
-    const text = await navigator.clipboard.readText();
-    return text;
-  } catch (error) {
-    console.error(error.message);
-  }
-
-}
-
 export function renderTime({ remainingTime }) { // what a mess xd
   if (remainingTime === 0) return <div className="timer">Pause!</div>;
 
