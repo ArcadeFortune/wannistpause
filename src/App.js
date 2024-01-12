@@ -80,7 +80,7 @@ export default function App({ currentView }) {
   return (
     <div className="App" onClick={ksh.handleContextMenuLeftClick} onContextMenu={ksh.handleContextMenuRightClick}> 
       <header className="App-header">
-        {process.env.NODE_ENV === 'development' && <button onClick={() => console.log('settings:', ksh.todaysSubjectsTeacher)} style={{top:0, position: 'absolute'}}>Dev Button</button>}
+        {process.env.NODE_ENV === 'development' && <button onClick={() => console.log('settings:', ksh.pomodoro)} style={{top:0, position: 'absolute'}}>Dev Button</button>}
         {/* Context Menu */}
         <ContextMenu/>
 

@@ -16,7 +16,7 @@ export default function Lofi() {
 			const firstScriptTag = document.getElementsByTagName("script")[0];
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 		} else {
-			loadVideo(1);
+			loadVideo(ksh.pomodoro.isRunning ? ksh.pomodoro.musik === true ? 1 : 0 : 0);
 		}
     
     return () => {

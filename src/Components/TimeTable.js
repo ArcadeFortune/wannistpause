@@ -20,7 +20,6 @@ export default function TimeTable() {
   return (
     <div className="time-table-div">
       <table className='time-table'>
-        {console.log('todaysSubjects: ', ksh.todaysSubjectsTeacher)}
         {todaysSubjects && (
           <tbody>
           {ksh.timeStamps.map((time, index) => {

@@ -6,6 +6,8 @@ import { pad } from "../importantFunctions";
 export default function Input({ type, value, setValue, defaultValue, valueId, specialAction, options, className, placeholder, min, max }) {
   const booleanRef = useRef(null)
 
+  if (!specialAction) specialAction = () => {};
+
   function handleBooleanClick(e) {
     if (booleanRef.current) {
       booleanRef.current.checked = !booleanRef.current.checked;
