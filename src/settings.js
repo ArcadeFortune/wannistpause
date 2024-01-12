@@ -1,20 +1,24 @@
 const settings = {
+  "currentClass": {
+    viewName: ["Klasse", "Lehrer"],
+    type: "text",
+    value: 'I3a',
+    invisible: true,
+  },
   "autoSave": {
     viewName: "Autospeichern",
     type: "checkbox",
-    placeholder: "",
     value: true,
+    invisible: true, // this is useless
   },
   "teacherView": {
     viewName: "Lehrer Ansicht",
     type: "checkbox",
-    placeholder: "",
     value: false,
   },
   "contextMenu": {
     viewName: "Spezieller Rechts-Click-Menü",
     type: "checkbox",
-    placeholder: "",
     value: true,
   },
   "YTURL": {

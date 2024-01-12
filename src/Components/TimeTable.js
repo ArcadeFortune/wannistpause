@@ -15,11 +15,12 @@ export default function TimeTable() {
     return ((endHours * 60 + endMinutes) - (startHours * 60 + startMinutes));
   };
 
-  const todaysSubjects = ksh.settings.teacherView.value ? ksh.todaysSubjectsTeacher : ksh.todaysSubjectsObj;  
+  const todaysSubjects = ksh.settings.teacherView.value ? ksh.todaysSubjectsTeacher : ksh.todaysSubjects;
 
   return (
     <div className="time-table-div">
       <table className='time-table'>
+        {console.log('todaysSubjects: ', ksh.todaysSubjectsTeacher)}
         {todaysSubjects && (
           <tbody>
           {ksh.timeStamps.map((time, index) => {
@@ -29,7 +30,7 @@ export default function TimeTable() {
               <React.Fragment key={index}>
                 <tr style={{ height: `${duration}px` }}>
                   <td className='col1'>{time}</td>
-                  <td className='col2'>{todaysSubjects[ksh.currentClass][index][1] != null ? todaysSubjects[ksh.currentClass][index].join(" ") : "Frei"}</td>
+                  <td className='col2'>{todaysSubjects[ksh.settings.currentClass.value][index][1] != null ? todaysSubjects[ksh.settings.currentClass.value][index].join(" ") : "Frei"}</td>
                   <td className='col3'></td>
                 </tr>
                 {index < ksh.timeStamps.length - 1 && (

@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './myOwnTailwind.css'
 import reportWebVitals from './reportWebVitals';
-import { KshManagerProvider } from './KshManager';
-import Lofi from './Components/Lofi';
 import RouteMe from './RouteMe';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

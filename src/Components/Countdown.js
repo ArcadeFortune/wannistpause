@@ -16,11 +16,11 @@ const CountdownComponent = ({ className }) => {
     } // needs to load data
 
     ksh.configureTimer();
-  }, [ksh.timeStamps, ksh.currentClass, ksh.refreshTimer]);
+  }, [ksh.timeStamps, ksh.settings.currentClass.value, ksh.refreshTimer]);
 
 
   if (!ksh.isKSHLoaded()) return <div>Intranet laden...</div>;
-  if (!ksh.isActiveInterval() && !ksh.pomodoro.isRunning) return <><div className='countdown'>Kein Unterricht!</div><Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={700} /></>;
+  if (!ksh.isActiveInterval() && !ksh.pomodoro.isRunning) return <><div className='countdown'>Kein Unterricht!</div><Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={500} /></>;
 
   return (
     <>
@@ -59,7 +59,7 @@ const CountdownComponent = ({ className }) => {
 
         {!ksh.pomodoro.isRunning && (
           <>
-            <div className='currentClass'>{ksh.settings.teacherView ? 'Lehrer' : 'Klasse'}: <br></br><span className='currentSelectedClass information'>{ksh.currentClass}</span></div>
+            <div className='currentClass'>{ksh.settings.teacherView.value ? 'Lehrer' : 'Klasse'}: <br></br><span className='currentSelectedClass information'>{ksh.settings.currentClass.value}</span></div>
             <div className='nextSubject'>Nächstes Fach: <br></br><span className='subject information'>{ksh.nextSubject.subject}{ksh.nextSubject.room && <span>, {ksh.nextSubject.room}</span>} </span></div>
           </>
         )}

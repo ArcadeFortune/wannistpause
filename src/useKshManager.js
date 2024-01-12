@@ -16,7 +16,7 @@ export default function useKSHManager() {
 	const [todaysSubjects, setTodaysSubjects] = useState(null); // all the subjects
 	const [everyClass, setEveryClass] = useState([]); // all the classes as a string list [for the dropdown menu]
 	const [todaysSubjectsTeacher, setTodaysSubjectsTeacher] = useState([]); // all the classes as a string list [for the dropdown menu]
-	const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || ""); // school class selected by the user
+	// const [currentClass, setCurrentClass] = useState(localStorage.getItem("currentClass") || ""); // school class selected by the user
 
 	// website relevant variables
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,10 +56,11 @@ export default function useKSHManager() {
 	
 	function saveCurrentClass(currentClass) {
 		localStorage.setItem("currentClass", currentClass);
-		setCurrentClass(currentClass);
+		// setCurrentClass(currentClass);
   }
 
 	function saveSetting(newValue, key) {
+		console.log(`Ändere Einstellung '${key}':`, newValue);
 		const updatedSettings = {
       ...settings,
       [key]: {
@@ -251,11 +252,15 @@ export default function useKSHManager() {
 		const todaysSubjectsObj = settings.teacherView.value ? todaysSubjectsTeacher : todaysSubjects;
 		
 		// determine the current time
-		const currentTime = process.env.NODE_ENV === 'development' ? moment('12:55:00', 'HH:mm:ss') : moment();// for testing
+		const currentTime = process.env.NODE_ENV === 'development' ? moment('12:55:00', 'HH:mm:ss') : moment(); // for testing
     currentTime.add(1, 'seconds'); // perhaps this will fix everything
     log('Zurzeit ist es:', currentTime.format('HH:mm:ss'))
 
 		log("Schulzeiten: ", JSON.stringify(timeStamps));
+
+		const currentClass = settings.currentClass.value;
+		log('Du bist:', currentClass)
+
 		const i = getActiveInterval(currentTime, date, timeStamps, todaysSubjectsObj, currentClass);
 		setActiveInterval(i); // finds current interval
 
@@ -301,7 +306,7 @@ export default function useKSHManager() {
 		todaysSubjects, setTodaysSubjects,
 		everyClass, setEveryClass,
 		todaysSubjectsTeacher, setTodaysSubjectsTeacher,
-		currentClass, setCurrentClass: saveCurrentClass,
+		// currentClass, setCurrentClass: saveCurrentClass,
 		isMenuOpen, setIsMenuOpen,
     subMenuContent, setSubMenuContent: handleSubMenuChange,
 		modalContent, setModalContent: handleModalChange,

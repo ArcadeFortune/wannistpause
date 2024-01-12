@@ -14,6 +14,7 @@ export default function Settings() {
       <div className="settings content">
       {
         Object.keys(ksh.settings).map((settingId) => (
+          !ksh.settings[settingId].invisible && // if invisible is true, don't show the setting
           <div key={settingId} className="settings row">
             {ksh.settings[settingId].viewName}
             <div className='settings options'>
@@ -28,7 +29,7 @@ export default function Settings() {
         <div className="settings row">
           Einstellungen zurücksetzen
           <div className='settings options'>
-            <Input type='checkbox' value={''} setValue={() => { localStorage.clear(); window.location.href = '/'; }} className={'fatal'} />
+            <Input type='checkbox' value={'as;dlkajs;dlf'} setValue={() => { localStorage.clear(); window.location.href = '/'; }} className={'fatal'} />
           </div>
         </div>
 
