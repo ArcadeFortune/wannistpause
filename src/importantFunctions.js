@@ -92,6 +92,14 @@ export function getEveryTeacherSubject(todaysSubjectsObj) {
   return transformedObj;
 }
 
+// write me a javascript function to sort an object alphabetical
+export function sortObj(obj) {
+  const sortedObj = {};
+  Object.keys(obj).sort().forEach(key => {
+      sortedObj[key] = obj[key];
+  });
+  return sortedObj;
+}
 
 export function cleanTimeStamps(timeStamps) {
   let timestamps = [];

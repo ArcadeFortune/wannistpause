@@ -9,7 +9,7 @@ import { BurgerMenu } from "./SVGs/BurgerMenu";
 import { KshManagerContext } from "./KshManager";
 import ContextMenu from "./Components/ContextMenu";
 
-import { getEveryTeacherSubject, parseTodaysSubjectsHTML } from "./importantFunctions";
+import { getEveryTeacherSubject, parseTodaysSubjectsHTML, sortObj } from "./importantFunctions";
 import Menu from "./Layouts/Menu";
 import SubMenu from "./Layouts/SubMenu";
 import Modal from "./Layouts/Modal";
@@ -53,7 +53,7 @@ export default function App({ currentView }) {
         // parse the subjects into an object
         const todaysSubjects = parseTodaysSubjectsHTML(todaysSubjectsHTML);
         
-        const todaysSubjectsTeacher = getEveryTeacherSubject(todaysSubjects);
+        const todaysSubjectsTeacher = sortObj(getEveryTeacherSubject(todaysSubjects));
 
         // grab every class as a string list
         const everyClass = Array.from(
@@ -80,7 +80,7 @@ export default function App({ currentView }) {
   return (
     <div className="App" onClick={ksh.handleContextMenuLeftClick} onContextMenu={ksh.handleContextMenuRightClick}> 
       <header className="App-header">
-        {process.env.NODE_ENV === 'development' && <button onClick={() => console.log('settings:', ksh.settings)} style={{top:0, position: 'absolute'}}>Dev Button</button>}
+        {process.env.NODE_ENV === 'development' && <button onClick={() => console.log('settings:', ksh.todaysSubjectsTeacher)} style={{top:0, position: 'absolute'}}>Dev Button</button>}
         {/* Context Menu */}
         <ContextMenu/>
 
