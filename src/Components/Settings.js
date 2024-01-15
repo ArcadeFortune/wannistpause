@@ -2,6 +2,7 @@ import './Settings.css';
 import Input from './Input';
 import { useContext } from 'react';
 import { KshManagerContext } from '../KshManager';
+import { resetWebsite } from '../importantFunctions';
 
 
 export default function Settings() {
@@ -18,7 +19,7 @@ export default function Settings() {
           <div key={settingId} className="settings row">
             {ksh.settings[settingId].viewName}
             <div className='settings options'>
-              <Input type={ksh.settings[settingId].type} value={ksh.settings[settingId].value} setValue={ksh.setSettings} valueId={settingId} specialAction={ settingId === 'teacherView' ? () => {ksh.navigate('/changeclass'); } : undefined } placeholder={ksh.settings[settingId].placeholder}/>
+              <Input type={ksh.settings[settingId].type} value={ksh.settings[settingId].value} setValue={ksh.setSettings} valueId={settingId} optionsValueCounter={settingId === 'teacherView' ? true : false} specialAction={ settingId === 'teacherView' ? () => {ksh.navigate('/changeclass'); } : undefined } placeholder={ksh.settings[settingId].placeholder}/>
             </div>
           </div>
         ))
@@ -29,7 +30,7 @@ export default function Settings() {
         <div className="settings row">
           Einstellungen zurücksetzen
           <div className='settings options'>
-            <Input type='checkbox' value={'as;dlkajs;dlf'} setValue={() => { localStorage.clear(); window.location.href = '/'; }} className={'fatal'} />
+            <Input type='checkbox' value={'as;dlkajs;dlf'} setValue={resetWebsite} className={'fatal'} />
           </div>
         </div>
 

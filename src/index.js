@@ -4,11 +4,14 @@ import './index.css';
 import './myOwnTailwind.css'
 import reportWebVitals from './reportWebVitals';
 import RouteMe from './RouteMe';
+import ErrorBoundary from './ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouteMe/>
+    <ErrorBoundary>
+      <RouteMe/>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

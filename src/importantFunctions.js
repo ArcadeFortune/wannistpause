@@ -5,6 +5,11 @@ export function pad(num) { // turns 1 into 01
   return String(parseInt(num)).padStart(2, "0");
 }
 
+export function resetWebsite() {
+  localStorage.clear();
+  window.location.href = '/';
+}
+
 export async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);

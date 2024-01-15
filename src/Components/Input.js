@@ -15,13 +15,13 @@ export default function Input({ type, value, setValue, defaultValue, valueId, sp
 
     // unfocus the button
     e.target.blur();
-    setValue(!value, valueId)
+    setValue(+!value, valueId)
   }
 
   if (type === 'checkbox') {
     return (
       <label style={{position: 'relative'}}>
-        <input type="checkbox" ref={booleanRef} className="pomodoro boolean-input-hidden" id="myCheckbox" onChange={() => {console.log(value); setValue(!value, valueId)}} defaultChecked={value}/>
+        <input type="checkbox" ref={booleanRef} className="pomodoro boolean-input-hidden" id="myCheckbox" onChange={() => {setValue(+!value, valueId)}} defaultChecked={value}/>
         <input type="text" placeholder={value ? '': 'Nein'} value={value ? 'Ja':''} className={`boolean-input ${className}`} tabIndex={-1} onClick={(e) => {handleBooleanClick(e); specialAction()}} readOnly/>
       </label>
     )
